@@ -1,0 +1,14 @@
+.venv/
+node_modules/
+web/dist/
+server/certs/
+server/data/
+__pycache__/
+*.pyc
+ml/vision/data/raw/
+ml/vision/data/ood/
+ml/vision/out/*/best.pt
+ml/vision/out/*/*.npy
+ml/forecast/out/*.csv
+ml/forecast/out/*.csv.gz
+.claude/

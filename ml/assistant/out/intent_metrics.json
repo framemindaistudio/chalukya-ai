@@ -1,0 +1,61 @@
+{
+  "model": "char n-gram (2-4) TF-IDF + multinomial logistic regression",
+  "evaluation": "5-fold GroupKFold over phrasing templates (test phrasings never seen in training)",
+  "n_examples": 400,
+  "n_templates": 400,
+  "n_intents": 17,
+  "accuracy": 0.517,
+  "macro_f1": 0.523,
+  "by_language": {
+    "en": {
+      "n": 130,
+      "accuracy": 0.685
+    },
+    "kn": {
+      "n": 92,
+      "accuracy": 0.337
+    },
+    "hi": {
+      "n": 92,
+      "accuracy": 0.402
+    },
+    "rom": {
+      "n": 86,
+      "accuracy": 0.581
+    }
+  },
+  "top_confusions": [
+    [
+      "about_place -> timings_entry",
+      5
+    ],
+    [
+      "sculpture -> about_place",
+      5
+    ],
+    [
+      "timings_entry -> about_place",
+      5
+    ],
+    [
+      "greeting -> sculpture",
+      5
+    ],
+    [
+      "timings_entry -> route_distance",
+      4
+    ],
+    [
+      "food -> stay",
+      4
+    ],
+    [
+      "shopping_crafts -> food",
+      4
+    ],
+    [
+      "greeting -> safety_emergency",
+      4
+    ]
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "data": "simulated 10-minute IoT occupancy (queue model driven by the footfall simulation)",
+  "train": "2024-01-01..2025-10-31",
+  "test": "2025-11-01..2026-02-28 (peak season)",
+  "horizons": {
+    "30min": {
+      "mae_slots_model": 2.34,
+      "mae_slots_persistence": 3.12,
+      "improvement_vs_persistence": 0.251,
+      "lot_full_precision": 0.823,
+      "lot_full_recall": 0.69,
+      "test_share_of_time_full": 0.06
+    },
+    "60min": {
+      "mae_slots_model": 3.01,
+      "mae_slots_persistence": 5.01,
+      "improvement_vs_persistence": 0.399,
+      "lot_full_precision": 0.83,
+      "lot_full_recall": 0.592,
+      "test_share_of_time_full": 0.062
+    },
+    "120min": {
+      "mae_slots_model": 3.46,
+      "mae_slots_persistence": 7.9,
+      "improvement_vs_persistence": 0.562,
+      "lot_full_precision": 0.807,
+      "lot_full_recall": 0.544,
+      "test_share_of_time_full": 0.068
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "n_train_examples": 400,
+  "n_fresh_test": 70,
+  "results": {
+    "char n-gram LR (browser)": {
+      "unseen_templates": 0.517,
+      "fresh_test": 0.686
+    },
+    "lexicon only": {
+      "unseen_templates": 0.92,
+      "fresh_test": 0.657
+    },
+    "char LR + lexicon (browser default)": {
+      "unseen_templates": 0.912,
+      "fresh_test": 0.786
+    },
+    "multilingual-e5 embeddings + LR": {
+      "unseen_templates": 0.843,
+      "fresh_test": 0.871
+    },
+    "char LR + lexicon + e5 (server default)": {
+      "unseen_templates": 0.958,
+      "fresh_test": 0.886
+    }
+  },
+  "note": "The lexicon is hand-curated by the team, so its scores are an upper-bound style estimate; the fresh test set was written separately from the training templates."
+}

@@ -1,0 +1,96 @@
+{
+  "data": "simulated daily footfall calibrated to ASI annual totals (FY 2024-25 document); non-ASI sites use assumed totals",
+  "train": "2022-01-01..2025-12-31",
+  "test": "2026-01-01..2026-08-31",
+  "n_test_days": 243,
+  "wape": {
+    "lightgbm": 0.1311,
+    "seasonal_naive": 0.3105,
+    "month_weekday_avg": 0.261
+  },
+  "mape": {
+    "lightgbm": 0.112,
+    "seasonal_naive": 0.2148,
+    "month_weekday_avg": 0.1875
+  },
+  "wape_on_festival_days": {
+    "lightgbm": 0.1492,
+    "seasonal_naive": 0.4274,
+    "month_weekday_avg": 0.3351
+  },
+  "p10_p90_interval_coverage": 0.792,
+  "interval_method": "conformalized quantile regression (target 80% coverage)",
+  "conformal_widening_log": 0.0473,
+  "per_site": {
+    "badami_caves": {
+      "wape_model": 0.1133,
+      "wape_seasonal_naive": 0.2055,
+      "wape_month_weekday_avg": 0.1976,
+      "p10_p90_coverage": 0.823
+    },
+    "pattadakal": {
+      "wape_model": 0.1032,
+      "wape_seasonal_naive": 0.1983,
+      "wape_month_weekday_avg": 0.1938,
+      "p10_p90_coverage": 0.823
+    },
+    "aihole": {
+      "wape_model": 0.1129,
+      "wape_seasonal_naive": 0.1985,
+      "wape_month_weekday_avg": 0.1972,
+      "p10_p90_coverage": 0.794
+    },
+    "banashankari": {
+      "wape_model": 0.1564,
+      "wape_seasonal_naive": 0.4899,
+      "wape_month_weekday_avg": 0.3495,
+      "p10_p90_coverage": 0.778
+    },
+    "mahakuta": {
+      "wape_model": 0.1484,
+      "wape_seasonal_naive": 0.2888,
+      "wape_month_weekday_avg": 0.2606,
+      "p10_p90_coverage": 0.724
+    },
+    "kudalasangama": {
+      "wape_model": 0.1356,
+      "wape_seasonal_naive": 0.2702,
+      "wape_month_weekday_avg": 0.2668,
+      "p10_p90_coverage": 0.811
+    }
+  },
+  "top_features": [
+    [
+      "doy_sin",
+      4844
+    ],
+    [
+      "doy_cos",
+      4016
+    ],
+    [
+      "dow",
+      3056
+    ],
+    [
+      "year_idx",
+      1992
+    ],
+    [
+      "site",
+      1459
+    ],
+    [
+      "month",
+      1118
+    ],
+    [
+      "holiday",
+      911
+    ],
+    [
+      "school_vacation",
+      520
+    ]
+  ]
+}

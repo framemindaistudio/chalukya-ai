@@ -1,0 +1,27 @@
+{
+  "rule": "answer if p1 >= min_prob and p1 - p2 >= min_margin, else show candidates",
+  "min_prob": 0.75,
+  "min_margin": 0.0,
+  "val": {
+    "answered": 0.75,
+    "accuracy_when_answered": 0.958
+  },
+  "test": {
+    "answered": 0.794,
+    "accuracy_when_answered": 0.956,
+    "accuracy_all": 0.858
+  },
+  "ood": {
+    "n": 33,
+    "rejected": 0.818,
+    "sources": [
+      "Category:Vittala Temple, Hampi",
+      "Category:Chennakeshava Temple, Belur",
+      "Category:Hoysaleswara Temple, Halebidu",
+      "Category:Brahma Jinalaya, Lakkundi",
+      "Category:Food of Karnataka",
+      "Category:Streets in Karnataka",
+      "Category:Mysore Palace"
+    ]
+  }
+}

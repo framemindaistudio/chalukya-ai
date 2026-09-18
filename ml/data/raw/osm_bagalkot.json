@@ -1,0 +1,2946 @@
+{
+"stay": [
+{
+"type": "node",
+"id": 601836401,
+"lat": 15.916836,
+"lon": 75.6747756,
+"tags": {
+"name": "Mayura Chalukya",
+"name:kn": "ಮಯೂರ ಚಾಲುಕ್ಯ",
+"tourism": "hotel"
+}
+},
+{
+"type": "node",
+"id": 1467561754,
+"lat": 16.1719529,
+"lon": 75.6612221,
+"tags": {
+"designation": "BEC womens new hostel",
+"name": "Basaveshwar Engineering college womens new hostel",
+"tourism": "hostel"
+}
+},
+{
+"type": "node",
+"id": 1467562243,
+"lat": 16.1723239,
+"lon": 75.6613401,
+"tags": {
+"designation": "BEC women's old hostel",
+"name": "Basaveswara engineering college women's old hostel",
+"tourism": "hostel"
+}
+},
+{
+"type": "node",
+"id": 1467588431,
+"lat": 16.1747611,
+"lon": 75.6540663,
+"tags": {
+"designation": "V Block hostel",
+"name": "Engineering College Boys Hostel",
+"tourism": "hostel"
+}
+},
+{
+"type": "node",
+"id": 1467589374,
+"lat": 16.1745344,
+"lon": 75.6548495,
+"tags": {
+"designation": "netaji block",
+"name": "Basaveshwara Engineering College Boys Hostel",
+"tourism": "hostel"
+}
+},
+{
+"type": "node",
+"id": 1472369863,
+"lat": 16.1737016,
+"lon": 75.6616184,
+"tags": {
+"name": "Homestay Inn and Guesshouse",
+"tourism": "hostel"
+}
+},
+{
+"type": "node",
+"id": 7213752702,
+"lat": 16.1539038,
+"lon": 75.6116571,
+"tags": {
+"name": "Kanthi Resorts",
+"tourism": "hotel"
+}
+},
+{
+"type": "node",
+"id": 8196766195,
+"lat": 16.1829523,
+"lon": 75.702794,
+"tags": {
+"addr:full": "Ward No 10, Bagalkot, Karnataka",
+"addr:state": "Karnataka",
+"name": "Hotel Anugraha Deluxe",
+"tourism": "hotel"
+}
+},
+{
+"type": "node",
+"id": 8196766199,
+"lat": 16.1811408,
+"lon": 75.7003894,
+"tags": {
+"addr:full": "10, Station Road, Kaulpet, Bagalkot, Karnataka",
+"addr:state": "Karnataka",
+"name": "Krupa Lodge",
+"tourism": "hotel"
+}
+},
+{
+"type": "node",
+"id": 8196766203,
+"lat": 16.1689191,
+"lon": 75.6605244,
+"tags": {
+"addr:full": "Sector 4, Sector 63A, Nava Nagar, Bagalkot, Karnataka",
+"addr:state": "Karnataka",
+"name": "Chalukya Hotel",
+"name:kn": "ಚಾಲುಕ್ಯ",
+"tourism": "hotel"
+}
+},
+{
+"type": "node",
+"id": 8196825457,
+"lat": 16.2054357,
+"lon": 76.0610918,
+"tags": {
+"addr:full": "Near Temple, Kudalasangama, Basavana Bagewadi, Karnataka",
+"addr:state": "Karnataka",
+"name": "Kamath Hotel",
+"name:kn": "ಕಾಮತ್",
+"tourism": "hotel"
+}
+},
+{
+"type": "node",
+"id": 8196825525,
+"lat": 15.9682969,
+"lon": 76.1113212,
+"tags": {
+"addr:full": "Near Bus Stand, opp: Svm College 1st Floor Above kanva mart, Ilkal, Karnataka",
+"addr:state": "Karnataka",
+"name": "Hotel JB Residency",
+"tourism": "hotel"
+}
+},
+{
+"type": "node",
+"id": 8196825540,
+"lat": 15.886891,
+"lon": 75.7049974,
+"tags": {
+"addr:full": "Banashankari, Cholachagudda, Karnataka",
+"addr:state": "Karnataka",
+"name": "Hotel Chalukya",
+"name:kn": "ಚಾಲುಕ್ಯ",
+"tourism": "hotel"
+}
+},
+{
+"type": "node",
+"id": 11598150669,
+"lat": 15.9063265,
+"lon": 75.690488,
+"tags": {
+"name": "Badami Climbing Adventure",
+"tourism": "guest_house"
+}
+},
+{
+"type": "node",
+"id": 13563404601,
+"lat": 15.9376672,
+"lon": 75.6741464,
+"tags": {
+"name": "Mavi Retreat",
+"tourism": "hotel"
+}
+},
+{
+"type": "node",
+"id": 13589522401,
+"lat": 15.9377829,
+"lon": 75.6751678,
+"tags": {
+"addr:city": "Badami",
+"addr:district": "Bagalkot Dist",
+"addr:housenumber": "17/3",
+"addr:postcode": "587201",
+"addr:street": "17/3 Station Road Badami",
+"email": "courthotelbadami@gmail.com",
+"internet_access": "yes",
+"internet_access:fee": "no",
+"name": "Hotel Badami Court unit of shreejit Resorts Pvt Ltd",
+"phone": "08357200230",
+"rooms": "45",
+"tourism": "hotel",
+"website": "www.hotelbadamicourt.co.in"
+}
+},
+{
+"type": "node",
+"id": 14072858973,
+"lat": 16.1686534,
+"lon": 75.6098295,
+"tags": {
+"tourism": "hotel"
+}
+},
+{
+"type": "way",
+"id": 221752136,
+"center": {
+"lat": 16.1745769,
+"lon": 75.6549185
+},
+"tags": {
+"name": "Netaji Hostel",
+"tourism": "hostel"
+}
+},
+{
+"type": "way",
+"id": 221752200,
+"center": {
+"lat": 16.174723,
+"lon": 75.6537987
+},
+"tags": {
+"name": "Vishweshwaraya Hostel",
+"name:kn": "ವಿಶ್ವೇಶ್ವರಯ್ಯ ಕಾಲೇಜು",
+"tourism": "hostel"
+}
+},
+{
+"type": "way",
+"id": 404591164,
+"center": {
+"lat": 15.918732,
+"lon": 75.6803124
+},
+"tags": {
+"check_date": "2024-12-14",
+"name": "Clarks Inn",
+"name:kn": "ಕ್ಲಾರ್ಕ್ಸ್ ಇನ್",
+"tourism": "hotel"
+}
+},
+{
+"type": "way",
+"id": 1128615771,
+"center": {
+"lat": 15.9241421,
+"lon": 75.6794005
+},
+"tags": {
+"building": "yes",
+"check_date": "2023-02-23",
+"name": "Hotel Mookambika Deluxe",
+"tourism": "hotel"
+}
+},
+{
+"type": "way",
+"id": 1128615773,
+"center": {
+"lat": 15.9240169,
+"lon": 75.6796358
+},
+"tags": {
+"building": "yes",
+"name": "Rajsangam International Hotel",
+"tourism": "hotel"
+}
+},
+{
+"type": "way",
+"id": 1128615776,
+"center": {
+"lat": 15.9245468,
+"lon": 75.6787013
+},
+"tags": {
+"building": "yes",
+"name": "Royal Deluxe Lodge",
+"tourism": "hotel"
+}
+},
+{
+"type": "way",
+"id": 1130691806,
+"center": {
+"lat": 15.9242873,
+"lon": 75.6793605
+},
+"tags": {
+"building": "yes",
+"check_date": "2023-02-23",
+"internet_access": "wlan",
+"internet_access:fee": "customers",
+"name": "Hotel Sanman Deluxe",
+"tourism": "hotel"
+}
+},
+{
+"type": "way",
+"id": 1130691807,
+"center": {
+"lat": 15.9240747,
+"lon": 75.6788679
+},
+"tags": {
+"addr:city": "Badami",
+"addr:street": "Station Road",
+"building": "yes",
+"check_date": "2023-02-23",
+"name": "Udupi Hotel Anand",
+"tourism": "hotel"
+}
+},
+{
+"type": "way",
+"id": 1130691808,
+"center": {
+"lat": 15.9242933,
+"lon": 75.6787645
+},
+"tags": {
+"building": "yes",
+"check_date": "2023-02-23",
+"name": "Anand Deluxe Lodge",
+"tourism": "hotel"
+}
+}
+],
+"food": [
+{
+"type": "node",
+"id": 1472367064,
+"lat": 16.1742762,
+"lon": 75.6596524,
+"tags": {
+"amenity": "restaurant",
+"diet:vegetarian": "only",
+"name": "New Indraprastha - Hotel Restaurant"
+}
+},
+{
+"type": "node",
+"id": 1472371473,
+"lat": 16.1742658,
+"lon": 75.6658456,
+"tags": {
+"amenity": "restaurant",
+"name": "Maharaja"
+}
+},
+{
+"type": "node",
+"id": 1474291304,
+"lat": 16.1818902,
+"lon": 75.6979889,
+"tags": {
+"amenity": "restaurant",
+"name": "Durga Vihar Boarding and lodging"
+}
+},
+{
+"type": "node",
+"id": 2307723293,
+"lat": 16.1751879,
+"lon": 75.6550472,
+"tags": {
+"amenity": "restaurant",
+"name": "Unnati Food Paradise"
+}
+},
+{
+"type": "node",
+"id": 4950995235,
+"lat": 15.9187225,
+"lon": 75.680357,
+"tags": {
+"amenity": "restaurant",
+"check_date": "2024-12-14",
+"name": "Clark's Inn",
+"name:kn": "ಕ್ಲಾರ್ಕ್ಸ್ ಇನ್"
+}
+},
+{
+"type": "node",
+"id": 8188051179,
+"lat": 16.2032306,
+"lon": 76.0534314,
+"tags": {
+"addr:full": "Chowdakamaladinni, Karnataka",
+"addr:state": "Karnataka",
+"amenity": "restaurant",
+"name": "Kamath Hotel",
+"name:kn": "ಕಾಮತ್"
+}
+},
+{
+"type": "node",
+"id": 8188051201,
+"lat": 16.1832008,
+"lon": 75.7030569,
+"tags": {
+"addr:full": "Kaulpet, Bagalkot, Karnataka",
+"addr:state": "Karnataka",
+"amenity": "restaurant",
+"name": "Andra Restaurant"
+}
+},
+{
+"type": "node",
+"id": 8188051202,
+"lat": 16.1831275,
+"lon": 75.6961843,
+"tags": {
+"addr:full": "Kaulpet, Bagalkot, Karnataka",
+"addr:state": "Karnataka",
+"amenity": "restaurant",
+"name": "Devi Prasad Hotel"
+}
+},
+{
+"type": "node",
+"id": 8188051207,
+"lat": 16.175899,
+"lon": 75.659597,
+"tags": {
+"addr:full": "19 main cross, road, Engineering College Cir, Vijay Nagar, Vidayagiri, Bagalkot, Karnataka",
+"addr:state": "Karnataka",
+"amenity": "restaurant",
+"name": "V.s.r Andhra Restaurant"
+}
+},
+{
+"type": "node",
+"id": 8188051215,
+"lat": 16.1725355,
+"lon": 75.6557206,
+"tags": {
+"addr:full": "Vidayagiri, Bagalkot, Karnataka",
+"addr:state": "Karnataka",
+"amenity": "restaurant",
+"name": "Andhra Mess Bagalkot"
+}
+},
+{
+"type": "node",
+"id": 8188051218,
+"lat": 16.1715513,
+"lon": 76.0057634,
+"tags": {
+"addr:full": "NH50, Nandanoor, Karnataka",
+"addr:state": "Karnataka",
+"amenity": "restaurant",
+"name": "Akash Hotel"
+}
+},
+{
+"type": "node",
+"id": 8188051220,
+"lat": 16.1709574,
+"lon": 76.0060995,
+"tags": {
+"addr:full": "Nandanoor, Karnataka",
+"addr:state": "Karnataka",
+"amenity": "restaurant",
+"name": "Sangameshwar Hotel (mannikatti)"
+}
+},
+{
+"type": "node",
+"id": 8188051224,
+"lat": 16.1692372,
+"lon": 75.6608891,
+"tags": {
+"addr:full": "Navanagar Rd, Vidayagiri, Bagalkot, Karnataka",
+"addr:state": "Karnataka",
+"amenity": "restaurant",
+"name": "Hotel Shetty Lunch Home"
+}
+},
+{
+"type": "node",
+"id": 8188051233,
+"lat": 16.1658632,
+"lon": 75.6665489,
+"tags": {
+"addr:full": "Sector 9, Nava Nagar, Bagalkot, Karnataka",
+"addr:state": "Karnataka",
+"amenity": "restaurant",
+"name": "Hotel Panjurli(veg/nonveg)"
+}
+},
+{
+"type": "node",
+"id": 8188051318,
+"lat": 16.101925,
+"lon": 75.781345,
+"tags": {
+"addr:full": "Near bus stand, Shirur, Karnataka",
+"addr:state": "Karnataka",
+"amenity": "restaurant",
+"diet:vegetarian": "only",
+"name": "Nagaraj Hotel Vegetarian"
+}
+},
+{
+"type": "node",
+"id": 8188051319,
+"lat": 16.100832,
+"lon": 75.783218,
+"tags": {
+"addr:full": "Shirur, Karnataka",
+"addr:state": "Karnataka",
+"amenity": "restaurant",
+"name": "Jagadamba Savji Hotel"
+}
+},
+{
+"type": "node",
+"id": 8188051339,
+"lat": 16.0657366,
+"lon": 76.0597608,
+"tags": {
+"addr:full": "Hungund Rd, Hungund, Karnataka",
+"addr:state": "Karnataka",
+"amenity": "restaurant",
+"name": "Siddeswar Hotel",
+"name:kn": "ಸಿದ್ದೇಶ್ವೆರ ಭುವನ ಹೊಟೇಲ್"
+}
+},
+{
+"type": "node",
+"id": 8188051343,
+"lat": 16.0602114,
+"lon": 76.0596699,
+"tags": {
+"addr:full": "Hungund, Karnataka",
+"addr:state": "Karnataka",
+"amenity": "restaurant",
+"name": "Mallikarjun Hotel"
+}
+},
+{
+"type": "node",
+"id": 8188051348,
+"lat": 16.0562674,
+"lon": 76.0665039,
+"tags": {
+"addr:full": "Hungund, Karnataka",
+"addr:state": "Karnataka",
+"amenity": "restaurant",
+"name": "Apmc Hotel Hungund"
+}
+},
+{
+"type": "node",
+"id": 8188051370,
+"lat": 16.0334715,
+"lon": 76.0733418,
+"tags": {
+"addr:full": "Bachi - Raichur Hwy, Hungund Rural, Karnataka",
+"addr:state": "Karnataka",
+"amenity": "restaurant",
+"name": "Dhanaraj Hotel"
+}
+},
+{
+"type": "node",
+"id": 8188051379,
+"lat": 16.0215012,
+"lon": 75.8814324,
+"tags": {
+"addr:full": "Aihole, Karnataka",
+"addr:state": "Karnataka",
+"amenity": "restaurant",
+"name": "Hotel Chalukya",
+"name:kn": "ಚಾಲುಕ್ಯ"
+}
+},
+{
+"type": "node",
+"id": 8188051429,
+"lat": 15.9668444,
+"lon": 76.1048393,
+"tags": {
+"addr:full": "SH 6, Ilkal, Karnataka",
+"addr:state": "Karnataka",
+"amenity": "restaurant",
+"name": "V Cool Family Restaurant"
+}
+},
+{
+"type": "node",
+"id": 8188051455,
+"lat": 15.9537408,
+"lon": 75.830508,
+"tags": {
+"addr:full": "Bagalkot, Karnataka",
+"addr:state": "Karnataka",
+"amenity": "restaurant",
+"name": "Katapur Adi Shakthi Savaji Hotel"
+}
+},
+{
+"type": "node",
+"id": 8188051490,
+"lat": 15.9221363,
+"lon": 75.677718,
+"tags": {
+"addr:full": "Bus Stand Rd, Badami, Karnataka",
+"addr:state": "Karnataka",
+"amenity": "restaurant",
+"name": "Hotel Udupi",
+"name:kn": "ಉಡುಪಿ"
+}
+},
+{
+"type": "node",
+"id": 8188051496,
+"lat": 15.9180579,
+"lon": 75.6800448,
+"tags": {
+"addr:full": "Ramdurg Cross, Near, SH 57, Badami, Karnataka",
+"addr:state": "Karnataka",
+"amenity": "restaurant",
+"name": "Vinayak Restaurant",
+"name:kn": "ಸಿದ್ದೇಶ್ವೆರ ಭುವನ ಹೊಟೇಲ್"
+}
+},
+{
+"type": "node",
+"id": 8188051517,
+"lat": 15.8932526,
+"lon": 75.840052,
+"tags": {
+"addr:full": "Bommanhal, Karnataka",
+"addr:state": "Karnataka",
+"amenity": "restaurant",
+"name": "Sangameshwara Hotel",
+"name:kn": "ಸಂಗಮೇಶ್ವರ"
+}
+},
+{
+"type": "node",
+"id": 8188051564,
+"lat": 15.8716099,
+"lon": 76.0479571,
+"tags": {
+"addr:full": "Hanamsagar, Karnataka",
+"addr:state": "Karnataka",
+"amenity": "restaurant",
+"name": "Hotel Huligemma."
+}
+},
+{
+"type": "node",
+"id": 8188051570,
+"lat": 15.8706121,
+"lon": 76.0515713,
+"tags": {
+"addr:full": "Koppal, Karnataka",
+"addr:state": "Karnataka",
+"amenity": "restaurant",
+"name": "Huligemma Sawaji Hotel"
+}
+},
+{
+"type": "node",
+"id": 8188051572,
+"lat": 15.8700184,
+"lon": 76.0406812,
+"tags": {
+"addr:full": "near bhavani temple, Hanamsagar, Karnataka",
+"addr:state": "Karnataka",
+"amenity": "restaurant",
+"name": "Ashwini Hotel"
+}
+},
+{
+"type": "node",
+"id": 10537472359,
+"lat": 15.9239117,
+"lon": 75.6794461,
+"tags": {
+"addr:city": "Badami",
+"amenity": "restaurant",
+"building": "yes",
+"check_date": "2023-02-23",
+"cuisine": "indian",
+"diet:vegetarian": "yes",
+"name": "Udupi Shri Banashri Restaurant",
+"source": "local knowledge"
+}
+},
+{
+"type": "node",
+"id": 10537472364,
+"lat": 15.9241574,
+"lon": 75.6792867,
+"tags": {
+"amenity": "restaurant",
+"check_date": "2023-02-23",
+"name": "Restaurant Mookambika Deluxe"
+}
+},
+{
+"type": "node",
+"id": 10540138962,
+"lat": 15.9400266,
+"lon": 75.6758743,
+"tags": {
+"amenity": "restaurant",
+"name": "Hotel Paradise"
+}
+},
+{
+"type": "node",
+"id": 10743790324,
+"lat": 16.1687627,
+"lon": 75.6616403,
+"tags": {
+"amenity": "cafe"
+}
+},
+{
+"type": "node",
+"id": 10743790325,
+"lat": 16.1664992,
+"lon": 75.6617272,
+"tags": {
+"addr:city": "Bagalkot",
+"addr:postcode": "587103",
+"amenity": "cafe",
+"name": "Engineer Ban Gaya Chaiwala",
+"opening_hours": "Mo-Su 06:00-21:00"
+}
+},
+{
+"type": "way",
+"id": 1128615775,
+"center": {
+"lat": 15.9235447,
+"lon": 75.6795079
+},
+"tags": {
+"addr:street": "Station Road",
+"amenity": "restaurant",
+"building": "yes",
+"name": "Golden Caves Restaurant",
+"phone": "9448729812"
+}
+}
+],
+"civic": [
+{
+"type": "node",
+"id": 1474293182,
+"lat": 16.1812514,
+"lon": 75.6917984,
+"tags": {
+"amenity": "police",
+"name": "Bagalkot Police station",
+"name:kn": "ಬಾಗಲಕೋಟೆ ಆರಕ್ಷಕ ಠಾಣೆ"
+}
+},
+{
+"type": "node",
+"id": 2307579379,
+"lat": 16.1797927,
+"lon": 75.6990611,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Near Railwaystation",
+"addr:postcode": "587101",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Mane Hospital",
+"source": "OpenGovernmentData"
+}
+},
+{
+"type": "node",
+"id": 2307728989,
+"lat": 16.173989,
+"lon": 75.6609684,
+"tags": {
+"amenity": "fuel",
+"name": "AM Petrol pump"
+}
+},
+{
+"type": "node",
+"id": 2676809398,
+"lat": 16.0539025,
+"lon": 75.7942644,
+"tags": {
+"amenity": "bus_station",
+"name:kn": "ಬಸ್ ನಿಲ್ದಾಣ"
+}
+},
+{
+"type": "node",
+"id": 3899803799,
+"lat": 15.9812701,
+"lon": 76.1044753,
+"tags": {
+"amenity": "fuel"
+}
+},
+{
+"type": "node",
+"id": 3899803803,
+"lat": 15.9815821,
+"lon": 76.1030752,
+"tags": {
+"amenity": "fuel"
+}
+},
+{
+"type": "node",
+"id": 3899803806,
+"lat": 15.9889077,
+"lon": 76.0995293,
+"tags": {
+"amenity": "fuel"
+}
+},
+{
+"type": "node",
+"id": 3899803815,
+"lat": 15.9826367,
+"lon": 76.1034749,
+"tags": {
+"amenity": "fuel"
+}
+},
+{
+"type": "node",
+"id": 3899899828,
+"lat": 16.1824833,
+"lon": 75.9981606,
+"tags": {
+"amenity": "fuel"
+}
+},
+{
+"type": "node",
+"id": 3913878350,
+"lat": 15.8938768,
+"lon": 75.6995985,
+"tags": {
+"amenity": "fuel"
+}
+},
+{
+"type": "node",
+"id": 3914524227,
+"lat": 16.1519739,
+"lon": 75.7407709,
+"tags": {
+"amenity": "fuel"
+}
+},
+{
+"type": "node",
+"id": 4046426835,
+"lat": 16.0587246,
+"lon": 76.0598424,
+"tags": {
+"amenity": "bus_station",
+"name": "Bus Stand",
+"name:kn": "ಬಸ್ ನಿಲ್ದಾಣ"
+}
+},
+{
+"type": "node",
+"id": 4794439526,
+"lat": 15.9388538,
+"lon": 75.9166245,
+"tags": {
+"addr:postcode": "587202",
+"amenity": "bus_station",
+"name": "Guduru sc",
+"name:en": "Guduru sc"
+}
+},
+{
+"type": "node",
+"id": 5793318459,
+"lat": 15.8612029,
+"lon": 75.7391863,
+"tags": {
+"amenity": "fuel",
+"brand": "Indian Oil",
+"brand:wikidata": "Q1289348",
+"brand:wikipedia": "en:Indian Oil Corporation",
+"name": "Indian Oil",
+"name:kn": "ಇಂಡಿಯನ್ ಆಯಿಲ್"
+}
+},
+{
+"type": "node",
+"id": 6681696985,
+"lat": 15.9516287,
+"lon": 75.8147164,
+"tags": {
+"amenity": "bus_station",
+"name:en": "Bus to Badami"
+}
+},
+{
+"type": "node",
+"id": 6938638576,
+"lat": 16.182572,
+"lon": 75.6980968,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Mahaveer Road,Near Durga Vihar Extn Area",
+"addr:postcode": "587101",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Dhanush Hospital, Bagalkot",
+"source": "OpenGovernmentData"
+}
+},
+{
+"type": "node",
+"id": 6938695180,
+"lat": 16.1860229,
+"lon": 75.6950659,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "166 A/1A, Near Old I.B, Extension Area",
+"addr:postcode": "587101",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Shanthi Hospital, Bagalkot",
+"name:kn": "ಶಾಂತಿ ಆಸ್ಪತ್ರೆ",
+"source": "OpenGovernmentData"
+}
+},
+{
+"type": "node",
+"id": 6938760213,
+"lat": 16.1833776,
+"lon": 75.6983502,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Near Durga Vihar, Rajiv Ghandhi Road",
+"addr:postcode": "587101",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Baragi Hospital",
+"source": "OpenGovernmentData"
+}
+},
+{
+"type": "node",
+"id": 6938777891,
+"lat": 16.176543,
+"lon": 75.6923716,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "OppositeDurgha Vihar, Near Railway Station",
+"addr:postcode": "587101",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Nagathan Maternity and Surgical Hospital",
+"source": "OpenGovernmentData"
+}
+},
+{
+"type": "node",
+"id": 6944289759,
+"lat": 16.1822037,
+"lon": 75.6979237,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Near Durga Vihar , Mahaveer Road",
+"addr:postcode": "587101",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Shri Tulasigirish Diabetes Hospital",
+"source": "OpenGovernmentData"
+}
+},
+{
+"type": "node",
+"id": 6944398632,
+"lat": 15.9696443,
+"lon": 76.1109263,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Opp I.B Near V.C Akki Smaraba Sangha, Joshi Galli, Illkal",
+"addr:postcode": "587125",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Mahanthesh Multi Speciality Hospital",
+"source": "OpenGovernmentData"
+}
+},
+{
+"type": "node",
+"id": 6947651429,
+"lat": 15.9669005,
+"lon": 76.1137533,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Mahentesh Talkies Road, Ilkal, Bijapur",
+"addr:postcode": "587125",
+"addr:state": "Karnataka",
+"amenity": "clinic",
+"name": "Kathare Nursing Home",
+"source": "OpenGovernmentData"
+}
+},
+{
+"type": "node",
+"id": 6947701120,
+"lat": 16.1838368,
+"lon": 75.6951664,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Opposite Lion`S School, Extension",
+"addr:postcode": "587101",
+"addr:state": "Karnataka",
+"amenity": "clinic",
+"name": "Yogappanavar Medical Nursing Home",
+"source": "OpenGovernmentData"
+}
+},
+{
+"type": "node",
+"id": 6947701136,
+"lat": 16.1788253,
+"lon": 75.6910466,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Near Rural Police Station Laxminagar Extension",
+"addr:postcode": "587101",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Daddenevar Hospital And Research Centre",
+"source": "OpenGovernmentData"
+}
+},
+{
+"type": "node",
+"id": 6947707822,
+"lat": 16.1636419,
+"lon": 75.6744236,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Bagalkot",
+"addr:postcode": "587101",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "H S K Hospital",
+"source": "OpenGovernmentData"
+}
+},
+{
+"type": "node",
+"id": 6947929619,
+"lat": 15.9253915,
+"lon": 75.6790759,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Tippunagar Station Road , Badami",
+"addr:postcode": "587201",
+"addr:state": "Karnataka",
+"amenity": "clinic",
+"healthcare": "clinic",
+"name": "R.G. Karudaga Matt Memorial Nursing Home",
+"source": "OpenGovernmentData"
+}
+},
+{
+"type": "node",
+"id": 6948025010,
+"lat": 16.1839347,
+"lon": 75.6962071,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Extension Area,Near Lion's School",
+"addr:postcode": "587101",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Dandin Hospital",
+"source": "OpenGovernmentData"
+}
+},
+{
+"type": "node",
+"id": 6948622404,
+"lat": 16.184276,
+"lon": 75.6973216,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "OppositeSiddarameshwar Kalyan Mantap,Near Water Tank",
+"addr:postcode": "587101",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Patil Medi-Care Multispeciality Hospital",
+"source": "OpenGovernmentData"
+}
+},
+{
+"type": "node",
+"id": 6950124298,
+"lat": 16.1826592,
+"lon": 75.6966246,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Behind Food Basket Extension Area",
+"addr:postcode": "587101",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Vittal Eye and Skin Hospital",
+"source": "OpenGovernmentData"
+}
+},
+{
+"type": "node",
+"id": 7205356353,
+"lat": 16.2176764,
+"lon": 76.0945934,
+"tags": {
+"addr:district": "Bijapur",
+"addr:full": "Main Road, Tangadagi",
+"addr:postcode": "586219",
+"addr:state": "Karnataka",
+"addr:subdistrict": "Muddebihal",
+"amenity": "hospital",
+"contact:phone": "08356-238031",
+"name": "Government Hospital, Tangadagi",
+"name:kn": "ಸರ್ಕಾರಿ ಆಸ್ಪತ್ರೆ, ತಂಗಡಗಿ",
+"source": "OpenGovernmentData"
+}
+},
+{
+"type": "node",
+"id": 7205356380,
+"lat": 16.178701,
+"lon": 76.08666,
+"tags": {
+"addr:block": "Hunagund",
+"addr:district": "Bagalkot",
+"addr:full": "Kamadatta",
+"addr:postcode": "587118",
+"addr:state": "Karnataka",
+"addr:subdistrict": "Hungund",
+"amenity": "hospital",
+"name": "Government Hospital, Dhannur",
+"source": "OpenGovernmentData"
+}
+},
+{
+"type": "node",
+"id": 7205448363,
+"lat": 16.0553525,
+"lon": 75.953146,
+"tags": {
+"addr:block": "Hunagund",
+"addr:district": "Bagalkot",
+"addr:full": "Amingad, Bagalkot",
+"addr:postcode": "587112",
+"addr:state": "Karnataka",
+"addr:subdistrict": "Hungund",
+"amenity": "hospital",
+"description": "Government Hospital",
+"name": "Govt. Hospital, Aminagad",
+"source": "OpenGovernmentData"
+}
+},
+{
+"type": "node",
+"id": 7205448369,
+"lat": 15.9550516,
+"lon": 76.057792,
+"tags": {
+"addr:district": "Koppal",
+"addr:full": "Hulgera, Ilkal Road",
+"addr:postcode": "583281",
+"addr:state": "Karnataka",
+"addr:subdistrict": "Kushtagi",
+"amenity": "hospital",
+"contact:phone": "08536 -201001",
+"name": "Hoolgera Government Hospital",
+"source": "OpenGovernmentData"
+}
+},
+{
+"type": "node",
+"id": 7205448373,
+"lat": 15.9629299,
+"lon": 76.1234801,
+"tags": {
+"addr:block": "Hunagund",
+"addr:district": "Bagalkot",
+"addr:full": "Ilkal",
+"addr:postcode": "587125",
+"addr:state": "Karnataka",
+"addr:subdistrict": "Hungund",
+"amenity": "hospital",
+"name": "Government Hospital, Ilkal",
+"source": "OpenGovernmentData"
+}
+},
+{
+"type": "node",
+"id": 7205448390,
+"lat": 16.06689,
+"lon": 76.059741,
+"tags": {
+"addr:block": "Hunagund",
+"addr:district": "Bagalkot",
+"addr:full": "Opposite Police Station, Bijapur Road,",
+"addr:postcode": "587118",
+"addr:state": "Karnataka",
+"addr:subdistrict": "Hungund",
+"amenity": "hospital",
+"contact:phone": "8351260020",
+"description": "Sub-District Hospital",
+"name": "Hungund Government Hospital",
+"name:kn": "ಹುನಗುಂದ ಸರ್ಕಾರಿ ಆಸ್ಪತ್ರೆ",
+"source": "OpenGovernmentData"
+}
+},
+{
+"type": "node",
+"id": 7205448416,
+"lat": 15.9216682,
+"lon": 75.6778945,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Badami",
+"addr:postcode": "587201",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"description": "Government Hospital",
+"healthcare": "hospital",
+"name": "Government Hospital, Badami",
+"name:kn": "ಬಾದಾಮಿ ಸರ್ಕಾರಿ ಆಸ್ಪತ್ರೆ",
+"source": "OpenGovernmentData"
+}
+},
+{
+"type": "node",
+"id": 7205448429,
+"lat": 16.007047,
+"lon": 75.646405,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Halakurki",
+"addr:postcode": "587201",
+"addr:state": "Karnataka",
+"addr:subdistrict": "Badami",
+"amenity": "hospital",
+"name": "Government Hospital, Halakurki",
+"source": "OpenGovernmentData"
+}
+},
+{
+"type": "node",
+"id": 7205448449,
+"lat": 15.9550199,
+"lon": 75.5718172,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Mushtigeri",
+"addr:postcode": "587206",
+"addr:state": "Karnataka",
+"addr:subdistrict": "Badami",
+"amenity": "hospital",
+"name": "Government Hospital Mustigeri",
+"source": "OpenGovernmentData"
+}
+},
+{
+"type": "node",
+"id": 7565711859,
+"lat": 16.1829793,
+"lon": 75.6589323,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Vidayagiri, Bagalkot",
+"addr:postcode": "587103",
+"addr:state": "Karnataka",
+"amenity": "clinic",
+"name": "Siddkala Clinic",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711863,
+"lat": 16.1762796,
+"lon": 75.6597795,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Vijay Nagar, Vidayagiri, Bagalkot",
+"addr:postcode": "587103",
+"addr:state": "Karnataka",
+"amenity": "clinic",
+"name": "Sparsh Clinic",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711866,
+"lat": 16.172544,
+"lon": 75.655719,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Vidayagiri, Bagalkot",
+"addr:postcode": "587103",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Kerudi Cancer Hospital",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711867,
+"lat": 16.15929,
+"lon": 75.667693,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Nava Nagar, Bagalkot",
+"addr:postcode": "587103",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Dr. Daddenavar Hospital",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711869,
+"lat": 16.156754,
+"lon": 75.6666965,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Nava Nagar, Bagalkot",
+"addr:postcode": "587103",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Kanbur Hospital",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711872,
+"lat": 16.1836368,
+"lon": 75.6956443,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Kaulpet, Bagalkot",
+"addr:postcode": "587101",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Dr. K M Sudhakar Rao Hospital",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711874,
+"lat": 16.1610963,
+"lon": 75.6671382,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Nava Nagar, Bagalkot",
+"addr:postcode": "587103",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Boke Hospital",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711876,
+"lat": 16.1753875,
+"lon": 75.6596198,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Vidayagiri, Bagalkot",
+"addr:postcode": "587102",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Yogappannavar Hospital",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711877,
+"lat": 16.158549,
+"lon": 75.669537,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Nava Nagar, Bagalkot",
+"addr:postcode": "587103",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Shirur Memorial Hospital",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711878,
+"lat": 16.04932,
+"lon": 75.7842727,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Saraff Bazaar, Guledagudda",
+"addr:postcode": "587203",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Shri Parvatesh Hospital",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711881,
+"lat": 16.183095,
+"lon": 75.696982,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Kaulpet, Bagalkot",
+"addr:postcode": "587101",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Dr. Halakatti Hospital",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711882,
+"lat": 16.1906227,
+"lon": 75.701982,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Kaulpet, Bagalkot",
+"addr:postcode": "587101",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Nangarani Hospital",
+"name:kn": "ನಂಗಾರಣಿ ಆಸ್ಪತ್ರೆ",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711883,
+"lat": 16.1593374,
+"lon": 75.6682007,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Nava Nagar, Bagalkot",
+"addr:postcode": "587103",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "New Shanti Hospital",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711885,
+"lat": 16.1821179,
+"lon": 75.6966973,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Kaulpet, Bagalkot",
+"addr:postcode": "587101",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Spandana Multispeciality Hospital",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711886,
+"lat": 16.0476037,
+"lon": 75.7854887,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Guledagudda",
+"addr:postcode": "587203",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Soni Hospital",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711889,
+"lat": 16.1896211,
+"lon": 75.6989171,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Kaulpet, Bagalkot",
+"addr:postcode": "587101",
+"addr:state": "Karnataka",
+"amenity": "clinic",
+"name": "Kanthi Nursing Home",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711897,
+"lat": 16.181781,
+"lon": 75.697466,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Near Railway Station, Bagalkot",
+"addr:postcode": "587101",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Drishti Super Speciality Eye Hospital",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711903,
+"lat": 16.1798428,
+"lon": 75.6578405,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Vidayagiri, Bagalkot",
+"addr:postcode": "587102",
+"addr:state": "Karnataka",
+"amenity": "clinic",
+"name": "Ashwini Clinic",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711906,
+"lat": 16.050064,
+"lon": 75.783289,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Guledagudda",
+"addr:postcode": "587203",
+"addr:state": "Karnataka",
+"amenity": "clinic",
+"name": "Sarangi Clinic",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711907,
+"lat": 16.183653,
+"lon": 75.697962,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Mahaveer Road, Kaulpet, Bagalkot",
+"addr:postcode": "587101",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Chandargi Eye Hospital",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711909,
+"lat": 16.161771,
+"lon": 75.669748,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Nava Nagar, Bagalkot",
+"addr:postcode": "587103",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Sanjeevini Newlajami Hospital",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711915,
+"lat": 16.1580657,
+"lon": 75.6670062,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Nava Nagar, Bagalkot",
+"addr:postcode": "587103",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Banashankari Eye Hospital",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711916,
+"lat": 16.048993,
+"lon": 75.781268,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Guledagudda",
+"addr:postcode": "587203",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Guledagudda Veterinary Hospital",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711919,
+"lat": 16.1578532,
+"lon": 75.6675568,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Nava Nagar, Bagalkot",
+"addr:postcode": "587103",
+"addr:state": "Karnataka",
+"amenity": "clinic",
+"name": "Sanskruti Homeopathy Clinic",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711920,
+"lat": 16.1462366,
+"lon": 75.6648948,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Rajiv Gandhi Colony, Bagalkot",
+"addr:postcode": "587103",
+"addr:state": "Karnataka",
+"amenity": "clinic",
+"name": "Shri Guru Clinic",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711921,
+"lat": 16.1848202,
+"lon": 75.6922527,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Kaulpet, Bagalkot",
+"addr:postcode": "587101",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Chincholi Hospital",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711922,
+"lat": 16.171109,
+"lon": 75.6563035,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Station Road, Kaulpet, Bagalkot",
+"addr:postcode": "587101",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Patil Multispeciality Hospital",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711923,
+"lat": 16.1558076,
+"lon": 75.6798599,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Yeswanthpur, Bengaluru",
+"addr:postcode": "587103",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Malaji Hospital",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711924,
+"lat": 16.1839796,
+"lon": 75.6972253,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Kaulpet, Bagalkot",
+"addr:postcode": "587101",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Dr. Subhas Patil Hospital",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711929,
+"lat": 16.18448,
+"lon": 75.698152,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Mahaveer Road, Kaulpet, Bagalkot",
+"addr:postcode": "587101",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Kulkarni Eye Hospital",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711934,
+"lat": 16.1865756,
+"lon": 75.6951842,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Kaulpet, Bagalkot",
+"addr:postcode": "587101",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Halagali Hospital",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711935,
+"lat": 16.1737852,
+"lon": 75.6599204,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Vidayagiri, Bagalkot",
+"addr:postcode": "587103",
+"addr:state": "Karnataka",
+"amenity": "clinic",
+"name": "Dr. Patil's Homeopathy Clinic",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711936,
+"lat": 16.184705,
+"lon": 75.698227,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Kaulpet, Bagalkot",
+"addr:postcode": "587101",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "B.M. Hospital",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711937,
+"lat": 16.1744042,
+"lon": 75.65917,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Vidayagiri, Bagalkot",
+"addr:postcode": "587102",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Ashraya Hospital",
+"name:kn": "ಆಶ್ರಯ ಆಸ್ಪತ್ರೆ",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711938,
+"lat": 16.15563,
+"lon": 75.6658953,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Nava Nagar, Bagalkot",
+"addr:postcode": "587103",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Srujan Hospital",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711939,
+"lat": 16.183776,
+"lon": 75.697945,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Station Road, Kaulpet, Bagalkot",
+"addr:postcode": "587101",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Dr. Kalburgi Hospital",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711940,
+"lat": 16.184362,
+"lon": 75.698131,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Kaulpet, Bagalkot",
+"addr:postcode": "587101",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Shailaja Hospital",
+"name:kn": "ಶೈಲಜ ಆಸ್ಪತ್ರೆ",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711945,
+"lat": 16.1572091,
+"lon": 75.6680892,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Nava Nagar, Bagalkot",
+"addr:postcode": "587103",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Soragavi Multispeciality Hospital",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711948,
+"lat": 16.1830422,
+"lon": 75.6598512,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Bagalkot",
+"addr:postcode": "587102",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Dr. Hooli Sri Dhanvantari Ayurveda Hospital",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711950,
+"lat": 16.1551732,
+"lon": 75.6795552,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Bagalkot",
+"addr:postcode": "587103",
+"addr:state": "Karnataka",
+"amenity": "clinic",
+"name": "Shami Ayurveda Panchakarma Chikitsalaya",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711954,
+"lat": 16.163802,
+"lon": 75.669298,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Nava Nagar, Bagalkot",
+"addr:postcode": "587103",
+"addr:state": "Karnataka",
+"amenity": "clinic",
+"name": "Charaka Clinic",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711956,
+"lat": 16.1765091,
+"lon": 75.65952,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Vidayagiri, Bagalkot",
+"addr:postcode": "587102",
+"addr:state": "Karnataka",
+"amenity": "clinic",
+"name": "Vijay Clinic",
+"name:kn": "ವಿಜಯ ಚಿಕಿತ್ಸಾಲಯ",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711957,
+"lat": 16.0479282,
+"lon": 75.785863,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Guledagudda",
+"addr:postcode": "587203",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Shree Banashankari Hospital",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711958,
+"lat": 16.048307,
+"lon": 75.783265,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Guledagudda",
+"addr:postcode": "587203",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Tejashwini Hospital",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711959,
+"lat": 16.184473,
+"lon": 75.6976651,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Kaulpet, Bagalkot",
+"addr:postcode": "587101",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Patted Hospital",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711961,
+"lat": 16.183184,
+"lon": 75.696595,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Kaulpet, Bagalkot",
+"addr:postcode": "587101",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Kerudi Multispeciality Hospital",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711963,
+"lat": 16.1845818,
+"lon": 75.6977062,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Kaulpet, Bagalkot",
+"addr:postcode": "587101",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Mareguddi Hospital",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711964,
+"lat": 16.1834245,
+"lon": 75.6953576,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Kaulpet, Bagalkot",
+"addr:postcode": "587101",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Mural Inamdar Hospital",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711966,
+"lat": 16.0511054,
+"lon": 75.7856645,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Guledagudda",
+"addr:postcode": "587203",
+"addr:state": "Karnataka",
+"amenity": "clinic",
+"name": "V M Tippa Clinic",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711970,
+"lat": 16.173279,
+"lon": 75.664107,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Vijay Nagar, Vidayagiri, Bagalkot",
+"addr:postcode": "587103",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Badakali Hospital",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 7565711971,
+"lat": 16.1626972,
+"lon": 75.6646009,
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Nava Nagar, Bagalkot",
+"addr:postcode": "587103",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Kuntoji Hospital",
+"source": "Local Knowledge"
+}
+},
+{
+"type": "node",
+"id": 8187977777,
+"lat": 15.9492067,
+"lon": 75.8074766,
+"tags": {
+"addr:full": "Pattadakal Rd, Bachinagudd, Karnataka",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "PHC Pattadakal",
+"name:kn": "ಪ್ರಾಥಮಿಕ ಆರೋಗ್ಯ ಕೇಂದ್ರ"
+}
+},
+{
+"type": "node",
+"id": 8187977794,
+"lat": 15.9184683,
+"lon": 75.6800676,
+"tags": {
+"addr:full": "Badami, Karnataka",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Kyalakond Hospital"
+}
+},
+{
+"type": "node",
+"id": 8187977816,
+"lat": 15.872358,
+"lon": 75.718893,
+"tags": {
+"addr:full": "Chalukya Nagar, Cholachagudda, Karnataka",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Ambiger Hospital"
+}
+},
+{
+"type": "node",
+"id": 8187985926,
+"lat": 16.1876639,
+"lon": 75.7064502,
+"tags": {
+"addr:full": "veterinary polyclinic, Bagalkot, Karnataka",
+"addr:state": "Karnataka",
+"amenity": "clinic",
+"name": "Veterinary Polyclinic",
+"name:kn": "ಪಶು ಆಸ್ಪತ್ರೆ"
+}
+},
+{
+"type": "node",
+"id": 8187985935,
+"lat": 16.1063541,
+"lon": 75.8681478,
+"tags": {
+"addr:full": "Kamatagi, Karnataka",
+"addr:state": "Karnataka",
+"amenity": "clinic",
+"name": "Sri Basav Clinic"
+}
+},
+{
+"type": "node",
+"id": 8187985936,
+"lat": 16.1033948,
+"lon": 75.8670172,
+"tags": {
+"addr:full": "Kamatagi, Karnataka",
+"addr:state": "Karnataka",
+"amenity": "clinic",
+"name": "Jaya Clinic"
+}
+},
+{
+"type": "node",
+"id": 8188036793,
+"lat": 16.2058858,
+"lon": 75.8894718,
+"tags": {
+"addr:full": "Bewoor, Karnataka",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Government Hospital",
+"name:kn": "ಸರ್ಕಾರಿ ಆಸ್ಪತ್ರೆ"
+}
+},
+{
+"type": "node",
+"id": 8188036848,
+"lat": 16.1552201,
+"lon": 75.6795875,
+"tags": {
+"addr:full": "Kanthi badavane A P M C A P M C Yard, A P M C Yard, Bagalkot, Karnataka",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Shami Ayurveda Panchakarma Chikitsalaya"
+}
+},
+{
+"type": "node",
+"id": 8188036861,
+"lat": 16.1006619,
+"lon": 75.8654607,
+"tags": {
+"addr:full": "Kamatagi, Karnataka",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Sri Veerabadreshwar Opticals And Eye Care Centre Kamatagi"
+}
+},
+{
+"type": "node",
+"id": 8188036865,
+"lat": 16.0738211,
+"lon": 75.6458425,
+"tags": {
+"addr:full": "Katageri, Karnataka",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Government Hospital",
+"name:kn": "ಸರ್ಕಾರಿ ಆಸ್ಪತ್ರೆ"
+}
+},
+{
+"type": "node",
+"id": 8188036870,
+"lat": 16.0555641,
+"lon": 75.9542256,
+"tags": {
+"addr:full": "Amingad, Karnataka",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Primary Health Centre",
+"name:kn": "ಪ್ರಾಥಮಿಕ ಆರೋಗ್ಯ ಕೇಂದ್ರ"
+}
+},
+{
+"type": "node",
+"id": 8188036873,
+"lat": 16.0478344,
+"lon": 75.787822,
+"tags": {
+"addr:full": "Near Bus Stand, SH 44, Guledagudda, Karnataka",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Government Hospital",
+"name:kn": "ಸರ್ಕಾರಿ ಆಸ್ಪತ್ರೆ"
+}
+},
+{
+"type": "node",
+"id": 8188036874,
+"lat": 16.045364,
+"lon": 75.9390728,
+"tags": {
+"addr:full": "Sulebhavi, Karnataka",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Government Hospital",
+"name:kn": "ಸರ್ಕಾರಿ ಆಸ್ಪತ್ರೆ"
+}
+},
+{
+"type": "node",
+"id": 8188036891,
+"lat": 15.9665495,
+"lon": 76.1138512,
+"tags": {
+"addr:full": "Ilkal, Karnataka",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Shirnevas Netralay Eye Hospital"
+}
+},
+{
+"type": "node",
+"id": 8188036894,
+"lat": 15.9639607,
+"lon": 76.1132892,
+"tags": {
+"addr:full": "Mahant Belagu Complex, Kanthi Circle, Main Road, Ilkal, Karnataka 587125. Branch- Saka Laparoscopy Hospital Behind Old IB, Extension Area, Ilkal, Karnataka",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Saka Laparoscopy Hospital"
+}
+},
+{
+"type": "node",
+"id": 8188037044,
+"lat": 15.8436599,
+"lon": 75.75261,
+"tags": {
+"addr:full": "Karnataka",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Government Hospital",
+"name:kn": "ಸರ್ಕಾರಿ ಆಸ್ಪತ್ರೆ"
+}
+},
+{
+"type": "node",
+"id": 8188037060,
+"lat": 15.8245279,
+"lon": 75.6455892,
+"tags": {
+"addr:full": "station road, Hole Alur, Karnataka",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "Dhanvantari Hospital",
+"name:kn": "ಧನ್ವಂತರಿ ಚಿಕಿತ್ಸಾಲಯ"
+}
+},
+{
+"type": "node",
+"id": 12465514522,
+"lat": 15.9517955,
+"lon": 75.8152174,
+"tags": {
+"access": "customers",
+"amenity": "toilets",
+"lit": "no",
+"male": "yes"
+}
+},
+{
+"type": "node",
+"id": 12465514523,
+"lat": 15.9517819,
+"lon": 75.8151901,
+"tags": {
+"access": "customers",
+"amenity": "toilets",
+"female": "yes",
+"lit": "no"
+}
+},
+{
+"type": "node",
+"id": 13389079029,
+"lat": 15.8013116,
+"lon": 75.8540124,
+"tags": {
+"amenity": "fuel",
+"brand": "Indian Oil",
+"brand:wikidata": "Q1289348",
+"name": "Indian oil"
+}
+},
+{
+"type": "node",
+"id": 13389079030,
+"lat": 15.9038989,
+"lon": 75.6903218,
+"tags": {
+"amenity": "fuel",
+"brand": "Indian Oil",
+"brand:wikidata": "Q1289348",
+"name": "Indian oil"
+}
+},
+{
+"type": "node",
+"id": 13389079106,
+"lat": 15.9185636,
+"lon": 75.684305,
+"tags": {
+"access": "yes",
+"amenity": "toilets"
+}
+},
+{
+"type": "node",
+"id": 13645058679,
+"lat": 15.8689107,
+"lon": 76.0388612,
+"tags": {
+"addr:city": "HANAMASAGAR",
+"addr:district": "KOPPAL",
+"addr:postcode": "583281",
+"amenity": "hospital",
+"emergency": "yes",
+"healthcare": "hospital",
+"healthcare:speciality": "general",
+"name": "NEW PHC HANAMASGAR",
+"wheelchair": "yes"
+}
+},
+{
+"type": "way",
+"id": 221729027,
+"center": {
+"lat": 16.1745015,
+"lon": 75.6587809
+},
+"tags": {
+"amenity": "hospital",
+"name": "Shanti Hospital",
+"name:kn": "ಶಾಂತಿ ಆಸ್ಪತ್ರೆ"
+}
+},
+{
+"type": "way",
+"id": 389087816,
+"center": {
+"lat": 15.9234183,
+"lon": 75.6784662
+},
+"tags": {
+"amenity": "bus_station",
+"bus": "yes",
+"name": "Badami Bus Station",
+"name:kn": "ಬಾದಾಮಿ ಬಸ್ ನಿಲ್ದಾಣ",
+"public_transport": "station"
+}
+},
+{
+"type": "way",
+"id": 475657059,
+"center": {
+"lat": 16.1840641,
+"lon": 75.7022663
+},
+"tags": {
+"amenity": "bus_station",
+"name": "Bagalakote bus station",
+"name:kn": "ಬಾಗಲಕೋಟೆ ಬಸ್ ನಿಲ್ದಾಣ",
+"source": "survey"
+}
+},
+{
+"type": "way",
+"id": 505062727,
+"center": {
+"lat": 15.9184303,
+"lon": 75.6838294
+},
+"tags": {
+"amenity": "parking",
+"service": "parking_aisle"
+}
+},
+{
+"type": "way",
+"id": 510287537,
+"center": {
+"lat": 15.9659519,
+"lon": 76.1126802
+},
+"tags": {
+"amenity": "bus_station",
+"building": "yes",
+"name": "Bus station",
+"name:kn": "ಬಸ್ ನಿಲ್ದಾಣ"
+}
+},
+{
+"type": "way",
+"id": 704422475,
+"center": {
+"lat": 15.9336555,
+"lon": 75.7220756
+},
+"tags": {
+"amenity": "parking"
+}
+},
+{
+"type": "way",
+"id": 785190962,
+"center": {
+"lat": 15.9097309,
+"lon": 75.6861991
+},
+"tags": {
+"amenity": "fuel",
+"building": "yes"
+}
+},
+{
+"type": "way",
+"id": 809118234,
+"center": {
+"lat": 16.1743921,
+"lon": 75.689391
+},
+"tags": {
+"addr:city": "Bagalkot",
+"addr:postcode": "587101",
+"amenity": "hospital",
+"building:levels": "4",
+"building:material": "cement:brick",
+"healthcare": "hospital",
+"healthcare:speciality": "oncology",
+"height": "20",
+"name": "Halamma Kerudi Cancer Hospital",
+"operator": "Kerudi",
+"operator:type": "private",
+"website": "https://www.kerudihospitals.com/"
+}
+},
+{
+"type": "way",
+"id": 1007114428,
+"center": {
+"lat": 15.9208127,
+"lon": 75.6861873
+},
+"tags": {
+"amenity": "parking"
+}
+},
+{
+"type": "way",
+"id": 1130964983,
+"center": {
+"lat": 15.9379267,
+"lon": 75.6757587
+},
+"tags": {
+"amenity": "fuel"
+}
+},
+{
+"type": "way",
+"id": 1373787322,
+"center": {
+"lat": 16.1310015,
+"lon": 75.5982233
+},
+"tags": {
+"amenity": "fuel"
+}
+},
+{
+"type": "way",
+"id": 1373787327,
+"center": {
+"lat": 16.1420523,
+"lon": 75.6026329
+},
+"tags": {
+"amenity": "fuel"
+}
+},
+{
+"type": "way",
+"id": 1373787454,
+"center": {
+"lat": 16.1864978,
+"lon": 75.6122291
+},
+"tags": {
+"amenity": "fuel"
+}
+},
+{
+"type": "way",
+"id": 1373787455,
+"center": {
+"lat": 16.1865209,
+"lon": 75.612763
+},
+"tags": {
+"amenity": "fuel"
+}
+},
+{
+"type": "way",
+"id": 1373787466,
+"center": {
+"lat": 16.1858415,
+"lon": 75.6129701
+},
+"tags": {
+"amenity": "fuel"
+}
+},
+{
+"type": "way",
+"id": 1373787471,
+"center": {
+"lat": 16.200085,
+"lon": 75.61358
+},
+"tags": {
+"amenity": "fuel"
+}
+},
+{
+"type": "way",
+"id": 1540246832,
+"center": {
+"lat": 15.8883623,
+"lon": 75.7053681
+},
+"tags": {
+"amenity": "parking",
+"parking": "surface"
+}
+},
+{
+"type": "way",
+"id": 1540246833,
+"center": {
+"lat": 15.8866412,
+"lon": 75.7055997
+},
+"tags": {
+"amenity": "parking",
+"parking": "surface"
+}
+},
+{
+"type": "relation",
+"id": 3380564,
+"center": {
+"lat": 16.1653763,
+"lon": 75.6606144
+},
+"tags": {
+"addr:district": "Bagalkot",
+"addr:full": "Sector 11, Sector 63A, Navanagar",
+"addr:postcode": "587301",
+"addr:state": "Karnataka",
+"amenity": "hospital",
+"name": "District Hospital",
+"name:kn": "ಜಿಲ್ಲಾ ಆಸ್ಪತ್ರೆ",
+"source": "OpenGovernmentData",
+"type": "multipolygon"
+}
+},
+{
+"type": "relation",
+"id": 12913920,
+"center": {
+"lat": 16.1589821,
+"lon": 75.6713041
+},
+"tags": {
+"amenity": "bus_station",
+"building": "yes",
+"name": "Navanagara Bus Stand",
+"name:kn": "ನವನಗರ ಬಸ್ ನಿಲ್ದಾಣ",
+"type": "multipolygon"
+}
+}
+],
+"sights": [
+{
+"type": "node",
+"id": 1467576469,
+"lat": 16.1623332,
+"lon": 75.6633199,
+"tags": {
+"name": "Museum and Cultural Hall",
+"tourism": "museum"
+}
+},
+{
+"type": "node",
+"id": 3914219611,
+"lat": 15.9221735,
+"lon": 75.685841,
+"tags": {
+"historic": "ruins",
+"name": "Kappe Arabatta Shilashasana",
+"name:kn": "ಕಪ್ಪೆ ಅರಬಟ್ಟನ ಶಿಲಾಶಾಸನ",
+"wikidata": "Q6367138",
+"wikipedia": "en:Kappe Arabhatta"
+}
+},
+{
+"type": "node",
+"id": 4950994667,
+"lat": 15.9183722,
+"lon": 75.6843849,
+"tags": {
+"name": "Badami Cave Temples",
+"tourism": "attraction",
+"wikidata": "Q825236",
+"wikipedia": "en:Badami cave temples"
+}
+},
+{
+"type": "node",
+"id": 4951025381,
+"lat": 15.9195534,
+"lon": 75.6843475,
+"tags": {
+"amenity": "place_of_worship",
+"historic": "ruins",
+"name": "Yellamma Temple",
+"name:kn": "ದತ್ತಾತ್ರೇಯ ದೇವಸ್ಥಾನ",
+"religion": "hindu",
+"ruins": "temple"
+}
+},
+{
+"type": "node",
+"id": 4956708877,
+"lat": 15.9437683,
+"lon": 75.7013757,
+"tags": {
+"name": "Siddlaphadi Cave",
+"natural": "cave_entrance",
+"tourism": "attraction"
+}
+},
+{
+"type": "node",
+"id": 5142589714,
+"lat": 16.0204269,
+"lon": 75.8827044,
+"tags": {
+"name": "Aihole museum",
+"name:kn": "ವಸ್ತು ಸಂಗ್ರಹಾಲಯ",
+"tourism": "museum"
+}
+},
+{
+"type": "node",
+"id": 7415807785,
+"lat": 15.9237,
+"lon": 75.68169,
+"tags": {
+"name": "Malgatti Shivalaya Temple",
+"tourism": "attraction"
+}
+},
+{
+"type": "node",
+"id": 7415807786,
+"lat": 16.0073611,
+"lon": 75.878981,
+"tags": {
+"name": "Ramalinga Temple Complex",
+"tourism": "attraction"
+}
+},
+{
+"type": "node",
+"id": 7415807787,
+"lat": 16.0152385,
+"lon": 75.8825892,
+"tags": {
+"name": "Boyargudi Temple",
+"tourism": "attraction"
+}
+},
+{
+"type": "way",
+"id": 210623127,
+"center": {
+"lat": 15.9157126,
+"lon": 75.8295001
+},
+"tags": {
+"barrier": "city_wall",
+"historic": "ruins"
+}
+},
+{
+"type": "way",
+"id": 210623128,
+"center": {
+"lat": 15.9156453,
+"lon": 75.8299583
+},
+"tags": {
+"barrier": "city_wall",
+"historic": "ruins"
+}
+},
+{
+"type": "way",
+"id": 210623134,
+"center": {
+"lat": 15.9152597,
+"lon": 75.8304745
+},
+"tags": {
+"barrier": "city_wall",
+"historic": "ruins"
+}
+},
+{
+"type": "way",
+"id": 210623135,
+"center": {
+"lat": 15.9152589,
+"lon": 75.830486
+},
+"tags": {
+"barrier": "city_wall",
+"historic": "ruins"
+}
+},
+{
+"type": "way",
+"id": 210623137,
+"center": {
+"lat": 15.9155431,
+"lon": 75.8300574
+},
+"tags": {
+"barrier": "city_wall",
+"historic": "ruins"
+}
+},
+{
+"type": "way",
+"id": 210623138,
+"center": {
+"lat": 15.9150216,
+"lon": 75.8299596
+},
+"tags": {
+"barrier": "city_wall",
+"historic": "ruins"
+}
+},
+{
+"type": "way",
+"id": 389065984,
+"center": {
+"lat": 15.9214265,
+"lon": 75.6848945
+},
+"tags": {
+"building": "yes",
+"name": "Badami Museum",
+"name:kn": "ಬಾದಾಮಿ ವಸ್ತು ಸಂಗ್ರಹಾಲಯ",
+"tourism": "museum",
+"website": "http://www.asidharwadcircle.in/badami-museum/"
+}
+},
+{
+"type": "way",
+"id": 505839868,
+"center": {
+"lat": 16.060186,
+"lon": 75.9511755
+},
+"tags": {
+"historic": "archaeological_site",
+"name": "Amingad Fort",
+"name:kn": "ಅಮಿನಗಡ್ ಕೋಟೆ"
+}
+},
+{
+"type": "way",
+"id": 555415241,
+"center": {
+"lat": 16.1945408,
+"lon": 75.7031554
+},
+"tags": {
+"historic": "ruins",
+"name": "Bagalakote Fort",
+"name:kn": "ಬಾಗಲಕೋಟೆ"
+}
+},
+{
+"type": "way",
+"id": 663941738,
+"center": {
+"lat": 16.0156133,
+"lon": 75.8801493
+},
+"tags": {
+"historic": "monument",
+"name": "Hucchappayya Gudi",
+"name:kn": "ಹುಚ್ಚಪ್ಪಯ್ಯ ಗುಡಿ"
+}
+},
+{
+"type": "way",
+"id": 663941741,
+"center": {
+"lat": 16.009991,
+"lon": 75.8789286
+},
+"tags": {
+"barrier": "wall",
+"historic": "monument",
+"name": "Galaganatha Temples",
+"name:kn": "ಗಳಗನಾಥ ಗುಡಿಗಳು"
+}
+},
+{
+"type": "way",
+"id": 1007114413,
+"center": {
+"lat": 15.9214238,
+"lon": 75.6869931
+},
+"tags": {
+"amenity": "place_of_worship",
+"building": "yes",
+"historic": "ruins",
+"religion": "hindu"
+}
+},
+{
+"type": "way",
+"id": 1007114414,
+"center": {
+"lat": 15.9213043,
+"lon": 75.6868973
+},
+"tags": {
+"amenity": "place_of_worship",
+"building": "yes",
+"historic": "ruins",
+"religion": "hindu"
+}
+},
+{
+"type": "way",
+"id": 1134286590,
+"center": {
+"lat": 15.9232675,
+"lon": 75.683408
+},
+"tags": {
+"historic": "ruins",
+"name": "Granary",
+"ruins": "building"
+}
+},
+{
+"type": "way",
+"id": 1134286591,
+"center": {
+"lat": 15.9232209,
+"lon": 75.6834504
+},
+"tags": {
+"historic": "ruins",
+"name": "Granary",
+"ruins": "building"
+}
+},
+{
+"type": "way",
+"id": 1134286592,
+"center": {
+"lat": 15.923167,
+"lon": 75.683499
+},
+"tags": {
+"historic": "ruins",
+"name": "Granary",
+"ruins": "building"
+}
+},
+{
+"type": "way",
+"id": 1134286593,
+"center": {
+"lat": 15.9224023,
+"lon": 75.6840059
+},
+"tags": {
+"amenity": "place_of_worship",
+"building": "yes",
+"historic": "ruins",
+"name": "Upper Shivalaya",
+"religion": "hindu"
+}
+},
+{
+"type": "way",
+"id": 1134286594,
+"center": {
+"lat": 15.9216348,
+"lon": 75.6832787
+},
+"tags": {
+"amenity": "place_of_worship",
+"historic": "ruins",
+"name": "Lower Shivalaya",
+"religion": "hindu"
+}
+},
+{
+"type": "way",
+"id": 1262562813,
+"center": {
+"lat": 15.9195645,
+"lon": 75.6843435
+},
+"tags": {
+"historic": "ruins"
+}
+}
+]
+}

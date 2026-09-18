@@ -1,0 +1,196 @@
+{
+ "footfall": {
+  "data": "simulated daily footfall calibrated to ASI annual totals (FY 2024-25 document); non-ASI sites use assumed totals",
+  "train": "2022-01-01..2025-12-31",
+  "test": "2026-01-01..2026-08-31",
+  "n_test_days": 243,
+  "wape": {
+   "lightgbm": 0.1311,
+   "seasonal_naive": 0.3105,
+   "month_weekday_avg": 0.261
+  },
+  "mape": {
+   "lightgbm": 0.112,
+   "seasonal_naive": 0.2148,
+   "month_weekday_avg": 0.1875
+  },
+  "wape_on_festival_days": {
+   "lightgbm": 0.1492,
+   "seasonal_naive": 0.4274,
+   "month_weekday_avg": 0.3351
+  },
+  "p10_p90_interval_coverage": 0.792,
+  "interval_method": "conformalized quantile regression (target 80% coverage)",
+  "conformal_widening_log": 0.0473,
+  "per_site": {
+   "badami_caves": {
+    "wape_model": 0.1133,
+    "wape_seasonal_naive": 0.2055,
+    "wape_month_weekday_avg": 0.1976,
+    "p10_p90_coverage": 0.823
+   },
+   "pattadakal": {
+    "wape_model": 0.1032,
+    "wape_seasonal_naive": 0.1983,
+    "wape_month_weekday_avg": 0.1938,
+    "p10_p90_coverage": 0.823
+   },
+   "aihole": {
+    "wape_model": 0.1129,
+    "wape_seasonal_naive": 0.1985,
+    "wape_month_weekday_avg": 0.1972,
+    "p10_p90_coverage": 0.794
+   },
+   "banashankari": {
+    "wape_model": 0.1564,
+    "wape_seasonal_naive": 0.4899,
+    "wape_month_weekday_avg": 0.3495,
+    "p10_p90_coverage": 0.778
+   },
+   "mahakuta": {
+    "wape_model": 0.1484,
+    "wape_seasonal_naive": 0.2888,
+    "wape_month_weekday_avg": 0.2606,
+    "p10_p90_coverage": 0.724
+   },
+   "kudalasangama": {
+    "wape_model": 0.1356,
+    "wape_seasonal_naive": 0.2702,
+    "wape_month_weekday_avg": 0.2668,
+    "p10_p90_coverage": 0.811
+   }
+  },
+  "top_features": [
+   [
+    "doy_sin",
+    4844
+   ],
+   [
+    "doy_cos",
+    4016
+   ],
+   [
+    "dow",
+    3056
+   ],
+   [
+    "year_idx",
+    1992
+   ],
+   [
+    "site",
+    1459
+   ],
+   [
+    "month",
+    1118
+   ],
+   [
+    "holiday",
+    911
+   ],
+   [
+    "school_vacation",
+    520
+   ]
+  ]
+ },
+ "parking": {
+  "data": "simulated 10-minute IoT occupancy (queue model driven by the footfall simulation)",
+  "train": "2024-01-01..2025-10-31",
+  "test": "2025-11-01..2026-02-28 (peak season)",
+  "horizons": {
+   "30min": {
+    "mae_slots_model": 2.34,
+    "mae_slots_persistence": 3.12,
+    "improvement_vs_persistence": 0.251,
+    "lot_full_precision": 0.823,
+    "lot_full_recall": 0.69,
+    "test_share_of_time_full": 0.06
+   },
+   "60min": {
+    "mae_slots_model": 3.01,
+    "mae_slots_persistence": 5.01,
+    "improvement_vs_persistence": 0.399,
+    "lot_full_precision": 0.83,
+    "lot_full_recall": 0.592,
+    "test_share_of_time_full": 0.062
+   },
+   "120min": {
+    "mae_slots_model": 3.46,
+    "mae_slots_persistence": 7.9,
+    "improvement_vs_persistence": 0.562,
+    "lot_full_precision": 0.807,
+    "lot_full_recall": 0.544,
+    "test_share_of_time_full": 0.068
+   }
+  }
+ },
+ "intent": {
+  "n_train_examples": 400,
+  "n_fresh_test": 70,
+  "results": {
+   "char n-gram LR (browser)": {
+    "unseen_templates": 0.517,
+    "fresh_test": 0.686
+   },
+   "lexicon only": {
+    "unseen_templates": 0.92,
+    "fresh_test": 0.657
+   },
+   "char LR + lexicon (browser default)": {
+    "unseen_templates": 0.887,
+    "fresh_test": 0.786
+   },
+   "multilingual-e5 embeddings + LR": {
+    "unseen_templates": 0.843,
+    "fresh_test": 0.871
+   },
+   "char LR + lexicon + e5 (server default)": {
+    "unseen_templates": 0.945,
+    "fresh_test": 0.886
+   }
+  },
+  "note": "The lexicon is hand-curated by the team, so its scores are an upper-bound style estimate; the fresh test set was written separately from the training templates."
+ },
+ "vision": {
+  "model": "efficientnet_b0",
+  "params_m": 4.04,
+  "n_train": 1396,
+  "n_val": 220,
+  "n_test": 344,
+  "classes": 25,
+  "test_top1": 0.8576,
+  "test_top3": 0.9186,
+  "test_macro_f1": 0.8297,
+  "test_site_accuracy": 0.9797,
+  "split": "photographer-grouped (no photographer appears in both train and test for a class)"
+ },
+ "vision_openset": {
+  "rule": "answer if p1 >= min_prob and p1 - p2 >= min_margin, else show candidates",
+  "min_prob": 0.75,
+  "min_margin": 0.0,
+  "val": {
+   "answered": 0.75,
+   "accuracy_when_answered": 0.958
+  },
+  "test": {
+   "answered": 0.794,
+   "accuracy_when_answered": 0.956,
+   "accuracy_all": 0.858
+  },
+  "ood": {
+   "n": 33,
+   "rejected": 0.818,
+   "sources": [
+    "Category:Vittala Temple, Hampi",
+    "Category:Chennakeshava Temple, Belur",
+    "Category:Hoysaleswara Temple, Halebidu",
+    "Category:Brahma Jinalaya, Lakkundi",
+    "Category:Food of Karnataka",
+    "Category:Streets in Karnataka",
+    "Category:Mysore Palace"
+   ]
+  }
+ }
+}

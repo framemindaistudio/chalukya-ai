@@ -1,0 +1,10 @@
+{
+  "name": "Chalukya AI · Bagalkot",
+  "short_name": "Chalukya AI",
+  "description": "Offline-first AI companion for tourists in Bagalkot district: Badami, Pattadakal, Aihole and beyond.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#EEF3F0",
+  "theme_color": "#1F5E57",
+  "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+}
