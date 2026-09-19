@@ -1,0 +1,2 @@
+# Logo and brand SVGs must keep their exact bytes (geometry fingerprint)
+*.svg -text

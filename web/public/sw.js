@@ -1,7 +1,7 @@
 // Offline-first service worker: the sculpture model, ONNX runtime, data and app shell are cached
 // after the first visit, so scanning and the guide keep working inside the caves with no signal.
-const CACHE = 'chalukya-v3'
-const PRECACHE = ['/', '/manifest.webmanifest', '/favicon.svg', '/models/sculpture.onnx', '/models/sculpture_labels.json',
+const CACHE = 'chalukya-v4'
+const PRECACHE = ['/', '/manifest.webmanifest', '/img/brand/icon-192.png', '/img/brand/favicon-32.png', '/models/sculpture.onnx', '/models/sculpture_labels.json',
   '/models/sculpture_calibration.json', '/models/intent_model.json', '/ort/ort-wasm-simd-threaded.wasm', '/ort/ort-wasm-simd-threaded.mjs']
 
 self.addEventListener('install', (e) => {

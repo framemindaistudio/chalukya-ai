@@ -1,3 +1,5 @@
+<img src="docs/brand/logo/chalukya-ai-logo-2048.png" width="88" alt="Chalukya AI logo: a stepped temple tower with a gold finial" />
+
 # Chalukya AI · ಚಾಲುಕ್ಯ AI
 
 **One offline-first AI companion for every tourist journey in Bagalkot district, and one command
@@ -46,7 +48,8 @@ Committee's book *Sounds and Emotions* (2022, paraphrased); the District Adminis
 (bagalkot.nic.in) and tourism office contact; Open-Meteo live weather.
 
 **AI-enhanced (and labelled):** the home-screen photos are real Commons photographs relit and upscaled to 4K
-with Nano Banana 2; the architecture is unchanged. 4K masters are in `docs/brand/hero-4k/`.
+with Nano Banana 2; the architecture is unchanged. 4K masters are in `docs/brand/hero-4k/`. The logo (Recraft vector, chosen by the team) is in
+`docs/brand/logo/` as SVG, 2048 px and 4K PNG.
 
 **Simulated (and labelled in the app):** the daily/hourly shape of footfall (calibrated so the annual totals
 match ASI exactly), parking sensor streams, business prices/ratings/hours. Every pipeline retrains unchanged

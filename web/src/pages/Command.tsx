@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
+import LogoMark from '../components/LogoMark'
 import { Link } from 'react-router'
 import { Area, CartesianGrid, ComposedChart, Line, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import { Activity, AlertTriangle, ArrowLeft, Bell, CarFront, CheckCircle2, Clock, CloudSun, Cpu, Droplets, Flame, Radio, Siren, Trash2, Users, Wifi, WifiOff } from 'lucide-react'
@@ -129,6 +130,7 @@ export default function Command() {
       <header className="sticky top-0 z-40 flex flex-wrap items-center justify-between gap-3 border-b border-white/8 bg-night/95 px-4 py-3 backdrop-blur md:px-6">
         <div className="flex items-center gap-3">
           <Link to="/" className="grid h-9 w-9 place-items-center rounded-full bg-white/8" aria-label="Back to tourist app"><ArrowLeft size={18} /></Link>
+          <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white"><LogoMark className="h-[26px] w-auto" title="" /></span>
           <div>
             <div className="text-[20px] font-bold leading-none tracking-[-0.02em] text-lamp"><span className="brand font-normal">ಚಾಲುಕ್ಯ</span> AI · Command Centre</div>
             <div className="mt-0.5 text-[12px] text-white/50">Bagalkot District Tourism · live operations</div>
