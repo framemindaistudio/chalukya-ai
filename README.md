@@ -5,7 +5,7 @@
 **One offline-first AI companion for every tourist journey in Bagalkot district, and one command
 centre for the people who run it.**
 
-Built for *AI to Redesign Tourism: Bagalkot 2026* (inter-college AI project competition, 26 Sept 2026),
+Built for *AI to Redesign Tourism: Bagalkot 2026* (inter-college AI project competition, 25 Sept 2026),
 on the World Tourism Day 2026 theme *"Digital Agenda and Artificial Intelligence to Redesign Tourism"*.
 
 **Try it:** https://chalukya-ai.vercel.app. On a phone, tap **Take the 90-second tour** on the home screen,
