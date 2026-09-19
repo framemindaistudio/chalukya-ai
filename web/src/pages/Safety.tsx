@@ -64,6 +64,7 @@ export default function Safety() {
   useEffect(() => onDelivery((id, d) => setDeliveries((m) => ({ ...m, [id]: d }))), [])
   const delivery: Delivery | null = sos ? deliveries[sos.id] ?? null : null
 
+  // asked on open, not on the first press: a permission prompt mid-hold could cancel the SOS
   useEffect(() => { getPosition().then((p) => p && setGps(p)) }, [])
   useEffect(() => onAlert((a) => { if (sos && a.id === sos.id && a.ack) setSos({ ...sos, acked: true }) }), [sos])
   useEffect(() => {
@@ -118,7 +119,7 @@ export default function Safety() {
         {!sos ? (
           <Card className="p-5 text-center">
             <button onPointerDown={startHold} onPointerUp={stopHold} onPointerLeave={stopHold} onContextMenu={(e) => e.preventDefault()}
-              className="relative mx-auto grid h-44 w-44 select-none place-items-center rounded-full bg-sos text-white shadow-[0_14px_40px_-12px_rgba(215,38,61,0.9)] active:scale-[0.98]" aria-label="Hold for SOS">
+              className="relative mx-auto grid h-44 w-44 select-none place-items-center rounded-full bg-sos text-white shadow-[0_14px_40px_-12px_rgba(215,38,61,0.9)] active:scale-[0.98]">
               <svg className="absolute inset-0 -rotate-90" viewBox="0 0 100 100"><circle cx="50" cy="50" r="47" fill="none" stroke="#fff" strokeOpacity={0.25} strokeWidth={4} /><circle cx="50" cy="50" r="47" fill="none" stroke="#fff" strokeWidth={4} strokeDasharray={`${holding * 295} 300`} strokeLinecap="round" /></svg>
               <span className="flex flex-col items-center"><Siren size={40} /><span className="mt-1 text-[26px] font-black tracking-wider">SOS</span><span className="text-[12px] text-white/85">{L(TX.hold)}</span></span>
             </button>

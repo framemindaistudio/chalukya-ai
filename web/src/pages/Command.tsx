@@ -35,7 +35,7 @@ function Kpi({ label, value, sub, tone = 'text-white' }: { label: string; value:
     <div className="rounded-2xl border border-white/8 bg-night-2 px-4 py-3">
       <div className="text-[12px] text-white/55">{label}</div>
       <div className={`num mt-0.5 text-[30px] font-bold leading-none ${tone}`}>{value}</div>
-      {sub && <div className="mt-1 text-[11.5px] text-white/45">{sub}</div>}
+      {sub && <div className="mt-1 text-[11.5px] text-white/60">{sub}</div>}
     </div>
   )
 }
@@ -194,7 +194,7 @@ export default function Command() {
                     <button onClick={() => setSite(x.s)} className={`w-full rounded-xl p-2 text-left ${site === x.s ? 'bg-white/8' : ''}`}>
                       <div className="flex items-baseline justify-between text-[14px]"><span className="font-semibold">{L(placeById[x.s].name).split(':')[0]}</span><span className="num text-white/60">{x.c ? `${x.c.present}` : '—'} / {x.cap} · peak {peak} at {x.f ? hourLabel(6 + x.f.hourly.indexOf(peak)) : '—'}</span></div>
                       <div className="mt-1.5 h-2 overflow-hidden rounded-full bg-white/8"><div className="h-full rounded-full" style={{ width: `${Math.min(100, ((x.c?.present ?? 0) / x.cap) * 100)}%`, background: LEVEL_COLOR[lvl] }} /></div>
-                      <div className="mt-1 flex justify-between text-[11.5px] text-white/45"><span>{x.f?.p50.toLocaleString('en-IN')} expected today{x.f?.tag ? ` · ${x.f.tag}` : ''}</span><span>{FOOTFALL.sites[x.s].calibrated_to_asi ? 'ASI-calibrated' : 'estimated scale'}</span></div>
+                      <div className="mt-1 flex justify-between text-[11.5px] text-white/60"><span>{x.f?.p50.toLocaleString('en-IN')} expected today{x.f?.tag ? ` · ${x.f.tag}` : ''}</span><span>{FOOTFALL.sites[x.s].calibrated_to_asi ? 'ASI-calibrated' : 'estimated scale'}</span></div>
                     </button>
                   </li>
                 )
@@ -236,7 +236,7 @@ export default function Command() {
                 ))}</tbody>
               </table>
             </div>
-            <p className="mt-2 text-[11.5px] text-white/45">Assumptions (editable per site): {WATER_L} L water and {WASTE_KG} kg waste per visitor; one toilet seat per {PER_TOILET} people on site; one Pravasi Mitra per {PER_GUIDE}.</p>
+            <p className="mt-2 text-[11.5px] text-white/60">Assumptions (editable per site): {WATER_L} L water and {WASTE_KG} kg waste per visitor; one toilet seat per {PER_TOILET} people on site; one Pravasi Mitra per {PER_GUIDE}.</p>
           </Panel>
 
           <Panel title="IoT devices" icon={<Cpu size={15} />}>
@@ -248,10 +248,10 @@ export default function Command() {
                 </li>
               ))}
               {[['Safety node · Cave steps', 'PIR + DHT22 + buzzer'], ['Safety node · Agastya ghats', 'PIR + ultrasonic'], ['CCTV · Cave 1 entrance', 'people counter']].map(([n, d]) => (
-                <li key={n} className="flex items-center justify-between rounded-lg bg-white/5 px-3 py-2"><span className="flex items-center gap-2"><Radio size={14} className="text-lamp" />{n}</span><span className="text-[11.5px] text-white/45">{d}</span></li>
+                <li key={n} className="flex items-center justify-between rounded-lg bg-white/5 px-3 py-2"><span className="flex items-center gap-2"><Radio size={14} className="text-lamp" />{n}</span><span className="text-[11.5px] text-white/60">{d}</span></li>
               ))}
             </ul>
-            <p className="mt-2 text-[11.5px] text-white/45">No hardware attached: nodes replay the simulated sensor stream. ESP32 firmware in /iot posts to /api/iot.</p>
+            <p className="mt-2 text-[11.5px] text-white/60">No hardware attached: nodes replay the simulated sensor stream. ESP32 firmware in /iot posts to /api/iot.</p>
           </Panel>
         </div>
 

@@ -63,7 +63,7 @@ export default function CctvPanel() {
         <button onClick={recount} className="inline-flex items-center gap-1.5 rounded-full bg-lake px-3.5 py-1.5 text-[12.5px] font-semibold">{busy && <Loader2 size={13} className="animate-spin" />}Recount on server</button>
         {ratio >= 0.5 && <button onClick={raise} className="rounded-full border border-white/15 px-3.5 py-1.5 text-[12.5px] font-semibold">Raise crowd alert</button>}
       </div>
-      <p className="mt-2 text-[11.5px] text-white/45">Zone capacity {ZONE_CAPACITY}. Detector undercounts tightly packed groups (occlusion); a density-map model is the next step for festival crowds.</p>
+      <p className="mt-2 text-[11.5px] text-white/60">Zone capacity {ZONE_CAPACITY}. Detector undercounts tightly packed groups (occlusion); a density-map model is the next step for festival crowds.</p>
     </section>
   )
 }

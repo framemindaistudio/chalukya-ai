@@ -8,7 +8,8 @@ import * as ort from 'onnxruntime-web/wasm'
   instead of guessing.
 */
 ort.env.wasm.wasmPaths = { wasm: '/ort/ort-wasm-simd-threaded.wasm' }
-ort.env.wasm.numThreads = Math.min(4, navigator.hardwareConcurrency || 2)
+// threads need cross-origin isolation; without it, asking would only probe SharedArrayBuffer and log a deprecation
+ort.env.wasm.numThreads = globalThis.crossOriginIsolated ? Math.min(4, navigator.hardwareConcurrency || 2) : 1
 
 let session: ort.InferenceSession | null = null
 let labels: string[] = []
