@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router'
 import { Accessibility, ArrowRight, BedDouble, Camera, CarFront, ChevronRight, Cpu, HandHeart, LayoutDashboard, Mic, Search, ShieldCheck, Sparkles, Sun, UtensilsCrossed } from 'lucide-react'
 import CircuitLine from '../components/CircuitLine'
+import InstallCard from '../components/InstallCard'
 import { Card, Eyebrow } from '../components/ui'
 import PlaceImage from '../components/PlaceImage'
 import { useLang, type Lang } from '../lib/i18n'
@@ -127,6 +128,8 @@ export default function Home() {
             <svg className="absolute -right-3 -top-3 h-20 w-20 text-white/15" viewBox="0 0 40 40"><path d="M4 12V4h8M28 4h8v8M36 28v8h-8M12 36H4v-8" stroke="currentColor" strokeWidth="2.5" fill="none" /></svg>
           </Link>
         </div>
+
+        <InstallCard />
 
         <div className="grid grid-cols-3 gap-2.5">
           {tiles.map(({ to, icon: Icon, label, bg, fg }) => (

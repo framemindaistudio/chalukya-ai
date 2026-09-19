@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useSearchParams } from 'react-router'
-import { Accessibility, Bike, Bus, Car, Clock, Leaf, Mic, Sparkles, UtensilsCrossed, Wallet } from 'lucide-react'
+import { Accessibility, Bike, Bus, Car, Clock, Leaf, Map as MapIcon, Mic, Share2, Sparkles, UtensilsCrossed, Wallet } from 'lucide-react'
 import { parseTrip } from '../lib/tripParse'
 import { canListen, listen } from '../lib/speech'
 import { track } from '../lib/live'
@@ -8,7 +8,7 @@ import { Card, Chip, Eyebrow, LevelBadge, PageHead } from '../components/ui'
 import MapView from '../components/MapView'
 import { useLang } from '../lib/i18n'
 import { hhmm, now } from '../lib/clock'
-import { plan, type Interest, type Mobility, type Mode, type PlanInput } from '../lib/itinerary'
+import { plan, type DayPlan, type Interest, type Mobility, type Mode, type PlanInput } from '../lib/itinerary'
 import { placeById, HUB_COORDS } from '../lib/data'
 import { LEVEL_COLOR } from '../lib/crowd'
 import { inr } from '../lib/geo'
@@ -20,7 +20,9 @@ const TX = {
   interests: { en: 'I love', kn: 'ನನಗೆ ಇಷ್ಟ', hi: 'मुझे पसंद है' }, who: { en: 'Who is travelling', kn: 'ಯಾರು ಪ್ರಯಾಣಿಸುತ್ತಿದ್ದಾರೆ', hi: 'कौन यात्रा कर रहा है' },
   how: { en: 'Getting around', kn: 'ಪ್ರಯಾಣದ ವಿಧಾನ', hi: 'आने-जाने का तरीका' }, go: { en: 'Build my plan', kn: 'ಯೋಜನೆ ರಚಿಸಿ', hi: 'योजना बनाएँ' },
   day: { en: 'Day', kn: 'ದಿನ', hi: 'दिन' }, lunch: { en: 'Lunch', kn: 'ಮಧ್ಯಾಹ್ನದ ಊಟ', hi: 'दोपहर का खाना' },
-  back: { en: 'Back to base', kn: 'ಮರಳಿ ತಂಗುದಾಣಕ್ಕೆ', hi: 'वापस ठहरने की जगह' }, parking: { en: 'Parking on arrival', kn: 'ತಲುಪಿದಾಗ ಪಾರ್ಕಿಂಗ್', hi: 'पहुँचने पर पार्किंग' },
+  back: { en: 'Back to base', kn: 'ಮರಳಿ ತಂಗುದಾಣಕ್ಕೆ', hi: 'वापस ठहरने की जगह' },
+  share: { en: 'Share', kn: 'ಹಂಚಿಕೊಳ್ಳಿ', hi: 'शेयर करें' }, route: { en: 'Route in Google Maps', kn: 'Google Maps ನಲ್ಲಿ ದಾರಿ', hi: 'Google Maps में रास्ता' },
+  myPlan: { en: 'My Bagalkot trip', kn: 'ನನ್ನ ಬಾಗಲಕೋಟೆ ಪ್ರವಾಸ', hi: 'मेरी बागलकोट यात्रा' }, copied: { en: 'Copied: paste it in WhatsApp', kn: 'ನಕಲಿಸಲಾಗಿದೆ: WhatsApp ನಲ್ಲಿ ಅಂಟಿಸಿ', hi: 'कॉपी हो गया: WhatsApp में पेस्ट करें' }, parking: { en: 'Parking on arrival', kn: 'ತಲುಪಿದಾಗ ಪಾರ್ಕಿಂಗ್', hi: 'पहुँचने पर पार्किंग' },
   describe: { en: 'Describe your trip in your own words', kn: 'ನಿಮ್ಮ ಪ್ರವಾಸವನ್ನು ನಿಮ್ಮದೇ ಮಾತಿನಲ್ಲಿ ಹೇಳಿ', hi: 'अपनी यात्रा अपने शब्दों में बताइए' },
   example: { en: 'I am in Badami. I have 6 hours, ₹3,000 budget, two children, and I like history.', kn: 'ನಾನು ಬಾದಾಮಿಯಲ್ಲಿದ್ದೇನೆ. 6 ಗಂಟೆ ಇದೆ, ₹3000 ಬಜೆಟ್, ಇಬ್ಬರು ಮಕ್ಕಳು, ಇತಿಹಾಸ ಇಷ್ಟ.', hi: 'मैं बादामी में हूँ। मेरे पास 6 घंटे हैं, ₹3000 बजट, दो बच्चे, इतिहास पसंद है।' },
   fromText: { en: 'Plan it', kn: 'ಯೋಜಿಸಿ', hi: 'योजना बनाएँ' }, orForm: { en: 'Or choose options', kn: 'ಅಥವಾ ಆಯ್ಕೆಗಳನ್ನು ಆರಿಸಿ', hi: 'या विकल्प चुनें' },
@@ -36,6 +38,14 @@ const MOB: { id: Mobility; en: string; kn: string; hi: string }[] = [
   { id: 'normal', en: 'Everyone walks fine', kn: 'ಎಲ್ಲರೂ ಆರಾಮವಾಗಿ ನಡೆಯುತ್ತಾರೆ', hi: 'सब आराम से चल सकते हैं' },
   { id: 'senior', en: 'With elders', kn: 'ಹಿರಿಯರೊಂದಿಗೆ', hi: 'बुज़ुर्गों के साथ' }, { id: 'wheelchair', en: 'Wheelchair', kn: 'ಗಾಲಿಕುರ್ಚಿ', hi: 'व्हीलचेयर' },
 ]
+
+/** Google Maps directions from base through every stop and back: opens the Maps app on phones. */
+function mapsRoute(base: readonly number[], d: DayPlan) {
+  const pt = (id: string) => `${placeById[id].lat},${placeById[id].lng}`
+  const q = new URLSearchParams({ api: '1', origin: `${base[0]},${base[1]}`, destination: `${base[0]},${base[1]}`, travelmode: 'driving' })
+  if (d.stops.length) q.set('waypoints', d.stops.map((s) => pt(s.id)).join('|'))
+  return `https://www.google.com/maps/dir/?${q.toString()}`
+}
 
 export default function Plan() {
   const { L, lang, t } = useLang()
@@ -70,6 +80,24 @@ export default function Plan() {
 
   const toggle = (i: Interest) => setInterests((a) => (a.includes(i) ? (a.length > 1 ? a.filter((x) => x !== i) : a) : [...a, i]))
   const base = HUB_COORDS.badami_bus_stand
+  const [copied, setCopied] = useState<number | null>(null)
+  /** A WhatsApp-ready summary of one day: native share sheet on phones, clipboard elsewhere. */
+  async function shareDay(d: DayPlan, di: number) {
+    const date = new Date(d.date).toLocaleDateString(lang === 'kn' ? 'kn-IN' : lang === 'hi' ? 'hi-IN' : 'en-IN', { weekday: 'short', day: 'numeric', month: 'short' })
+    const lines = [`*${L(TX.myPlan)}* · ${L(TX.day)} ${di + 1} · ${date}`, '']
+    d.stops.forEach((s, i) => {
+      lines.push(`${hhmm(s.arrive)}  ${L(placeById[s.id].name).split(':')[0]}`)
+      if (d.lunch && d.lunch.afterIndex === i && d.lunch.eatery) lines.push(`      ${L(TX.lunch)}: ${d.lunch.eatery.item.name}`)
+    })
+    lines.push(`${hhmm(d.endAt)}  ${L(TX.back)}`, '', `${d.km} km · ₹${d.cost.total.toLocaleString('en-IN')}`, `${L(TX.route)}: ${mapsRoute(base, d)}`, '', `Chalukya AI · ${location.origin}/plan`)
+    const text = lines.join('\n')
+    track({ kind: 'plan', key: 'share', lang })
+    try {
+      if (navigator.share) { await navigator.share({ title: L(TX.myPlan), text }); return }
+    } catch (e) { if ((e as DOMException)?.name === 'AbortError') return }
+    try { await navigator.clipboard.writeText(text); setCopied(di); setTimeout(() => setCopied(null), 2500) }
+    catch { window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank') }
+  }
 
   return (
     <div>
@@ -159,7 +187,11 @@ export default function Plan() {
                 ))}
                 <li className="pl-5 text-[13px] text-ink-3">{L(TX.back)} · ~{hhmm(d.endAt)}</li>
               </ol>
-              {mode !== 'bus' && <p className="mx-4 mb-4 rounded-xl bg-lake-soft/60 px-3 py-2 text-[13px] text-lake"><Leaf size={13} className="-mt-0.5 mr-1 inline" />{L(TX.greener)} <b>{d.co2Bus} kg</b> CO₂ ({people} people).</p>}
+              {mode !== 'bus' && <p className="mx-4 mb-3 rounded-xl bg-lake-soft/60 px-3 py-2 text-[13px] text-lake"><Leaf size={13} className="-mt-0.5 mr-1 inline" />{L(TX.greener)} <b>{d.co2Bus} kg</b> CO₂ ({people} people).</p>}
+              <div className="mx-4 mb-4 grid grid-cols-2 gap-2">
+                <button onClick={() => shareDay(d, di)} className="flex items-center justify-center gap-2 rounded-xl bg-[#1f8f4e] py-2.5 text-[14px] font-semibold text-white"><Share2 size={16} />{copied === di ? L(TX.copied) : L(TX.share)}</button>
+                <a href={mapsRoute(base, d)} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 rounded-xl border border-line py-2.5 text-[14px] font-semibold text-ink"><MapIcon size={16} className="text-lake" />{L(TX.route)}</a>
+              </div>
             </Card>
           )
         })}

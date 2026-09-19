@@ -44,7 +44,7 @@ async function connect() {
   try {
     const proto = location.protocol === 'https:' ? 'wss' : 'ws'
     ws = new WebSocket(`${proto}://${location.host}/api/ws`)
-    ws.onopen = () => { wsOk = true; retry = 4000 }
+    ws.onopen = () => { wsOk = true; retry = 4000; flushOutbox() }
     ws.onmessage = (e) => {
       try {
         const m = JSON.parse(e.data)
@@ -61,12 +61,50 @@ async function connect() {
 if (typeof window !== 'undefined') connect()
 bc?.addEventListener('message', (e) => { if (e.data?.__stat) statListeners.forEach((f) => f(e.data.__stat)); else deliver(e.data as Alert) })
 
+/*
+  Delivery to the control room. 'server' = the district server has it; 'queued' = no connection, so it is
+  kept on the phone and re-sent automatically when the signal returns; 'device' = this site has no control
+  room (static hosting), so only this phone's own tabs see it and the tourist must call 112.
+*/
+export type Delivery = 'server' | 'queued' | 'device'
+const deliveryListeners = new Set<(id: string, d: Delivery) => void>()
+export function onDelivery(f: (id: string, d: Delivery) => void) { deliveryListeners.add(f); return () => { deliveryListeners.delete(f) } }
+const report = (id: string, d: Delivery) => deliveryListeners.forEach((f) => f(id, d))
+
+const OUTBOX = 'chalukya.outbox'
+const readOutbox = (): Alert[] => { try { return JSON.parse(localStorage.getItem(OUTBOX) || '[]') } catch { return [] } }
+const writeOutbox = (l: Alert[]) => { try { localStorage.setItem(OUTBOX, JSON.stringify(l.slice(-20))) } catch { /* storage off */ } }
+
+async function send(full: Alert): Promise<Delivery> {
+  // the phone knows it has no network before a half-dead socket does
+  if (typeof navigator !== 'undefined' && navigator.onLine === false) return 'queued'
+  if (wsOk && ws && ws.readyState === WebSocket.OPEN) { ws.send(JSON.stringify({ kind: 'alert', alert: full })); return 'server' }
+  if (await isStaticHost()) return 'device'
+  try {
+    const r = await fetch('/api/alerts', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(full), signal: AbortSignal.timeout(5000) })
+    if (!r.ok) throw new Error(String(r.status))
+    return 'server'
+  } catch { return 'queued' }
+}
+
+/** Re-send anything that could not reach the control room (called when the phone comes back online). */
+export async function flushOutbox() {
+  const pending = readOutbox()
+  if (!pending.length) return
+  const left: Alert[] = []
+  for (const a of pending) { const d = await send(a); if (d === 'queued') left.push(a); else report(a.id, d) }
+  writeOutbox(left)
+}
+if (typeof window !== 'undefined') { window.addEventListener('online', () => { flushOutbox() }); setTimeout(flushOutbox, 3000) }
+
 export function publish(a: Omit<Alert, 'id' | 'at'> & { id?: string; at?: number }) {
   const full: Alert = { id: a.id ?? Math.random().toString(36).slice(2, 10), at: a.at ?? Date.now(), ...a } as Alert
   deliver(full)
   bc?.postMessage(full)
-  if (wsOk && ws) ws.send(JSON.stringify({ kind: 'alert', alert: full }))
-  else isStaticHost().then((st) => { if (!st) fetch('/api/alerts', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(full) }).catch(() => {}) })
+  send(full).then((d) => {
+    if (d === 'queued' && full.severity !== 'info') writeOutbox([...readOutbox().filter((x) => x.id !== full.id), full])
+    report(full.id, d)
+  })
   return full
 }
 
