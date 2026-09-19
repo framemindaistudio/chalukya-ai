@@ -4,6 +4,7 @@ import Shell from './components/Shell'
 import Home from './pages/Home'
 import { LangProvider } from './lib/i18n'
 import Boot from './components/Boot'
+import Tour from './components/Tour'
 
 const Scan = lazy(() => import('./pages/Scan'))
 const Ask = lazy(() => import('./pages/Ask'))
@@ -45,6 +46,7 @@ export default function App() {
             </Route>
           </Routes>
         </Suspense>
+        <Tour />
       </BrowserRouter>
     </LangProvider>
   )

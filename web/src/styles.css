@@ -77,7 +77,7 @@ button { -webkit-tap-highlight-color: transparent; }
 .map-dark .leaflet-container { background: #0f1a17; }
 
 /* ── Boot sequence ─────────────────────────────────────────────────────────── */
-.boot { position: fixed; inset: 0; z-index: 100; overflow: hidden; display: grid; place-items: center; cursor: pointer;
+.boot { position: fixed; inset: 0; z-index: 3000; overflow: hidden; display: grid; place-items: center; cursor: pointer;
   background: radial-gradient(120% 80% at 50% 110%, #7a3a1c 0%, #3b1d12 32%, #122420 68%, #0b1513 100%);
   transition: clip-path .65s cubic-bezier(.7, 0, .2, 1), opacity .65s ease; clip-path: circle(150% at 50% 50%); }
 .boot-exit { clip-path: circle(0% at 50% 42%); opacity: .6; }

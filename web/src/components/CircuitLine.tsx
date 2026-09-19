@@ -90,7 +90,7 @@ export default function CircuitLine() {
   const halo = { paintOrder: 'stroke' as const, stroke: '#fff', strokeWidth: 3.5, strokeLinejoin: 'round' as const }
 
   return (
-    <section aria-label={t('circuit')} className="card overflow-hidden">
+    <section aria-label={t('circuit')} data-tour="circuit" className="card overflow-hidden">
       <div className="flex items-center justify-between px-4 pt-3.5">
         <div className="text-[12px] font-semibold uppercase tracking-[0.08em] text-ink-3">{t('circuit')}</div>
         <span className={`inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap text-[12px] font-semibold ${open ? 'text-lake' : 'text-ink-3'}`}>

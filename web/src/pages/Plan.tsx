@@ -153,7 +153,7 @@ export default function Plan() {
         {result?.days.map((d, di) => {
           const line: [number, number][] = [[base[0], base[1]], ...d.stops.map((s) => [placeById[s.id].lat, placeById[s.id].lng] as [number, number]), [base[0], base[1]]]
           return (
-            <Card key={d.date} className="rise overflow-hidden">
+            <Card key={d.date} data-tour={di === 0 ? 'day' : undefined} className="rise overflow-hidden">
               <div className="flex items-baseline justify-between px-4 pt-4">
                 <h2 className="display text-[22px]">{L(TX.day)} {di + 1}</h2>
                 <span className="num text-[14px] text-ink-2">{new Date(d.date).toLocaleDateString(lang === 'kn' ? 'kn-IN' : lang === 'hi' ? 'hi-IN' : 'en-IN', { weekday: 'long', day: 'numeric', month: 'short' })}</span>
