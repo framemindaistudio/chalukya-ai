@@ -89,6 +89,7 @@ export default function LiveLens() {
       const vw = v.videoWidth, vh = v.videoHeight, dw = Math.min(vw, vh * 3 / 4), dh = Math.min(vh, vw * 4 / 3)
       const side = RET.size * dw, sx = (vw - dw) / 2 + (dw - side) / 2, sy = (vh - dh) / 2 + dh * RET.cy - side / 2
       g.drawImage(v, sx, Math.max(0, sy), side, side, 0, 0, 256, 256)
+      await loadVision()  // first frame: wait for the model without counting the download as inference time
       const t0 = performance.now()
       const p = await classifyFrame(c)
       setMs(Math.round(performance.now() - t0))
