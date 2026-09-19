@@ -41,7 +41,7 @@ export default function CctvPanel() {
     <section className="min-w-0 rounded-2xl border border-white/8 bg-night-2 p-4">
       <div className="mb-3 flex items-center justify-between">
         <h2 className="flex items-center gap-2 text-[13px] font-semibold uppercase tracking-[0.08em] text-white/60"><Cctv size={15} />CCTV people counter</h2>
-        <span className="inline-flex items-center gap-1 text-[11.5px] text-white/50"><EyeOff size={13} />privacy blur on</span>
+        <span className="inline-flex items-center gap-1 text-[11.5px] text-white/60"><EyeOff size={13} />privacy blur on</span>
       </div>
       <div className="relative overflow-hidden rounded-xl bg-black">
         <img src={f.file} alt="Blurred camera frame" className="block w-full" style={{ filter: 'blur(7px) saturate(0.7)', transform: 'scale(1.03)' }} />

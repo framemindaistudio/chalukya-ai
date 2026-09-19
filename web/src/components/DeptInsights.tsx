@@ -66,12 +66,12 @@ export default function DeptInsights() {
         <h2 className="mb-3 flex items-center gap-2 text-[13px] font-semibold uppercase tracking-[0.08em] text-white/60"><MessageSquareWarning size={15} />What visitors say</h2>
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
-            <div className="mb-2 text-[12px] text-white/50">Sentiment by site</div>
+            <div className="mb-2 text-[12px] text-white/60">Sentiment by site</div>
             <ul className="space-y-2">{bySite.map(([p, v]) => {
               const t = v.pos + v.neg + v.mix
               return (
                 <li key={p}>
-                  <div className="flex justify-between text-[12.5px]"><span className="truncate">{placeById[p]?.name.en.split(':')[0] ?? p}</span><span className="num text-white/50">{t}</span></div>
+                  <div className="flex justify-between text-[12.5px]"><span className="truncate">{placeById[p]?.name.en.split(':')[0] ?? p}</span><span className="num text-white/60">{t}</span></div>
                   <div className="mt-1 flex h-2 overflow-hidden rounded-full">
                     <div style={{ width: `${(v.pos / t) * 100}%`, background: '#2b776e' }} /><div style={{ width: `${(v.mix / t) * 100}%`, background: '#d9a441' }} /><div style={{ width: `${(v.neg / t) * 100}%`, background: '#c0562f' }} />
                   </div>
@@ -80,7 +80,7 @@ export default function DeptInsights() {
             })}</ul>
           </div>
           <div>
-            <div className="mb-2 text-[12px] text-white/50">Top facility complaints</div>
+            <div className="mb-2 text-[12px] text-white/60">Top facility complaints</div>
             <div className="space-y-1.5">{complaints.map(([a, n]) => <Bar key={a} label={ASPECT_LABEL[a]?.en ?? a} n={n} max={maxC} color="#c0562f" />)}</div>
           </div>
         </div>
@@ -90,23 +90,23 @@ export default function DeptInsights() {
               <div className="flex items-center gap-2">
                 <span className={`h-2 w-2 shrink-0 rounded-full ${r.a.sentiment === 'pos' ? 'bg-lake-2' : r.a.sentiment === 'neg' ? 'bg-sand' : 'bg-lamp'}`} />
                 <span className="truncate font-semibold">{placeById[r.place]?.name.en.split(':')[0]}</span>
-                <span className="text-white/40">{LANG[r.a.lang]}{r.sample ? ' · sample' : ' · live'}</span>
+                <span className="text-white/60">{LANG[r.a.lang]}{r.sample ? ' · sample' : ' · live'}</span>
               </div>
               <div className="mt-1 text-white/75">{r.text}</div>
               {r.a.aspects.length > 0 && <div className="mt-1 text-[11px] text-lamp">{r.a.aspects.map((a) => ASPECT_LABEL[a]?.en).join(' · ')}</div>}
             </li>
           ))}
         </ul>
-        <p className="mt-2 text-[11.5px] text-white/40">Sentiment and aspects are detected by the review model in any of the three languages. "Sample" reviews are demo seeds; "live" ones come from the app.</p>
+        <p className="mt-2 text-[11.5px] text-white/60">Sentiment and aspects are detected by the review model in any of the three languages. "Sample" reviews are demo seeds; "live" ones come from the app.</p>
       </section>
 
       <section className="min-w-0 rounded-2xl border border-white/8 bg-night-2 p-4">
         <h2 className="mb-3 flex items-center gap-2 text-[13px] font-semibold uppercase tracking-[0.08em] text-white/60"><BarChart3 size={15} />What tourists are asking (this session)</h2>
         {stats.length === 0 ? <p className="rounded-xl bg-white/5 p-3 text-[13px] text-white/60">Use the app on a phone (ask, scan, plan) and the questions, languages and places appear here live. Anonymous counts only.</p> : (
           <div className="space-y-4">
-            <div><div className="mb-1.5 text-[12px] text-white/50">Topics</div><div className="space-y-1.5">{intents.map(([k, n]) => <Bar key={k} label={k} n={n} max={intents[0][1]} color="#46e6cb" />)}</div></div>
-            <div><div className="mb-1.5 text-[12px] text-white/50">Languages used</div><div className="space-y-1.5">{langs.map(([k, n]) => <Bar key={k} label={k} n={n} max={langs[0][1]} color="#d9a441" />)}</div></div>
-            <div><div className="mb-1.5 text-[12px] text-white/50">Places & sculptures of interest</div><div className="space-y-1.5">{places.map(([k, n]) => <Bar key={k} label={k} n={n} max={places[0]?.[1] ?? 1} color="#2b776e" />)}</div></div>
+            <div><div className="mb-1.5 text-[12px] text-white/60">Topics</div><div className="space-y-1.5">{intents.map(([k, n]) => <Bar key={k} label={k} n={n} max={intents[0][1]} color="#46e6cb" />)}</div></div>
+            <div><div className="mb-1.5 text-[12px] text-white/60">Languages used</div><div className="space-y-1.5">{langs.map(([k, n]) => <Bar key={k} label={k} n={n} max={langs[0][1]} color="#d9a441" />)}</div></div>
+            <div><div className="mb-1.5 text-[12px] text-white/60">Places & sculptures of interest</div><div className="space-y-1.5">{places.map(([k, n]) => <Bar key={k} label={k} n={n} max={places[0]?.[1] ?? 1} color="#2b776e" />)}</div></div>
           </div>
         )}
       </section>

@@ -133,7 +133,7 @@ export default function Command() {
           <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white"><LogoMark className="h-[26px] w-auto" title="" /></span>
           <div>
             <div className="text-[20px] font-bold leading-none tracking-[-0.02em] text-lamp"><span className="brand font-normal">ಚಾಲುಕ್ಯ</span> AI · Command Centre</div>
-            <div className="mt-0.5 text-[12px] text-white/50">Bagalkot District Tourism · live operations</div>
+            <div className="mt-0.5 text-[12px] text-white/60">Bagalkot District Tourism · live operations</div>
           </div>
         </div>
         <div className="flex flex-wrap items-center gap-2 text-[13px] sm:gap-3">
@@ -162,7 +162,7 @@ export default function Command() {
             </div>
           </Panel>
 
-          <Panel title="Alerts" icon={<Bell size={15} />} right={<span className="num text-[12px] text-white/50">{alerts.length}</span>}>
+          <Panel title="Alerts" icon={<Bell size={15} />} right={<span className="num text-[12px] text-white/60">{alerts.length}</span>}>
             <ul className="max-h-[380px] space-y-2 overflow-y-auto pr-1">
               {alerts.length === 0 && <li className="rounded-xl bg-white/5 p-3 text-[13.5px] text-white/60">No alerts yet. Press SOS on a phone, or run a scenario below.</li>}
               {alerts.map((a) => (
@@ -172,7 +172,7 @@ export default function Command() {
                     <div className="min-w-0 flex-1">
                       <div className="text-[14px] font-semibold leading-snug">{a.title}</div>
                       {a.detail && <div className="mt-0.5 text-[12.5px] text-white/55">{a.detail}</div>}
-                      <div className="num mt-1 text-[11px] text-white/40">{new Date(a.at).toLocaleTimeString('en-IN')} · {a.source}</div>
+                      <div className="num mt-1 text-[11px] text-white/60">{new Date(a.at).toLocaleTimeString('en-IN')} · {a.source}</div>
                     </div>
                     {!a.ack && a.severity !== 'info' && a.type !== 'review' && <button onClick={() => ack(a)} className="shrink-0 rounded-full bg-lake px-3 py-1 text-[12px] font-semibold">Respond</button>}
                     {a.ack && <CheckCircle2 size={16} className="shrink-0 text-lake-soft" />}
@@ -217,7 +217,7 @@ export default function Command() {
                 </ComposedChart>
               </ResponsiveContainer>
             </div>
-            <p className="mt-1 text-[12px] text-white/50">White: recent daily visitors. Gold: forecast with calibrated 80% band. Festivals and school holidays are model inputs.</p>
+            <p className="mt-1 text-[12px] text-white/60">White: recent daily visitors. Gold: forecast with calibrated 80% band. Festivals and school holidays are model inputs.</p>
           </Panel>
         </div>
 
@@ -225,7 +225,7 @@ export default function Command() {
           <Panel title="Resource planning · next 7 days" icon={<Droplets size={15} />}>
             <div className="overflow-x-auto">
               <table className="num w-full min-w-[520px] text-[13px]">
-                <thead><tr className="text-left text-white/50"><th className="pb-2 font-medium">Day</th><th className="font-medium">Visitors</th><th className="font-medium"><Droplets size={12} className="inline" /> Water</th><th className="font-medium"><Trash2 size={12} className="inline" /> Waste</th><th className="font-medium">Toilets at peak</th><th className="font-medium">Guides</th></tr></thead>
+                <thead><tr className="text-left text-white/60"><th className="pb-2 font-medium">Day</th><th className="font-medium">Visitors</th><th className="font-medium"><Droplets size={12} className="inline" /> Water</th><th className="font-medium"><Trash2 size={12} className="inline" /> Waste</th><th className="font-medium">Toilets at peak</th><th className="font-medium">Guides</th></tr></thead>
                 <tbody>{week.map((x) => (
                   <tr key={+x.d} className="border-t border-white/8">
                     <td className="py-2">{x.d.toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric' })}{x.tag && <span className="ml-1.5 rounded bg-lamp/20 px-1 text-[10.5px] text-lamp">{x.tag}</span>}</td>
