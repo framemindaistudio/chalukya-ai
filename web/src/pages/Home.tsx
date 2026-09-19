@@ -44,6 +44,9 @@ export default function Home() {
   const at = useNow()
   const w = useWeather()
   const [hero, setHero] = useState(0)
+  // the other two hero photos wait until the first is on screen: they only show after 7 s anyway
+  const [allHeroes, setAllHeroes] = useState(false)
+  useEffect(() => { const t = setTimeout(() => setAllHeroes(true), 4500); return () => clearTimeout(t) }, [])
   const [ex, setEx] = useState(0)
   const [q, setQ] = useState('')
   const [rec, setRec] = useState(false)
@@ -83,9 +86,9 @@ export default function Home() {
     <div>
       {/* ── Hero ── */}
       <section className="relative -mt-[57px] h-[460px] overflow-hidden bg-night">
-        {HEROES.map((x, i) => (
+        {HEROES.map((x, i) => (i === 0 || i === hero || allHeroes) && (
           <img key={x.slug} alt="" aria-hidden decoding="async" fetchPriority={i === 0 ? 'high' : 'auto'}
-            src={`/img/hero/${x.slug}-${light}-960.webp`} srcSet={`/img/hero/${x.slug}-${light}-960.webp 960w, /img/hero/${x.slug}-${light}-1440.webp 1440w`}
+            src={`/img/hero/${x.slug}-${light}-960.webp`} srcSet={`/img/hero/${x.slug}-${light}-800.webp 800w, /img/hero/${x.slug}-${light}-960.webp 960w, /img/hero/${x.slug}-${light}-1440.webp 1440w`}
             sizes="(max-width: 520px) 100vw, 520px" className={`hero-img h-full w-full object-cover ${i === hero ? 'on' : ''}`} />
         ))}
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(9,20,17,.55)_0%,rgba(9,20,17,.15)_32%,rgba(9,20,17,.35)_62%,rgba(238,243,240,1)_100%)]" />
@@ -110,8 +113,12 @@ export default function Home() {
             <PlayCircle size={15} />{L(HERO_TX.tour)}
           </button>
         </div>
-        <div className="absolute bottom-[72px] right-3 flex items-center gap-1.5">
-          {HEROES.map((x, i) => <button key={x.slug} aria-label={x.place.en} onClick={() => setHero(i)} className={`h-1.5 rounded-full transition-all ${i === hero ? 'w-5 bg-white' : 'w-1.5 bg-white/50'}`} />)}
+        <div className="absolute bottom-[63px] right-2 flex items-center">
+          {HEROES.map((x, i) => (
+            <button key={x.slug} aria-label={x.place.en} onClick={() => setHero(i)} className="grid h-6 min-w-6 place-items-center px-[3px]">
+              <span className={`block h-1.5 rounded-full transition-all ${i === hero ? 'w-5 bg-white' : 'w-1.5 bg-white/50'}`} />
+            </button>
+          ))}
         </div>
         <div className="absolute left-4 top-[66px] max-w-[70%] truncate text-[11px] text-white/70">{L(HEROES[hero].place)}{credit ? ` · ${credit.ai ? `${L(HERO_TX.aiPhoto)} ` : ''}© ${credit.artist}, ${credit.license}` : ''}</div>
       </section>

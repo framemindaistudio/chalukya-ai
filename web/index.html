@@ -11,7 +11,17 @@
     <meta name="description" content="Chalukya AI: one offline-first AI companion for tourists in Bagalkot district. Scan sculptures, ask in Kannada, Hindi or English, and plan around crowds, parking and heat." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..800;1,9..40,400..600&family=Noto+Sans+Devanagari:wght@400..800&family=Noto+Sans+Kannada:wght@400..800&family=Tiro+Kannada&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..800;1,9..40,400..600&family=Noto+Sans+Devanagari:wght@400..800&family=Noto+Sans+Kannada:wght@400..800&family=Tiro+Kannada&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..800;1,9..40,400..600&family=Noto+Sans+Devanagari:wght@400..800&family=Noto+Sans+Kannada:wght@400..800&family=Tiro+Kannada&display=swap" rel="stylesheet" /></noscript>
+    <script>
+      // Home's first hero photo, in the same light Home will pick (dawn before 11, golden after)
+      if (location.pathname === '/') {
+        var p = '/img/hero/badami-' + (new Date().getHours() < 11 ? 'dawn' : 'gold'), k = document.createElement('link')
+        k.rel = 'preload'; k.as = 'image'; k.setAttribute('fetchpriority', 'high'); k.setAttribute('imagesizes', '(max-width: 520px) 100vw, 520px')
+        k.setAttribute('imagesrcset', p + '-800.webp 800w, ' + p + '-960.webp 960w, ' + p + '-1440.webp 1440w')
+        document.head.appendChild(k)
+      }
+    </script>
     <title>Chalukya AI · Bagalkot</title>
   </head>
   <body>

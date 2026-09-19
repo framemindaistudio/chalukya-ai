@@ -20,11 +20,12 @@ export function LangSwitch({ dark = false }: { dark?: boolean }) {
 
 export function Wordmark({ light = false }: { light?: boolean }) {
   return (
-    <NavLink to="/" className="flex items-center gap-2" aria-label="Chalukya AI home">
+    <NavLink to="/" className="flex items-center gap-2">
       <span className="grid h-8 w-8 shrink-0 place-items-center rounded-[10px] bg-white shadow-[0_2px_10px_rgba(0,0,0,.18)]"><LogoMark className="h-[21px] w-auto" title="" /></span>
       <span className="flex items-baseline gap-1.5">
         <span className={`brand text-[26px] leading-none transition-colors ${light ? 'text-white' : 'text-lake'}`}>ಚಾಲುಕ್ಯ</span>
         <span className={`text-[12.5px] font-bold tracking-[0.2em] transition-colors ${light ? 'text-lamp' : 'text-ink-2'}`}>AI</span>
+        <span className="sr-only">, Chalukya AI home</span>
       </span>
     </NavLink>
   )

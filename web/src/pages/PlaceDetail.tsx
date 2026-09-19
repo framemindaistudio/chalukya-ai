@@ -40,7 +40,7 @@ export default function PlaceDetail() {
   return (
     <div>
       <div className="relative">
-        <PlaceImage id={id} className="h-[240px] w-full" showCredit />
+        <PlaceImage id={id} className="h-[240px] w-full" showCredit sizes="(max-width: 520px) 100vw, 520px" />
         <Link to="/" className="absolute left-3 top-3 grid h-10 w-10 place-items-center rounded-full bg-white/90 text-ink shadow" aria-label={t('back')}><ChevronLeft size={20} /></Link>
       </div>
       <div className="space-y-4 px-4 pt-4">

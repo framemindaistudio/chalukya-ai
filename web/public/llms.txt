@@ -1,0 +1,15 @@
+# Chalukya AI
+
+> An offline-first AI companion for tourists in Bagalkot district, Karnataka: Badami, Pattadakal, Aihole and nearby sites. It works in Kannada, Hindi and English. Built by Chinmay R M for "AI to Redesign Tourism – Bagalkot 2026".
+
+Crowd numbers come from a forecast model and parking from simulated sensors. The How the AI works page labels which data is real and which is simulated.
+
+## Pages
+
+- [Home](https://chalukya-ai.vercel.app/): the circuit map with each site's crowd forecast and free parking
+- [Ask](https://chalukya-ai.vercel.app/ask): questions in Kannada, Hindi or English, answered from a verified knowledge base
+- [Plan](https://chalukya-ai.vercel.app/plan): day plans that avoid crowd peaks and midday heat
+- [Scan](https://chalukya-ai.vercel.app/scan): recognises 25 sculptures and temples on the phone, and reads monument boards
+- [Safety](https://chalukya-ai.vercel.app/safety): SOS with location, which still works without signal
+- [Command centre](https://chalukya-ai.vercel.app/command): the district's live operations view
+- [How the AI works](https://chalukya-ai.vercel.app/how): the models, how they were tested, and which data is simulated
