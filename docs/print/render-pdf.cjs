@@ -1,0 +1,13 @@
+const { chromium } = require('playwright-core')
+const [src, pdf, png] = process.argv.slice(2)
+;(async () => {
+  const b = await chromium.launch({ executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe', headless: true })
+  const p = await b.newPage({ viewport: { width: 794, height: 1123 }, deviceScaleFactor: 2 })
+  await p.goto('file:///' + src, { waitUntil: 'networkidle' })
+  await p.evaluate(() => document.fonts.ready)
+  const over = await p.evaluate(() => ({ sh: document.documentElement.scrollHeight, ch: window.innerHeight, fonts: [...document.fonts].filter((f) => f.status === 'loaded').map((f) => f.family).filter((v, i, a) => a.indexOf(v) === i) }))
+  console.log(JSON.stringify(over))
+  await p.pdf({ path: pdf, format: 'A4', printBackground: true, margin: { top: 0, right: 0, bottom: 0, left: 0 }, pageRanges: '1' })
+  await p.screenshot({ path: png, fullPage: false })
+  await b.close()
+})().catch((e) => { console.error(e); process.exit(1) })

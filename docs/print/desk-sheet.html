@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Chalukya AI desk sheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400..800&family=Tiro+Kannada&family=Noto+Sans+Kannada:wght@500&family=Noto+Sans+Devanagari:wght@500&display=swap" rel="stylesheet">
+<style>
+  /* One A4 page for the judging desk. Same tokens as the app (web/src/styles.css). */
+  :root { --night:#0F1A17; --night2:#16241F; --mist:#EEF3F0; --paper:#FBFCFA; --ink:#14211D; --ink2:#4A5A54;
+          --lake:#1F5E57; --lake-soft:#D5E6E1; --lamp:#D9A441; --lamp-l:#F3C56B; --sand:#C0562F; --line:#D6E0DB; }
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 210mm; height: 297mm; }
+  body { font-family: 'DM Sans', 'Noto Sans Kannada', 'Noto Sans Devanagari', Arial, sans-serif; color: var(--ink); background: var(--mist);
+         -webkit-print-color-adjust: exact; print-color-adjust: exact; overflow: hidden; }
+  .top { background: radial-gradient(120% 140% at 100% 0%, #1d3a33 0%, var(--night) 55%); color: var(--paper); padding: 9mm 12mm 8mm; display: grid; grid-template-columns: 1fr 50mm; gap: 8mm; align-items: center; }
+  .brand { display: flex; align-items: center; gap: 4mm; }
+  .tile { width: 15mm; height: 15mm; border-radius: 4mm; background: var(--paper); display: grid; place-items: center; box-shadow: 0 3mm 8mm -3mm rgba(217,164,65,.6); }
+  .tile img { width: 10.5mm; height: 10.5mm; object-fit: contain; }
+  .event { font-size: 7.6pt; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--lamp-l); }
+  h1 { font-size: 34pt; font-weight: 800; letter-spacing: -.03em; line-height: 1; margin-top: 4mm; }
+  h1 .kn { font-family: 'Tiro Kannada', serif; font-weight: 400; color: var(--lamp-l); font-size: 25pt; letter-spacing: 0; margin-left: 3mm; }
+  .tag { font-size: 11.5pt; line-height: 1.35; color: #DCE8E3; margin-top: 3mm; max-width: 118mm; }
+  .qr { background: var(--paper); border-radius: 5mm; padding: 3.5mm; text-align: center; color: var(--ink); }
+  .qr img { width: 43mm; height: 43mm; display: block; }
+  .qr b { display: block; font-size: 9pt; margin-top: 1.5mm; }
+  .qr span { display: block; font-size: 7pt; color: var(--ink2); margin-top: .5mm; }
+  .phones { display: grid; grid-template-columns: repeat(4, 30mm); justify-content: space-between; padding: 5.5mm 17mm 0; }
+  .phone { text-align: center; }
+  .phone .f { background: var(--ink); border-radius: 5.5mm; padding: 1.3mm; box-shadow: 0 3mm 6mm -3mm rgba(20,33,29,.45); }
+  .phone img { width: 100%; aspect-ratio: 780 / 1688; object-fit: cover; border-radius: 4.3mm; display: block; }
+  .phone p { font-size: 7.4pt; color: var(--ink2); margin-top: 1.8mm; line-height: 1.25; }
+  .phone p b { color: var(--ink); display: block; font-size: 8pt; }
+  h2 { font-size: 7.6pt; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--lake); margin: 5mm 12mm 2.4mm; }
+  .feats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.8mm 2.4mm; padding: 0 12mm; }
+  .feat { display: grid; grid-template-columns: 5.5mm 1fr; gap: 2.2mm; align-items: start; background: var(--paper); border: .25mm solid var(--line); border-radius: 2.6mm; padding: 1.9mm 2.6mm; }
+  .feat i { width: 5.5mm; height: 5.5mm; border-radius: 1.6mm; background: var(--lake-soft); display: grid; place-items: center; }
+  .feat i svg { width: 3.6mm; height: 3.6mm; stroke: var(--lake); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .feat.dist i { background: #F7ECD4; } .feat.dist i svg { stroke: #8A6412; }
+  .feat b { font-size: 8.3pt; display: block; line-height: 1.2; }
+  .feat span { font-size: 7.1pt; color: var(--ink2); line-height: 1.3; display: block; }
+  .nums { margin: 4.2mm 12mm 0; display: grid; grid-template-columns: repeat(5, 1fr); background: var(--night); color: var(--paper); border-radius: 3.5mm; padding: 3.2mm 4mm; gap: 3mm; }
+  .nums div b { font-size: 15pt; font-weight: 800; color: var(--lamp-l); display: block; letter-spacing: -.02em; line-height: 1.05; }
+  .nums div span { font-size: 6.6pt; color: #BFD8D5; line-height: 1.25; display: block; margin-top: .6mm; }
+  .foot { padding: 2.8mm 12mm 0; font-size: 6.8pt; color: var(--ink2); line-height: 1.4; display: grid; grid-template-columns: 1fr auto; gap: 6mm; }
+  .foot b { color: var(--ink); }
+</style>
+</head>
+<body>
+  <section class="top">
+    <div>
+      <div class="brand"><div class="tile"><img src="../brand/logo/chalukya-ai-logo-2048.png" alt="Chalukya AI logo"></div><div class="event">AI to Redesign Tourism · Bagalkot 2026</div></div>
+      <h1>Chalukya AI<span class="kn">ಚಾಲುಕ್ಯ AI</span></h1>
+      <p class="tag">One offline-first AI companion for every visitor to Badami, Pattadakal, Aihole and the whole of Bagalkot district, and a live command centre for the people who run it.</p>
+    </div>
+    <div class="qr"><img src="../brand/qr/chalukya-ai-qr.png" alt="QR code for chalukya-ai.vercel.app"><b>chalukya-ai.vercel.app</b><span>Scan to try. No install; works offline after the first visit.</span></div>
+  </section>
+
+  <div class="phones">
+    <div class="phone"><div class="f"><img src="../screens/v2/home.png" alt=""></div><p><b>Live circuit</b>real roads, crowds, parking</p></div>
+    <div class="phone"><div class="f"><img src="../screens/v2/ask_plan.png" alt=""></div><p><b>Ask the guide</b>“6 hours, ₹3,000, two kids…”</p></div>
+    <div class="phone"><div class="f"><img src="../screens/v2/scan_sculpture.png" alt=""></div><p><b>Scan a sculpture</b>recognised on the phone</p></div>
+    <div class="phone"><div class="f"><img src="../screens/v2/scan_board.png" alt=""></div><p><b>Read a board</b>3 scripts, 6 languages</p></div>
+  </div>
+
+  <h2>What it does</h2>
+  <div class="feats">
+    <div class="feat"><i><svg viewBox="0 0 24 24"><path d="M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3z"/><path d="M9 3v15M15 6v15"/></svg></i><div><b>Live circuit map</b><span>Real roads between the three sites; crowd, free parking and drive time on every pin.</span></div></div>
+    <div class="feat"><i><svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.8 7L4 20l1.1-4.5A8 8 0 1 1 21 12z"/></svg></i><div><b>Ask the guide</b><span>Kannada, Hindi or English, typed or spoken; answers only from verified sources.</span></div></div>
+    <div class="feat"><i><svg viewBox="0 0 24 24"><circle cx="6" cy="19" r="2"/><circle cx="18" cy="5" r="2"/><path d="M8 19h6a4 4 0 0 0 0-8h-4a4 4 0 0 1 0-8h6"/></svg></i><div><b>Crowd-smart planner</b><span>One sentence in, a timed plan out: fewer crowds, less driving, no midday climbs.</span></div></div>
+    <div class="feat"><i><svg viewBox="0 0 24 24"><path d="M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="3"/></svg></i><div><b>Scan a sculpture</b><span>25 sculptures and temples recognised on the phone, offline, with the story.</span></div></div>
+    <div class="feat"><i><svg viewBox="0 0 24 24"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h6"/></svg></i><div><b>Read a board</b><span>OCR of Kannada, Hindi and English boards; full translation into six languages.</span></div></div>
+    <div class="feat"><i><svg viewBox="0 0 24 24"><path d="M11 5L6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg></i><div><b>Voice guide</b><span>Every story read aloud; switch language in one tap.</span></div></div>
+    <div class="feat"><i><svg viewBox="0 0 24 24"><path d="M3 20V9l9-5 9 5v11"/><path d="M9 20v-6h6v6"/></svg></i><div><b>Stay and food</b><span>Explainable picks by budget, distance and needs; locally owned places first.</span></div></div>
+    <div class="feat"><i><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.6-7 10-7 10z"/></svg></i><div><b>Local livelihoods</b><span>Ilkal sarees, Guledgudda khana, local guides and small eateries.</span></div></div>
+    <div class="feat"><i><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M10 16V8h3a2.5 2.5 0 0 1 0 5h-3"/></svg></i><div><b>Smart parking</b><span>Free slots predicted for your arrival time, from slot sensors.</span></div></div>
+    <div class="feat"><i><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M12 8v5M12 16h.01"/></svg></i><div><b>Safety and SOS</b><span>Hold 2 s to alert the control room; caution zones, check-ins, heat alerts.</span></div></div>
+    <div class="feat"><i><svg viewBox="0 0 24 24"><circle cx="12" cy="4.5" r="1.8"/><path d="M12 7v6h5M7 11l5 2M9 21a5 5 0 1 1 7-7"/></svg></i><div><b>Accessible Bagalkot</b><span>Step-free, elder-friendly places and a planner that avoids stairs.</span></div></div>
+    <div class="feat dist"><i><svg viewBox="0 0 24 24"><path d="M12 17l-5 3 1-6-4-4 6-1 2-5 2 5 6 1-4 4 1 6z"/></svg></i><div><b>Reviews that matter</b><span>Reviews in any language become sentiment and complaint topics per site.</span></div></div>
+    <div class="feat dist"><i><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></i><div><b>District command centre</b><span>Live map, SOS and heat alerts, crowd against capacity, scenario drills.</span></div></div>
+    <div class="feat dist"><i><svg viewBox="0 0 24 24"><path d="M3 20h18M6 16l4-5 3 3 5-7"/></svg></i><div><b>Forecasts and planning</b><span>Seven-day footfall with festivals; water, waste, toilets and guides.</span></div></div>
+  </div>
+
+  <div class="nums">
+    <div><b>85.8%</b><span>sculptures recognised, unseen photographers</span></div>
+    <div><b>13.1%</b><span>footfall forecast error (31.1% last-year baseline)</span></div>
+    <div><b>±3.5</b><span>parking slots error, 2 hours ahead</span></div>
+    <div><b>95.8%</b><span>questions understood, unseen wording</span></div>
+    <div><b>93.3%</b><span>review sentiment accuracy</span></div>
+  </div>
+
+  <div class="foot">
+    <p><b>Honest data.</b> Real: 1,960 CC-licensed monument photos, ASI annual footfall, OpenStreetMap, the district tourism book and website, live weather. Simulated and labelled in the app: the hourly crowd shape (calibrated to ASI totals), parking sensor streams, hotel prices. Home photos are real photographs relit with AI.</p>
+    <p style="text-align:right">[Team members] · Guide: [name]<br>BVVS Basaveshwar Engineering College, Bagalkot<br>github.com/framemindaistudio/chalukya-ai</p>
+  </div>
+</body>
+</html>
