@@ -5,8 +5,12 @@
 **One offline-first AI companion for every tourist journey in Bagalkot district, and one command
 centre for the people who run it.**
 
-Built for *AI to Redesign Tourism: Bagalkot 2026* (inter-college AI project competition, 24 Sept 2026),
+Built for *AI to Redesign Tourism: Bagalkot 2026* (inter-college AI project competition, 26 Sept 2026),
 on the World Tourism Day 2026 theme *"Digital Agenda and Artificial Intelligence to Redesign Tourism"*.
+
+**Try it:** https://chalukya-ai.vercel.app. On a phone, tap **Take the 90-second tour** on the home screen,
+or open https://chalukya-ai.vercel.app/?tour=1. It walks through seven screens on its own, with a caption on
+each, and can be paused, stepped or ended at any time.
 
 It covers all six problem statements in one product, instead of six disconnected demos:
 
@@ -36,6 +40,9 @@ It covers all six problem statements in one product, instead of six disconnected
 | Heritage board reader | 4 real ASI boards (Commons photos) | 4/4 matched to the right monument or site; translation 3.9× faster with int8, first sentence in ~6 s | — |
 
 The phone's review lexicon scores 96.7 %, but the same person wrote its word lists and the test set, so the e5 number is the fair one.
+
+**Lighthouse**, measured on the live site on 19 Sept 2026 with a simulated mid-range phone on slow 4G (home page): Performance 83–87,
+Accessibility 100, Best Practices 100, SEO 100. Accessibility is also 100 on Ask, Plan, Scan, Safety, Command and How.
 
 Full reports: `ml/vision/out/efficientnet_b0/`, `ml/forecast/out/`, `ml/assistant/out/`.
 
