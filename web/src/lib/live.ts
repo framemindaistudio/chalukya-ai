@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { setLiveOccupancy } from './parking'
+import { isStaticHost } from './server'
 
 /*
   Live events between tourists and the district control room: SOS, geofence breaches,
@@ -38,7 +39,8 @@ function deliver(a: Alert) {
   listeners.forEach((f) => f(a))
 }
 
-function connect() {
+async function connect() {
+  if (await isStaticHost()) return  // static hosting (e.g. Vercel): alerts stay on this device and its tabs
   try {
     const proto = location.protocol === 'https:' ? 'wss' : 'ws'
     ws = new WebSocket(`${proto}://${location.host}/api/ws`)
@@ -64,7 +66,7 @@ export function publish(a: Omit<Alert, 'id' | 'at'> & { id?: string; at?: number
   deliver(full)
   bc?.postMessage(full)
   if (wsOk && ws) ws.send(JSON.stringify({ kind: 'alert', alert: full }))
-  else fetch('/api/alerts', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(full) }).catch(() => {})
+  else isStaticHost().then((st) => { if (!st) fetch('/api/alerts', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(full) }).catch(() => {}) })
   return full
 }
 

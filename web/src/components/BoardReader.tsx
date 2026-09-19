@@ -4,7 +4,7 @@ import { Camera, ChevronDown, ImagePlus, Languages, Loader2, MapPin, ScanText, W
 import { Card, Eyebrow } from './ui'
 import ExplainIn from './ExplainIn'
 import { useLang } from '../lib/i18n'
-import { readBoard, translate, TRANSLATE_TO, type BoardResult } from '../lib/ocr'
+import { ocrWorker, readBoard, translate, TRANSLATE_TO, type BoardResult } from '../lib/ocr'
 import { fileToImage } from '../lib/vision'
 import { placeById, sculptureById } from '../lib/data'
 import { track } from '../lib/live'
@@ -37,6 +37,8 @@ export default function BoardReader() {
   const [credit, setCredit] = useState<string | null>(null)
   const [showText, setShowText] = useState(false)
   const [tx, setTx] = useState<{ to: string; text: string | null | 'busy'; partial?: boolean } | null>(null)
+  // start downloading the reader (~10 MB, cached after the first visit) while the tourist frames the photo
+  useEffect(() => { const id = setTimeout(() => { ocrWorker().catch(() => {}) }, 400); return () => clearTimeout(id) }, [])
 
   async function run(src: string, im: Promise<HTMLImageElement>, creditLine: string | null) {
     setImg(src); setRes(null); setTx(null); setShowText(false); setCredit(creditLine)

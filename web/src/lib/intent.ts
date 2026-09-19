@@ -1,4 +1,5 @@
 import lexRaw from '../data/lexicon.json'
+import { isStaticHost } from './server'
 
 /*
   On-device language understanding: an exact port of the Python pipeline (ml/assistant):
@@ -78,7 +79,7 @@ function lexProbs(classes: string[], text: string): number[] | null {
 export type IntentResult = { intent: string; confidence: number; top: { intent: string; p: number }[]; places: string[]; source?: 'server' | 'phone' }
 let serverDown = 0
 async function serverIntent(text: string) {
-  if (Date.now() - serverDown < 60_000) return null
+  if (Date.now() - serverDown < 60_000 || (await isStaticHost())) return null
   try {
     const r = await fetch('/api/intent', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ q: text }), signal: AbortSignal.timeout(1500) })
     if (!r.ok) throw new Error()

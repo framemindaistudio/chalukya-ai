@@ -2,6 +2,7 @@ import { createWorker, type Worker } from 'tesseract.js'
 import { search } from './retrieval'
 import { findPlaces } from './intent'
 import { PLACES, SCULPTURES, placeById, sculptureById } from './data'
+import { isStaticHost } from './server'
 
 /*
   Heritage board reader.
@@ -76,6 +77,7 @@ export const TRANSLATE_TO = [
 
 /** Streams the translation sentence by sentence (NDJSON), so the first lines show within seconds. */
 export async function translate(text: string, to: string, onSentence?: (soFar: string) => void): Promise<string | null> {
+  if (await isStaticHost()) return null  // translation runs on the district server; say so at once
   try {
     const r = await fetch('/api/translate', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ text: text.slice(0, 4000), to, stream: true }), signal: AbortSignal.timeout(150000) })
     if (!r.ok || !r.body) return null
