@@ -35,7 +35,7 @@ It covers all six problem statements in one product, instead of six disconnected
 | Review sentiment (3 classes, 4 scripts/styles) | 30 separately written test reviews | **93.3 %** (multilingual-e5); complaint topic F1 0.98 | char model alone 73.3 % |
 | Heritage board reader | 4 real ASI boards (Commons photos) | 4/4 matched to the right monument or site; translation 3.9× faster with int8, first sentence in ~6 s | — |
 
-The phone's review lexicon scores 96.7 %, but the same team wrote its word lists and the test set, so the e5 number is the fair one.
+The phone's review lexicon scores 96.7 %, but the same person wrote its word lists and the test set, so the e5 number is the fair one.
 
 Full reports: `ml/vision/out/efficientnet_b0/`, `ml/forecast/out/`, `ml/assistant/out/`.
 
@@ -48,7 +48,7 @@ Committee's book *Sounds and Emotions* (2022, paraphrased); the District Adminis
 (bagalkot.nic.in) and tourism office contact; Open-Meteo live weather.
 
 **AI-enhanced (and labelled):** the home-screen photos are real Commons photographs relit and upscaled to 4K
-with Nano Banana 2; the architecture is unchanged. 4K masters are in `docs/brand/hero-4k/`. The logo (Recraft vector, chosen by the team) is in
+with Nano Banana 2; the architecture is unchanged. 4K masters are in `docs/brand/hero-4k/`. The logo (Recraft vector, chosen by the author) is in
 `docs/brand/logo/` as SVG, 2048 px and 4K PNG.
 
 **Simulated (and labelled in the app):** the daily/hourly shape of footfall (calibrated so the annual totals

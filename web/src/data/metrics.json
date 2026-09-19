@@ -151,7 +151,7 @@
     "fresh_test": 0.886
    }
   },
-  "note": "The lexicon is hand-curated by the team, so its scores are an upper-bound style estimate; the fresh test set was written separately from the training templates."
+  "note": "The lexicon is hand-curated by the author, so its scores are an upper-bound style estimate; the fresh test set was written separately from the training templates."
  },
  "vision": {
   "model": "efficientnet_b0",
@@ -219,6 +219,6 @@
     1.0
    ]
   },
-  "note": "Small, team-written dataset. The keyword lexicons were curated by the same team that wrote the test reviews, so lexicon scores are optimistic; the e5 model is the fair number. Add real moderated in-app reviews before relying on it."
+  "note": "Small, hand-written dataset. The keyword lexicons were curated by the same person who wrote the test reviews, so lexicon scores are optimistic; the e5 model is the fair number. Add real moderated in-app reviews before relying on it."
  }
 }

@@ -1,5 +1,5 @@
 """
-Labelled visitor reviews (written by the team for training; realistic phrasing in Kannada, Hindi,
+Labelled visitor reviews (written by hand for training; realistic phrasing in Kannada, Hindi,
 English and romanised text). Each: (text, sentiment, [aspects]).
 sentiment: pos | neg | mix
 aspects:   toilets  water  parking  crowd  guides  safety  food  access  heat

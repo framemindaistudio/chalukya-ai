@@ -23,5 +23,5 @@
       "fresh_test": 0.886
     }
   },
-  "note": "The lexicon is hand-curated by the team, so its scores are an upper-bound style estimate; the fresh test set was written separately from the training templates."
+  "note": "The lexicon is hand-curated by the author, so its scores are an upper-bound style estimate; the fresh test set was written separately from the training templates."
 }

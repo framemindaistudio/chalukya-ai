@@ -5,7 +5,7 @@ const OUT = process.argv[2]
 const ONLY = process.argv[3] ? process.argv[3].split(',') : null
 const BASE = 'https://chalukya-ai.vercel.app'
 const CLOCK = 't=2026-09-24T10:30'   // competition day, mid-morning: sites open, realistic crowds
-const MENTOR = 'I am in Badami. I have 6 hours, ₹3,000 budget, two children, and I like history.'
+const BRIEF_EXAMPLE = 'I am in Badami. I have 6 hours, ₹3,000 budget, two children, and I like history.'
 const NATARAJA = process.env.NATARAJA
 
 const want = (n) => !ONLY || ONLY.includes(n)
@@ -47,7 +47,7 @@ async function scrollToText(page, text, offset = 90) {
     }
   }
   if (want('ask_plan')) {
-    await open(page, '/ask?q=' + encodeURIComponent(MENTOR), { settle: 4500 })
+    await open(page, '/ask?q=' + encodeURIComponent(BRIEF_EXAMPLE), { settle: 4500 })
     await scrollToText(page, 'Your 6-hour plan', 150); await shot(page, 'ask_plan')
   }
   if (want('plan')) {

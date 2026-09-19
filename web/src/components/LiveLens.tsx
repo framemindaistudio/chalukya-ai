@@ -29,6 +29,9 @@ const T = {
   denied: { en: 'Camera permission is off. Allow the camera for this site in your browser settings, or use a photo instead.', kn: 'ಕ್ಯಾಮೆರಾ ಅನುಮತಿ ಇಲ್ಲ. ಬ್ರೌಸರ್ ಸೆಟ್ಟಿಂಗ್‌ನಲ್ಲಿ ಅನುಮತಿಸಿ, ಅಥವಾ ಫೋಟೋ ಬಳಸಿ.', hi: 'कैमरा की अनुमति बंद है। ब्राउज़र सेटिंग में अनुमति दें, या फ़ोटो इस्तेमाल करें।' },
   noCam: { en: 'No camera found on this device. Use a photo instead.', kn: 'ಈ ಸಾಧನದಲ್ಲಿ ಕ್ಯಾಮೆರಾ ಇಲ್ಲ. ಫೋಟೋ ಬಳಸಿ.', hi: 'इस डिवाइस पर कैमरा नहीं मिला। फ़ोटो इस्तेमाल करें।' },
   where: { en: 'Where it is', kn: 'ಎಲ್ಲಿದೆ', hi: 'कहाँ है' },
+  failed: { en: 'The camera could not start. Close other apps using it and try again.', kn: 'ಕ್ಯಾಮೆರಾ ಆರಂಭವಾಗಲಿಲ್ಲ. ಅದನ್ನು ಬಳಸುತ್ತಿರುವ ಇತರ ಆಪ್‌ಗಳನ್ನು ಮುಚ್ಚಿ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.', hi: 'कैमरा शुरू नहीं हो सका। इसे इस्तेमाल कर रहे दूसरे ऐप बंद करके फिर कोशिश करें।' },
+  retry: { en: 'Try again', kn: 'ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ', hi: 'फिर कोशिश करें' },
+  loading: { en: 'Loading the on-device model…', kn: 'ಫೋನ್‌ನಲ್ಲಿರುವ ಮಾದರಿಯನ್ನು ತೆರೆಯುತ್ತಿದೆ…', hi: 'फ़ोन पर मॉडल लोड हो रहा है…' },
   knows: { en: 'Knows 25 sculptures and temples of Badami, Pattadakal and Aihole.', kn: 'ಬಾದಾಮಿ, ಪಟ್ಟದಕಲ್ಲು, ಐಹೊಳೆಯ 25 ಶಿಲ್ಪ ಮತ್ತು ದೇವಾಲಯಗಳನ್ನು ಗುರುತಿಸುತ್ತದೆ.', hi: 'बादामी, पट्टदकल और ऐहोल की 25 मूर्तियाँ और मंदिर पहचानता है।' },
 }
 const LOCK_FRAMES = 3, EMA = 0.45
@@ -54,18 +57,19 @@ export default function LiveLens() {
 
   async function start() {
     setState('starting')
+    loadVision().catch(() => {})  // the model downloads while the camera starts (16 MB, cached after the first visit)
     try {
-      const [s] = await Promise.all([
-        navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: 'environment' }, width: { ideal: 1280 }, height: { ideal: 960 } }, audio: false }),
-        loadVision(),
-      ])
+      // camera first, straight from the tap, so the browser lets the video play
+      const s = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: 'environment' }, width: { ideal: 1280 }, height: { ideal: 960 } }, audio: false })
       stream.current = s
       const v = video.current!
-      v.srcObject = s; await v.play()
+      v.muted = true; v.srcObject = s
+      await v.play()
       setState('live')
     } catch (e) {
+      console.error('live lens:', e)
       const name = (e as DOMException)?.name
-      setState(name === 'NotAllowedError' ? 'denied' : name === 'NotFoundError' || name === 'OverconstrainedError' ? 'nocam' : 'error')
+      setState(name === 'NotAllowedError' || name === 'SecurityError' ? 'denied' : name === 'NotFoundError' || name === 'OverconstrainedError' ? 'nocam' : 'error')
     }
   }
 
@@ -141,7 +145,12 @@ export default function LiveLens() {
                 </div>
               )}
               {state === 'starting' && <div className="flex items-center gap-2 text-[15px] font-semibold"><Loader2 className="animate-spin" size={18} />…</div>}
-              {(state === 'denied' || state === 'nocam' || state === 'error') && <p className="max-w-[280px] text-[14.5px] text-white/90">{L(state === 'denied' ? T.denied : T.noCam)}</p>}
+              {(state === 'denied' || state === 'nocam' || state === 'error') && (
+                <div className="flex flex-col items-center gap-3">
+                  <p className="max-w-[280px] text-[14.5px] text-white/90">{L(state === 'denied' ? T.denied : state === 'nocam' ? T.noCam : T.failed)}</p>
+                  {state !== 'nocam' && <button onClick={start} className="rounded-full bg-white/15 px-4 py-2 text-[14px] font-semibold text-white">{L(T.retry)}</button>}
+                </div>
+              )}
             </div>
           )}
 
@@ -193,7 +202,7 @@ export default function LiveLens() {
               ) : (
                 <div className="absolute inset-x-0 bottom-4 text-center">
                   <span className="inline-flex items-center gap-2 rounded-full bg-black/55 px-3.5 py-2 text-[13.5px] font-semibold text-white">
-                    {view.kind === 'holding' && <Loader2 size={14} className="animate-spin" />}{L(view.kind === 'holding' ? T.hold : T.searching)}
+                    {(view.kind === 'holding' || ms === 0) && <Loader2 size={14} className="animate-spin" />}{L(ms === 0 ? T.loading : view.kind === 'holding' ? T.hold : T.searching)}
                   </span>
                 </div>
               )}

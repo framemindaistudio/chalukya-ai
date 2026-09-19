@@ -103,7 +103,7 @@ metrics = {
     "sentiment_accuracy": {"char_ngram_phone": round(float(accuracy_score(yte, p_char)), 3), "char_plus_polarity_lexicon_phone": round(float(accuracy_score(yte, p_phone)), 3), "e5_server": round(float(accuracy_score(yte, p_e5)), 3), "hybrid_server": round(float(accuracy_score(yte, p_hyb)), 3)},
     "sentiment_macro_f1": {"char_ngram_phone": round(float(f1_score(yte, p_char, average="macro")), 3), "char_plus_polarity_lexicon_phone": round(float(f1_score(yte, p_phone, average="macro")), 3), "e5_server": round(float(f1_score(yte, p_e5, average="macro")), 3), "hybrid_server": round(float(f1_score(yte, p_hyb, average="macro")), 3)},
     "aspect_f1_precision_recall": {"lexicon_phone": multi_f1(Ate, lex_pred), "lexicon_plus_e5_server": multi_f1(Ate, union)},
-    "note": "Small, team-written dataset. The keyword lexicons were curated by the same team that wrote the test reviews, so lexicon scores are optimistic; the e5 model is the fair number. Add real moderated in-app reviews before relying on it.",
+    "note": "Small, hand-written dataset. The keyword lexicons were curated by the same person who wrote the test reviews, so lexicon scores are optimistic; the e5 model is the fair number. Add real moderated in-app reviews before relying on it.",
 }
 (OUT / "review_metrics.json").write_text(json.dumps(metrics, indent=2, ensure_ascii=False), encoding="utf8")
 print(json.dumps(metrics, indent=2, ensure_ascii=False))

@@ -77,6 +77,6 @@ for k, P in {"A": pa, "B": pb, "C": 0.5 * pa + 0.5 * pb, "D": pd, "E": (pa + pb 
 
 out = {"n_train_examples": len(X), "n_fresh_test": len(FRESH),
        "results": {names[k]: v for k, v in res.items()},
-       "note": "The lexicon is hand-curated by the team, so its scores are an upper-bound style estimate; the fresh test set was written separately from the training templates."}
+       "note": "The lexicon is hand-curated by the author, so its scores are an upper-bound style estimate; the fresh test set was written separately from the training templates."}
 (OUT / "intent_comparison.json").write_text(json.dumps(out, indent=2, ensure_ascii=False), encoding="utf8")
 print(json.dumps(out, indent=2, ensure_ascii=False))

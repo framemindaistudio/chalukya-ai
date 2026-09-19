@@ -87,7 +87,7 @@ export default function HowAI() {
             <Stat v={pct(rv?.sentiment_accuracy?.e5_server)} l="sentiment accuracy, multilingual-e5 (fair number)" good />
             <Stat v={pct(rv?.aspect_f1_precision_recall?.lexicon_plus_e5_server?.[0])} l="complaint-topic F1" />
           </div>
-          <p className="mt-2 text-[12.5px] text-ink-2">Small team-written data (89 training, 30 test reviews in four scripts/styles). The phone's lexicon model scores {pct(rv?.sentiment_accuracy?.char_plus_polarity_lexicon_phone)}, but we wrote both its word lists and the test set, so we report the e5 number.</p>
+          <p className="mt-2 text-[12.5px] text-ink-2">Small hand-written data (89 training, 30 test reviews in four scripts/styles). The phone's lexicon model scores {pct(rv?.sentiment_accuracy?.char_plus_polarity_lexicon_phone)}, but its word lists and the test set came from the same author, so the e5 number is the one reported.</p>
         </Model>
 
         <Model icon={<Sparkles size={20} />} problem="PS 18 & 19 · Hospitality, food" title="Explainable recommenders"
