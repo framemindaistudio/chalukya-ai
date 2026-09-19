@@ -30,7 +30,7 @@ export default function HowAI() {
       <PageHead title={lang === 'kn' ? 'AI ಹೇಗೆ ಕೆಲಸ ಮಾಡುತ್ತದೆ' : lang === 'hi' ? 'AI कैसे काम करता है' : 'How the AI works'} sub="Five models trained for Bagalkot, five open models put to work, one verified knowledge base, and an honest account of what is real data and what is simulated." />
       <div className="space-y-4 px-4">
         <Model icon={<Camera size={20} />} problem="PS 07 · Heritage" title="Sculpture & monument recognition"
-          how={`Transfer learning: an ImageNet-pretrained EfficientNet-B0 fine-tuned on ${v ? v.n_train + v.n_val + v.n_test : '~1,960'} freely licensed Wikimedia Commons photos of 25 Chalukyan sculptures and monuments. Tested on photographers the model never saw, so near-duplicate shots cannot inflate the score. Exported to ONNX; it runs on the phone, offline.`}>
+          how={`Transfer learning: an ImageNet-pretrained EfficientNet-B0 fine-tuned on ${v ? v.n_train + v.n_val + v.n_test : '~1,960'} freely licensed Wikimedia Commons photos of 25 Chalukyan sculptures and monuments. Tested on photographers the model never saw, so near-duplicate shots cannot inflate the score. Exported to ONNX; it runs on the phone, offline. The live lens runs the same model on the camera feed several times a second and only names what has held steady across frames.`}>
           <div className="grid grid-cols-2 gap-2">
             <Stat v={pct(v?.test_top1)} l="top-1 accuracy (held-out photographers)" good />
             <Stat v={pct(v?.test_top3)} l="correct answer in top 3" />

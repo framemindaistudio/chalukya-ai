@@ -12,7 +12,7 @@ It covers all six problem statements in one product, instead of six disconnected
 
 | Problem statement | What Chalukya AI does | AI inside |
 |---|---|---|
-| **PS 07** Chalukyan sculpture identification | Photograph a sculpture or temple → name, story, audio narration, location; says "not sure" instead of guessing; site-level answer when unsure between neighbouring temples; Grad-CAM "why" | EfficientNet-B0 transfer learning, ONNX on the phone (offline) |
+| **PS 07** Chalukyan sculpture identification | Photograph a sculpture or temple, or point the **live lens** (AR-style label over the camera view) → name, story, audio narration, location; says "not sure" instead of guessing; site-level answer when unsure between neighbouring temples; Grad-CAM "why" | EfficientNet-B0 transfer learning, ONNX on the phone (offline) |
 | **PS 12** Multilingual voice assistant | Speak or type in Kannada, Hindi, English or romanised text; answers in the same language, read aloud, with live data cards and sources | Hybrid intent model (char n-grams + curated lexicon + multilingual-e5), tool-using answer composer grounded in a verified KB |
 | **PS 18** Hotel recommendation | Budget, distance to *your* itinerary, must-have amenities, priorities → ranked list with "why this" | Multi-criteria hybrid ranking + Bayesian rating + inclusive-growth boost + diversity (MMR) re-rank |
 | **PS 19** Local restaurant recommendation | Veg / non-veg, budget for two, cuisine, "jolada rotti meals", open now | Same explainable ranker; diet inferred from names where obvious |

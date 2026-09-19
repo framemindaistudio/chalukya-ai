@@ -156,3 +156,11 @@ button { -webkit-tap-highlight-color: transparent; }
   .cm-pin, .cm-chip, .cm-label { opacity: 1; animation: none !important; }
   .cm-pulse, .live-dot { animation: none; }
 }
+
+/* ── Live lens: the reticle breathes while searching and snaps gold when it recognises ── */
+.lens-breathe { animation: lensBreathe 2.4s ease-in-out infinite; }
+@keyframes lensBreathe { 50% { opacity: .4 } }
+.lens-lock { animation: lensLock .45s cubic-bezier(.2, .9, .3, 1.4) both; }
+@keyframes lensLock { from { opacity: .2 } to { opacity: 1 } }
+.lens-callout { animation: rise .35s cubic-bezier(.2, .8, .2, 1) both; }
+@media (prefers-reduced-motion: reduce) { .lens-breathe, .lens-lock, .lens-callout { animation: none; } }

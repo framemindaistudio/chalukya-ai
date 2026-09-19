@@ -62,6 +62,14 @@ export async function classify(img: HTMLImageElement | HTMLCanvasElement | Image
   return { top, confident, ms: Math.round(performance.now() - t0) }
 }
 
+/** One pass, no mirrored copy: fast enough for live camera frames (the lens smooths over time instead). */
+export async function classifyFrame(src: HTMLCanvasElement): Promise<Float32Array> {
+  await loadVision()
+  return (await session!.run({ image: toTensor(src) })).probs.data as Float32Array
+}
+export const visionLabels = () => labels
+export const visionCalibration = () => calib
+
 export function fileToImage(file: File): Promise<HTMLImageElement> {
   return new Promise((res, rej) => {
     const url = URL.createObjectURL(file)

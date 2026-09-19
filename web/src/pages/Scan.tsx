@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, useSearchParams } from 'react-router'
-import { Camera, ImagePlus, Loader2, MapPin, RotateCcw, WifiOff, HelpCircle, Landmark, ScanText } from 'lucide-react'
+import { Camera, ImagePlus, Loader2, MapPin, RotateCcw, WifiOff, HelpCircle, Landmark, ScanText, Aperture } from 'lucide-react'
 import { Card, Eyebrow, PageHead } from '../components/ui'
 import { useLang } from '../lib/i18n'
 import { classify, fileToImage, loadVision, type VisionResult } from '../lib/vision'
@@ -9,6 +9,7 @@ import { stopSpeaking } from '../lib/speech'
 import { publish, track } from '../lib/live'
 import ExplainIn from '../components/ExplainIn'
 import BoardReader from '../components/BoardReader'
+import LiveLens from '../components/LiveLens'
 
 const T = {
   title: { en: 'What am I looking at?', kn: 'ನಾನು ಏನನ್ನು ನೋಡುತ್ತಿದ್ದೇನೆ?', hi: 'मैं क्या देख रहा हूँ?' },
@@ -30,8 +31,10 @@ const T = {
   camNote: { en: 'Grad-CAM: the brighter regions influenced the decision most.', kn: 'Grad-CAM: ಪ್ರಕಾಶಮಾನ ಭಾಗಗಳು ನಿರ್ಧಾರದ ಮೇಲೆ ಹೆಚ್ಚು ಪ್ರಭಾವ ಬೀರಿವೆ.', hi: 'Grad-CAM: चमकीले हिस्सों ने फ़ैसले को सबसे ज़्यादा प्रभावित किया।' },
   camOffline: { en: 'The explanation needs the server; recognition itself works offline.', kn: 'ವಿವರಣೆಗೆ ಸರ್ವರ್ ಬೇಕು; ಗುರುತಿಸುವಿಕೆ ಆಫ್‌ಲೈನ್‌ನಲ್ಲೂ ಕೆಲಸ ಮಾಡುತ್ತದೆ.', hi: 'व्याख्या के लिए सर्वर चाहिए; पहचान ऑफ़लाइन भी चलती है।' },
   ms: { en: 'ms on this phone', kn: 'ms ಈ ಫೋನ್‌ನಲ್ಲಿ', hi: 'ms इस फ़ोन पर' },
-  modeSculpture: { en: 'Identify a sculpture', kn: 'ಶಿಲ್ಪ ಗುರುತಿಸಿ', hi: 'मूर्ति पहचानें' },
+  modeSculpture: { en: 'Photo', kn: 'ಫೋಟೋ', hi: 'फ़ोटो' },
+  modeLive: { en: 'Live lens', kn: 'ಲೈವ್ ಲೆನ್ಸ್', hi: 'लाइव लेंस' },
   modeBoard: { en: 'Read a board', kn: 'ಫಲಕ ಓದಿ', hi: 'बोर्ड पढ़ें' },
+  liveSub: { en: 'Point the camera at a sculpture or temple. Its name appears over the live view, recognised on this phone, with no network.', kn: 'ಕ್ಯಾಮೆರಾವನ್ನು ಶಿಲ್ಪ ಅಥವಾ ದೇವಾಲಯದತ್ತ ತೋರಿಸಿ. ಅದರ ಹೆಸರು ನೇರ ದೃಶ್ಯದ ಮೇಲೆ ಕಾಣುತ್ತದೆ; ಈ ಫೋನ್‌ನಲ್ಲೇ, ನೆಟ್‌ವರ್ಕ್ ಇಲ್ಲದೆ.', hi: 'कैमरे को किसी मूर्ति या मंदिर की ओर करें। उसका नाम लाइव दृश्य पर दिखता है, इसी फ़ोन पर, बिना नेटवर्क के।' },
   boardSub: { en: 'Photograph an information board in Kannada, Hindi or English. The phone reads it, tells you which monument it describes, and explains it in your language.', kn: 'ಕನ್ನಡ, ಹಿಂದಿ ಅಥವಾ ಇಂಗ್ಲಿಷ್ ಮಾಹಿತಿ ಫಲಕದ ಫೋಟೋ ತೆಗೆಯಿರಿ. ಫೋನ್ ಅದನ್ನು ಓದಿ, ಯಾವ ಸ್ಮಾರಕದ ಬಗ್ಗೆ ಎಂದು ಹೇಳಿ, ನಿಮ್ಮ ಭಾಷೆಯಲ್ಲಿ ವಿವರಿಸುತ್ತದೆ.', hi: 'कन्नड़, हिंदी या अंग्रेज़ी सूचना बोर्ड की फ़ोटो लें। फ़ोन उसे पढ़कर बताता है कि वह किस स्मारक के बारे में है, और आपकी भाषा में समझाता है।' },
 }
 
@@ -46,7 +49,7 @@ export default function Scan() {
   const [file, setFile] = useState<File | null>(null)
   const [heat, setHeat] = useState<string | 'loading' | 'unavailable' | null>(null)
   const [params, setParams] = useSearchParams()
-  const mode = params.get('mode') === 'board' ? 'board' : 'sculpture'
+  const mode = params.get('mode') === 'board' ? 'board' : params.get('mode') === 'live' ? 'live' : 'sculpture'
 
   useEffect(() => { loadVision().then(() => setModelReady(true)).catch(() => setState('error')); return () => stopSpeaking() }, [])
 
@@ -86,17 +89,17 @@ export default function Scan() {
 
   return (
     <div>
-      <PageHead title={L(T.title)} sub={mode === 'board' ? L(T.boardSub) : L(T.sub)} />
+      <PageHead title={L(T.title)} sub={mode === 'board' ? L(T.boardSub) : mode === 'live' ? L(T.liveSub) : L(T.sub)} />
       <div className="space-y-4 px-4">
-        <div role="tablist" aria-label="Scan mode" className="grid grid-cols-2 rounded-2xl bg-mist p-1">
-          {([['sculpture', Landmark, T.modeSculpture], ['board', ScanText, T.modeBoard]] as const).map(([id, Icon, label]) => (
-            <button key={id} role="tab" aria-selected={mode === id} onClick={() => { stopSpeaking(); setParams(id === 'board' ? { mode: 'board' } : {}, { replace: true }) }}
-              className={`flex items-center justify-center gap-2 rounded-xl py-2.5 text-[14.5px] font-semibold transition-colors ${mode === id ? 'bg-paper text-lake shadow-sm' : 'text-ink-2'}`}>
-              <Icon size={17} />{L(label)}
+        <div role="tablist" aria-label="Scan mode" className="grid grid-cols-3 rounded-2xl bg-mist p-1">
+          {([['sculpture', Landmark, T.modeSculpture], ['live', Aperture, T.modeLive], ['board', ScanText, T.modeBoard]] as const).map(([id, Icon, label]) => (
+            <button key={id} role="tab" aria-selected={mode === id} onClick={() => { stopSpeaking(); setParams(id === 'sculpture' ? {} : { mode: id }, { replace: true }) }}
+              className={`flex flex-col items-center justify-center gap-1 rounded-xl py-2 text-[13px] font-semibold leading-tight transition-colors ${mode === id ? 'bg-paper text-lake shadow-sm' : 'text-ink-2'}`}>
+              <Icon size={18} />{L(label)}
             </button>
           ))}
         </div>
-        {mode === 'board' ? <BoardReader /> : <>
+        {mode === 'board' ? <BoardReader /> : mode === 'live' ? <LiveLens /> : <>
         <input ref={cam} type="file" accept="image/*" capture="environment" hidden onChange={(e) => onFile(e.target.files?.[0])} />
         <input ref={gal} type="file" accept="image/*" hidden onChange={(e) => onFile(e.target.files?.[0])} />
 
