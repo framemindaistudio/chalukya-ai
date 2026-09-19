@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { useReveal } from '../lib/reveal'
 import { Link } from 'react-router'
 import { Camera, ChevronDown, ImagePlus, Languages, Loader2, MapPin, ScanText, WifiOff } from 'lucide-react'
 import { Card, Eyebrow } from './ui'
@@ -37,6 +38,9 @@ export default function BoardReader() {
   const [credit, setCredit] = useState<string | null>(null)
   const [showText, setShowText] = useState(false)
   const [tx, setTx] = useState<{ to: string; text: string | null | 'busy'; partial?: boolean } | null>(null)
+  const resRef = useRef<HTMLDivElement>(null), txRef = useRef<HTMLDivElement>(null)
+  useReveal(resRef, state === 'done' ? res : null)
+  useReveal(txRef, tx?.to)
   // start downloading the reader (~10 MB, cached after the first visit) while the tourist frames the photo
   useEffect(() => { const id = setTimeout(() => { ocrWorker().catch(() => {}) }, 400); return () => clearTimeout(id) }, [])
 
@@ -121,7 +125,7 @@ export default function BoardReader() {
       {state === 'error' && <Card className="p-4 text-[14.5px] text-sand">The reader could not run in this browser. Try Chrome, or ask the guide instead.</Card>}
 
       {state === 'done' && res && (
-        <Card className="rise p-4">
+        <Card ref={resRef} className="rise p-4">
           <div className="flex flex-wrap items-center gap-1.5">
             {res.scripts.map((s) => <span key={s} className="rounded-full bg-lake-soft px-2.5 py-0.5 text-[12px] font-semibold text-lake">{s}</span>)}
             <span className="num ml-auto text-[11.5px] text-ink-3">{(res.ms / 1000).toFixed(1)} s · Tesseract LSTM</span>
@@ -144,6 +148,7 @@ export default function BoardReader() {
                   className={`rounded-full px-3 py-1.5 text-[13px] font-semibold ${tx?.to === t.code ? 'bg-lake text-white' : 'border border-line text-ink'} disabled:opacity-60`}>{t.label}</button>
               ))}
             </div>
+            <div ref={txRef}>
             {tx?.text === 'busy' && <div className="mt-3 flex items-center gap-2 text-[14px] text-ink-2"><Loader2 size={15} className="animate-spin" />{L(T.translating)} <span className="num">{secs}s</span></div>}
             {tx && tx.text === null && <p className="mt-3 rounded-xl bg-sand-soft p-3 text-[13.5px] text-ink">{L(T.noServer)}</p>}
             {tx && typeof tx.text === 'string' && tx.text !== 'busy' && (
@@ -153,6 +158,7 @@ export default function BoardReader() {
                   : <p className="mt-2 text-[11.5px] text-ink-3">{L(T.mt)} · NLLB-200 (int8)</p>}
               </div>
             )}
+            </div>
           </div>
 
           <div className="mt-3 border-t border-line pt-3">

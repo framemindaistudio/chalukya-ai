@@ -4,8 +4,8 @@ import { ChevronLeft } from 'lucide-react'
 import { LEVEL_COLOR, type Level } from '../lib/crowd'
 import { useLang } from '../lib/i18n'
 
-export function Card({ children, className = '', ...rest }: { children: ReactNode; className?: string } & React.HTMLAttributes<HTMLDivElement>) {
-  return <div className={`card ${className}`} {...rest}>{children}</div>
+export function Card({ children, className = '', ref, ...rest }: { children: ReactNode; className?: string; ref?: React.Ref<HTMLDivElement> } & React.HTMLAttributes<HTMLDivElement>) {
+  return <div ref={ref} className={`card ${className}`} {...rest}>{children}</div>
 }
 
 export function Eyebrow({ children, className = '' }: { children: ReactNode; className?: string }) {

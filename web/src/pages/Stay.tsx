@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { reveal } from '../lib/reveal'
 import { BedDouble, ChevronDown, MapPin, Star } from 'lucide-react'
 import { Card, Chip, DemoTag, Eyebrow, PageHead } from '../components/ui'
 import MapView from '../components/MapView'
@@ -47,7 +48,7 @@ export default function Stay() {
 
         {res.map((r, i) => (
           <Card key={r.item.id} className="p-4">
-            <button className="w-full text-left" onClick={() => setOpen(open === r.item.id ? null : r.item.id)} aria-expanded={open === r.item.id}>
+            <button className="w-full text-left" onClick={(e) => { const card = e.currentTarget.parentElement; if (open !== r.item.id) reveal(() => card); setOpen(open === r.item.id ? null : r.item.id) }} aria-expanded={open === r.item.id}>
               <div className="flex items-start gap-3">
                 <div className="num grid h-9 w-9 shrink-0 place-items-center rounded-full bg-lake-soft text-[15px] font-bold text-lake">{i + 1}</div>
                 <div className="min-w-0 flex-1">

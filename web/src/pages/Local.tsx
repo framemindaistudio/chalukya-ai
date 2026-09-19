@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
+import { useReveal } from '../lib/reveal'
 import { Link } from 'react-router'
 import { BadgeCheck, CookingPot, Mountain, Scissors, Store, Users } from 'lucide-react'
 import { Card, Chip, Eyebrow, PageHead } from '../components/ui'
@@ -36,6 +37,8 @@ export default function Local() {
   const [kind, setKind] = useState('Homestay')
   const [form, setForm] = useState({ name: '', phone: '', town: 'Badami' })
   const [done, setDone] = useState(false)
+  const doneRef = useRef<HTMLParagraphElement>(null)
+  useReveal(doneRef, done)
   function submit(e: React.FormEvent) {
     e.preventDefault()
     if (!form.name.trim()) return
@@ -71,7 +74,7 @@ export default function Local() {
         <Card className="p-4">
           <div className="flex items-center gap-2"><Store size={18} className="text-lake" /><div className="text-[16px] font-semibold">{L(TX.portal)}</div></div>
           <p className="mt-1 text-[13.5px] text-ink-2">{L(TX.portalSub)}</p>
-          {done ? <p className="mt-3 rounded-xl bg-lake-soft/60 p-3 text-[14px] text-lake">{L(TX.done)}</p> : (
+          {done ? <p ref={doneRef} className="mt-3 rounded-xl bg-lake-soft/60 p-3 text-[14px] text-lake">{L(TX.done)}</p> : (
             <form onSubmit={submit} className="mt-3 space-y-3">
               <div className="no-scrollbar flex gap-2 overflow-x-auto">{KINDS.map((k) => <Chip key={k} active={kind === k} onClick={() => setKind(k)}>{k}</Chip>)}</div>
               <input required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder={L(TX.name)} className="h-11 w-full rounded-xl border border-line bg-paper px-3 text-[15px] outline-none focus:border-lake" />

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { useReveal } from '../lib/reveal'
 import { AlarmClock, CheckCircle2, Hospital, Loader2, MessageSquareText, Phone, Share2, Siren, ThermometerSun, TriangleAlert, WifiOff } from 'lucide-react'
 import { Card, Chip, Eyebrow, PageHead } from '../components/ui'
 import { useLang } from '../lib/i18n'
@@ -48,6 +49,8 @@ export default function Safety() {
   const [gps, setGps] = useState<{ lat: number; lng: number } | null>(null)
   const [holding, setHolding] = useState(0)
   const [sos, setSos] = useState<{ id: string; acked: boolean } | null>(null)
+  const sosRef = useRef<HTMLDivElement>(null)
+  useReveal(sosRef, sos?.id)
   const [timer, setTimer] = useState<{ until: number; mins: number } | null>(null)
   const [left, setLeft] = useState(0)
   const holdRef = useRef<number | null>(null)
@@ -129,7 +132,7 @@ export default function Safety() {
             </div>
           </Card>
         ) : (
-          <Card className={`rise p-5 ${sos.acked ? 'bg-lake text-white' : 'bg-sos text-white'}`}>
+          <Card ref={sosRef} className={`rise p-5 ${sos.acked ? 'bg-lake text-white' : 'bg-sos text-white'}`}>
             <div className="flex items-center gap-3">
               {sos.acked ? <CheckCircle2 size={34} /> : delivery === null ? <Loader2 size={30} className="animate-spin" /> : <Siren size={34} className="animate-pulse" />}
               <div className="text-[20px] font-bold leading-tight">{sos.acked ? L(TX.acked) : delivery === 'server' ? L(TX.sent) : delivery === 'queued' ? L(TX.queuedT) : delivery === 'device' ? L(TX.deviceT) : L(TX.sending)}</div>

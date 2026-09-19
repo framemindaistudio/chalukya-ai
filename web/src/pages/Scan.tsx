@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { useReveal } from '../lib/reveal'
 import { Link, useSearchParams } from 'react-router'
 import { Camera, ImagePlus, Loader2, MapPin, RotateCcw, WifiOff, HelpCircle, Landmark, ScanText, Aperture } from 'lucide-react'
 import { Card, Eyebrow, PageHead } from '../components/ui'
@@ -44,6 +45,8 @@ export default function Scan() {
   const [img, setImg] = useState<string | null>(null)
   const [state, setState] = useState<'idle' | 'loading' | 'thinking' | 'done' | 'error'>('idle')
   const [res, setRes] = useState<VisionResult | null>(null)
+  const resRef = useRef<HTMLDivElement>(null)
+  useReveal(resRef, state === 'done' ? res : state === 'error' ? 'error' : null)
   const [sent, setSent] = useState(false)
   const [modelReady, setModelReady] = useState(false)
   const [file, setFile] = useState<File | null>(null)
@@ -123,6 +126,7 @@ export default function Scan() {
           </div>
         </Card>
 
+        <div ref={resRef} className="space-y-4 empty:hidden">
         {state === 'error' && <Card className="p-4 text-[14.5px] text-sand">The model could not run on this browser. Try Chrome, or ask the guide instead.</Card>}
 
         {state === 'done' && res && s && res.confident && (
@@ -204,6 +208,7 @@ export default function Scan() {
             </div>
           </Card>
         )}
+        </div>
         </>}
       </div>
     </div>

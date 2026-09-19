@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { useReveal } from '../lib/reveal'
 import { Link, useSearchParams } from 'react-router'
 import { Accessibility, Bike, Bus, Car, Clock, Leaf, Map as MapIcon, Mic, Share2, Sparkles, UtensilsCrossed, Wallet } from 'lucide-react'
 import { parseTrip } from '../lib/tripParse'
@@ -60,6 +61,8 @@ export default function Plan() {
   const [desc, setDesc] = useState(params.get('q') ?? '')
   const [nl, setNl] = useState<{ input: PlanInput; understood: { key: string; value: string }[] } | null>(null)
   const [rec, setRec] = useState(false)
+  const planRef = useRef<HTMLDivElement>(null)
+  useReveal(planRef, go)
 
   function planFromText(text = desc) {
     if (!text.trim()) return
@@ -150,6 +153,13 @@ export default function Plan() {
           <button onClick={() => { setNl(null); setGo((g) => g + 1) }} className="flex w-full items-center justify-center gap-2 rounded-xl bg-lake py-3.5 text-[16px] font-semibold text-white"><Sparkles size={18} />{L(TX.go)}</button>
         </Card>
 
+        <div ref={planRef} className="space-y-4">
+        {result && nl && (
+          <div className="flex flex-wrap items-center gap-1.5 px-1">
+            <span className="text-[12px] font-semibold text-ink-3">{L(TX.understood)}:</span>
+            {nl.understood.map((u) => <span key={u.key} className="rounded-md bg-paper px-2 py-0.5 text-[12px] text-ink-2 ring-1 ring-line">{u.key}: <b className="text-ink">{u.value}</b></span>)}
+          </div>
+        )}
         {result?.days.map((d, di) => {
           const line: [number, number][] = [[base[0], base[1]], ...d.stops.map((s) => [placeById[s.id].lat, placeById[s.id].lng] as [number, number]), [base[0], base[1]]]
           return (
@@ -195,6 +205,7 @@ export default function Plan() {
             </Card>
           )
         })}
+        </div>
         {result && <p className="num px-1 pb-2 text-center text-[11.5px] text-ink-3">Optimised on this phone in {result.ms} ms · crowd = LightGBM forecast · parking = on-device model · roads = OSM</p>}
       </div>
     </div>

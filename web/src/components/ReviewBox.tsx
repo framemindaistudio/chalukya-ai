@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
+import { useReveal } from '../lib/reveal'
 import { Loader2, MessageSquareHeart, Mic, Star } from 'lucide-react'
 import { useLang } from '../lib/i18n'
 import { analyzeReview, ASPECT_LABEL, type ReviewAnalysis } from '../lib/reviews'
@@ -19,6 +20,8 @@ export default function ReviewBox({ place }: { place: string }) {
   const [text, setText] = useState('')
   const [busy, setBusy] = useState(false)
   const [res, setRes] = useState<ReviewAnalysis | null>(null)
+  const boxRef = useRef<HTMLDivElement>(null)
+  useReveal(boxRef, res)
   const [rec, setRec] = useState(false)
 
   async function send() {
@@ -32,7 +35,7 @@ export default function ReviewBox({ place }: { place: string }) {
   }
 
   return (
-    <div className="card p-4">
+    <div ref={boxRef} className="card p-4">
       <div className="flex items-center gap-2"><MessageSquareHeart size={18} className="text-lake" /><div className="text-[15.5px] font-bold">{L(TX.title)}</div></div>
       <p className="mt-1 text-[13px] text-ink-2">{L(TX.sub)}</p>
       {res ? (
