@@ -14,10 +14,12 @@ import { canListen, listen } from '../lib/speech'
 import credits from '../data/photo_credits.json'
 
 const FEATURED = ['badami_caves', 'pattadakal', 'aihole', 'bhutanatha', 'mahakuta', 'kudalasangama', 'banashankari', 'ilkal']
+// 4K photographs AI-enhanced from real Commons photos (architecture kept exactly), in two lights:
+// the hero follows the clock: dawn light in the morning, golden hour after that.
 const HEROES = [
-  { img: '/img/hero_badami.jpg', key: 'hero_badami', place: { en: 'Bhutanatha temples, Badami', kn: 'ಭೂತನಾಥ ದೇವಾಲಯಗಳು, ಬಾದಾಮಿ', hi: 'भूतनाथ मंदिर, बादामी' } },
-  { img: '/img/hero_pattadakal.jpg', key: 'hero_pattadakal', place: { en: 'Pattadakal, UNESCO World Heritage', kn: 'ಪಟ್ಟದಕಲ್ಲು, ಯುನೆಸ್ಕೋ ವಿಶ್ವ ಪರಂಪರೆ', hi: 'पट्टदकल, यूनेस्को विश्व धरोहर' } },
-  { img: '/img/hero_aihole.jpg', key: 'hero_aihole', place: { en: 'Durga temple, Aihole', kn: 'ದುರ್ಗಾ ದೇವಾಲಯ, ಐಹೊಳೆ', hi: 'दुर्गा मंदिर, ऐहोल' } },
+  { slug: 'badami', key: 'hero_badami', place: { en: 'Bhutanatha temples, Badami', kn: 'ಭೂತನಾಥ ದೇವಾಲಯಗಳು, ಬಾದಾಮಿ', hi: 'भूतनाथ मंदिर, बादामी' } },
+  { slug: 'pattadakal', key: 'hero_pattadakal', place: { en: 'Pattadakal, UNESCO World Heritage', kn: 'ಪಟ್ಟದಕಲ್ಲು, ಯುನೆಸ್ಕೋ ವಿಶ್ವ ಪರಂಪರೆ', hi: 'पट्टदकल, यूनेस्को विश्व धरोहर' } },
+  { slug: 'aihole', key: 'hero_aihole', place: { en: 'Durga temple, Aihole', kn: 'ದುರ್ಗಾ ದೇವಾಲಯ, ಐಹೊಳೆ', hi: 'दुर्गा मंदिर, ऐहोल' } },
 ]
 const EXAMPLES: Record<Lang, string[]> = {
   en: ['I have 6 hours in Badami with two kids…', 'Is Pattadakal crowded right now?', 'Veg lunch near Aihole under ₹300', 'Who is the 18-armed Nataraja?'],
@@ -30,6 +32,7 @@ const HERO_TX = {
   planSub: { en: 'Tell it your hours, budget and who is with you', kn: 'ಸಮಯ, ಬಜೆಟ್, ಜೊತೆಯಲ್ಲಿ ಯಾರು ಎಂದು ಹೇಳಿ', hi: 'समय, बजट और साथ कौन है, बताइए' },
   access: { en: 'Accessible', kn: 'ಸುಗಮ ಪ್ರವೇಶ', hi: 'सुगम पहुँच' },
   busyDays: { en: 'Busy days coming up', kn: 'ಮುಂಬರುವ ಜನದಟ್ಟಣೆಯ ದಿನಗಳು', hi: 'आने वाले भीड़ वाले दिन' },
+  aiPhoto: { en: 'AI-enhanced from photo', kn: 'AI ಸುಧಾರಿತ, ಮೂಲ ಫೋಟೋ', hi: 'AI से निखारा, मूल फ़ोटो' },
 }
 
 export default function Home() {
@@ -54,7 +57,8 @@ export default function Home() {
   const best = bestHours('badami_caves', planDay, openNow ? h : 6)
   const events = upcomingEvents(at, 75).slice(0, 3)
   const adv = w ? heatAdvice(w.feelsC) : null
-  const credit = (credits as Record<string, { artist: string; license: string }>)[HEROES[hero].key]
+  const credit = (credits as Record<string, { artist: string; license: string; ai?: string }>)[HEROES[hero].key]
+  const light = h < 11 ? 'dawn' : 'gold'
 
   const submit = (text: string) => { if (text.trim()) nav(`/ask?q=${encodeURIComponent(text.trim())}`) }
   const mic = () => {
@@ -76,7 +80,11 @@ export default function Home() {
     <div>
       {/* ── Hero ── */}
       <section className="relative -mt-[57px] h-[460px] overflow-hidden bg-night">
-        {HEROES.map((x, i) => <div key={x.img} className={`hero-img ${i === hero ? 'on' : ''}`} style={{ backgroundImage: `url(${x.img})` }} />)}
+        {HEROES.map((x, i) => (
+          <img key={x.slug} alt="" aria-hidden decoding="async" fetchPriority={i === 0 ? 'high' : 'auto'}
+            src={`/img/hero/${x.slug}-${light}-960.webp`} srcSet={`/img/hero/${x.slug}-${light}-960.webp 960w, /img/hero/${x.slug}-${light}-1440.webp 1440w`}
+            sizes="(max-width: 520px) 100vw, 520px" className={`hero-img h-full w-full object-cover ${i === hero ? 'on' : ''}`} />
+        ))}
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(9,20,17,.55)_0%,rgba(9,20,17,.15)_32%,rgba(9,20,17,.35)_62%,rgba(238,243,240,1)_100%)]" />
         <div className="relative flex h-full flex-col justify-end px-4 pb-16">
           <p className="rise text-[15px] font-medium text-white/85">{greet}</p>
@@ -97,9 +105,9 @@ export default function Home() {
           </form>
         </div>
         <div className="absolute bottom-[72px] right-3 flex items-center gap-1.5">
-          {HEROES.map((x, i) => <button key={x.img} aria-label={x.place.en} onClick={() => setHero(i)} className={`h-1.5 rounded-full transition-all ${i === hero ? 'w-5 bg-white' : 'w-1.5 bg-white/50'}`} />)}
+          {HEROES.map((x, i) => <button key={x.slug} aria-label={x.place.en} onClick={() => setHero(i)} className={`h-1.5 rounded-full transition-all ${i === hero ? 'w-5 bg-white' : 'w-1.5 bg-white/50'}`} />)}
         </div>
-        <div className="absolute left-4 top-[66px] max-w-[70%] truncate text-[11px] text-white/70">{L(HEROES[hero].place)}{credit ? ` · © ${credit.artist}, ${credit.license}` : ''}</div>
+        <div className="absolute left-4 top-[66px] max-w-[70%] truncate text-[11px] text-white/70">{L(HEROES[hero].place)}{credit ? ` · ${credit.ai ? `${L(HERO_TX.aiPhoto)} ` : ''}© ${credit.artist}, ${credit.license}` : ''}</div>
       </section>
 
       <div className="relative z-10 -mt-12 space-y-4 px-4">

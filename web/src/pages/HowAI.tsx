@@ -1,4 +1,4 @@
-import { Camera, CarFront, Database, LineChart, MessagesSquare, ShieldCheck, Sparkles } from 'lucide-react'
+import { Camera, CarFront, Database, LineChart, MessageSquareHeart, MessagesSquare, ScanText, ShieldCheck, Sparkles } from 'lucide-react'
 import type { ReactNode } from 'react'
 import { Card, Eyebrow, PageHead } from '../components/ui'
 import { METRICS } from '../lib/data'
@@ -24,10 +24,10 @@ function Stat({ v, l, good }: { v: string; l: string; good?: boolean }) {
 
 export default function HowAI() {
   const { lang } = useLang()
-  const v = METRICS.vision, vo = METRICS.vision_openset, f = METRICS.footfall, p = METRICS.parking, it = METRICS.intent
+  const v = METRICS.vision, vo = METRICS.vision_openset, f = METRICS.footfall, p = METRICS.parking, it = METRICS.intent, rv = METRICS.reviews
   return (
     <div>
-      <PageHead title={lang === 'kn' ? 'AI ಹೇಗೆ ಕೆಲಸ ಮಾಡುತ್ತದೆ' : lang === 'hi' ? 'AI कैसे काम करता है' : 'How the AI works'} sub="Five trained models, one curated knowledge base, and an honest account of what is real data and what is simulated." />
+      <PageHead title={lang === 'kn' ? 'AI ಹೇಗೆ ಕೆಲಸ ಮಾಡುತ್ತದೆ' : lang === 'hi' ? 'AI कैसे काम करता है' : 'How the AI works'} sub="Five models trained for Bagalkot, five open models put to work, one verified knowledge base, and an honest account of what is real data and what is simulated." />
       <div className="space-y-4 px-4">
         <Model icon={<Camera size={20} />} problem="PS 07 · Heritage" title="Sculpture & monument recognition"
           how={`Transfer learning: an ImageNet-pretrained EfficientNet-B0 fine-tuned on ${v ? v.n_train + v.n_val + v.n_test : '~1,960'} freely licensed Wikimedia Commons photos of 25 Chalukyan sculptures and monuments. Tested on photographers the model never saw, so near-duplicate shots cannot inflate the score. Exported to ONNX; it runs on the phone, offline.`}>
@@ -71,6 +71,25 @@ export default function HowAI() {
           <p className="mt-2 text-[12px] text-ink-3">“Unseen” = phrasings held out by template; “fresh” = a separately written test set incl. romanised and speech-style questions.</p>
         </Model>
 
+        <Model icon={<ScanText size={20} />} problem="Heritage · Language access" title="Heritage board reader"
+          how="Photograph an information board in Kannada, Hindi or English. Tesseract LSTM reads all three scripts on the phone, offline. The text is matched to the verified knowledge base (the name on the board's heading line, in any script), so the tourist gets the monument's story in their language with no network. With the district server, Meta's NLLB-200 translates the full board into English, Kannada, Hindi, Marathi, Telugu or Tamil.">
+          <div className="grid grid-cols-3 gap-2">
+            <Stat v="4 / 4" l="real ASI boards matched to the right monument or site" good />
+            <Stat v="3.9×" l="faster translation after int8 quantization" />
+            <Stat v="~6 s" l="to the first translated sentence (streamed)" />
+          </div>
+          <p className="mt-2 text-[12.5px] text-ink-2">Monument names are protected with a glossary from the knowledge base: without it, NLLB turned ಪಟ್ಟದಕಲ್ಲು into “the stone” (kal = stone). OCR noise from the board's edges is cleaned before translation. Only 4 boards tested so far, so treat 4/4 as a demonstration, not an accuracy figure.</p>
+        </Model>
+
+        <Model icon={<MessageSquareHeart size={20} />} problem="Department dashboard" title="Review sentiment & complaint topics"
+          how="Visitors rate a site in any language, by text or voice. The model finds the sentiment and what the complaint is about (toilets, drinking water, parking, cleanliness, guides, safety, crowding…), and the command centre shows which site needs what.">
+          <div className="grid grid-cols-2 gap-2">
+            <Stat v={pct(rv?.sentiment_accuracy?.e5_server)} l="sentiment accuracy, multilingual-e5 (fair number)" good />
+            <Stat v={pct(rv?.aspect_f1_precision_recall?.lexicon_plus_e5_server?.[0])} l="complaint-topic F1" />
+          </div>
+          <p className="mt-2 text-[12.5px] text-ink-2">Small team-written data (89 training, 30 test reviews in four scripts/styles). The phone's lexicon model scores {pct(rv?.sentiment_accuracy?.char_plus_polarity_lexicon_phone)}, but we wrote both its word lists and the test set, so we report the e5 number.</p>
+        </Model>
+
         <Model icon={<Sparkles size={20} />} problem="PS 18 & 19 · Hospitality, food" title="Explainable recommenders"
           how="Hybrid multi-criteria ranking: budget fit, distance to the places you will visit, amenity or cuisine match, a Bayesian-smoothed rating, and a small boost for locally owned businesses, then a diversity re-rank so the top results are not one street or one chain. Every result shows why it was picked.">
           <p className="text-[12.5px] text-ink-2">Names and locations are real (OpenStreetMap). Prices, ratings and hours are simulated until owners maintain them through the Local Business Portal.</p>
@@ -84,7 +103,8 @@ export default function HowAI() {
         <Card className="p-4">
           <div className="flex items-center gap-2"><Database size={18} className="text-lake" /><Eyebrow>Data: what is real, what is simulated</Eyebrow></div>
           <ul className="mt-2 space-y-1.5 text-[13.5px]">
-            <li><b className="text-lake">Real:</b> 1,960 CC-licensed monument photos (202 photographers); ASI annual footfall; OpenStreetMap places, hospitals, roads (OSRM distances); district tourism book facts (paraphrased); Open-Meteo weather.</li>
+            <li><b className="text-lake">Real:</b> 1,960 CC-licensed monument photos (202 photographers); ASI annual footfall; OpenStreetMap places, hospitals, roads (OSRM distances); district tourism book facts (paraphrased); the District Administration's tourism pages and tourism office contact; photos of real ASI information boards; Open-Meteo weather.</li>
+            <li><b className="text-[#8a6412]">AI-enhanced:</b> the home-screen photos are real Commons photographs, relit and upscaled to 4K with an image model (Nano Banana 2). The architecture is unchanged and the credit line says so.</li>
             <li><b className="text-sand">Simulated:</b> daily/hourly footfall shape, parking sensor streams, business prices and ratings. Clearly labelled in the app; each pipeline retrains unchanged on real data.</li>
           </ul>
         </Card>

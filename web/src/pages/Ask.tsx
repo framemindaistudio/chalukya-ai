@@ -23,7 +23,7 @@ const STARTERS: Record<Lang, string[]> = {
 const SRC: Record<string, string> = {
   kb: 'Curated knowledge base', dtdc_book: 'District Tourism book (2022)', forecast: 'Footfall forecast model', iot: 'Parking sensors',
   'parking-model': 'Parking prediction model', osm: 'OpenStreetMap', recommender: 'Recommender', 'osm-routing': 'OSM road network',
-  'open-meteo': 'Open-Meteo (live)', 'climate-normals': 'Climate normals', wikidata: 'Wikidata',
+  'open-meteo': 'Open-Meteo (live)', 'climate-normals': 'Climate normals', wikidata: 'Wikidata', district_site: 'District Administration (official)',
 }
 
 export default function Ask() {

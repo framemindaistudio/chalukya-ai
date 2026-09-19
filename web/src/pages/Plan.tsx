@@ -3,6 +3,7 @@ import { Link, useSearchParams } from 'react-router'
 import { Accessibility, Bike, Bus, Car, Clock, Leaf, Mic, Sparkles, UtensilsCrossed, Wallet } from 'lucide-react'
 import { parseTrip } from '../lib/tripParse'
 import { canListen, listen } from '../lib/speech'
+import { track } from '../lib/live'
 import { Card, Chip, Eyebrow, LevelBadge, PageHead } from '../components/ui'
 import MapView from '../components/MapView'
 import { useLang } from '../lib/i18n'
@@ -63,6 +64,7 @@ export default function Plan() {
     const start = now(); start.setDate(start.getDate() + startIn)
     const t0 = performance.now()
     const r = plan(nl ? nl.input : { start, days, interests, mobility, mode, people, startFrom: 'badami_bus_stand' })
+    track({ kind: 'plan', key: nl ? 'described' : 'form', lang, place: r[0]?.stops[0]?.id })
     return { days: r, ms: Math.round(performance.now() - t0), budget: nl?.input.budget }
   }, [go]) // eslint-disable-line react-hooks/exhaustive-deps
 

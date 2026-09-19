@@ -16,6 +16,8 @@ It covers all six problem statements in one product, instead of six disconnected
 | **PS 19** Local restaurant recommendation | Veg / non-veg, budget for two, cuisine, "jolada rotti meals", open now | Same explainable ranker; diet inferred from names where obvious |
 | **PS 25** Tourist safety alerts | Hold-to-SOS with location, geofenced caution zones, missed check-in alarm, live heat index, CCTV people counting (privacy-blurred), IoT anomaly detection → command centre in real time | Person detector (Faster R-CNN), robust z-score anomaly detection, forecast-driven overcrowding alerts |
 | **PS 21** Smart parking prediction | Live free slots per lot + predicted free slots on arrival | LightGBM 30/60/120-min forecasts; a 120-tree version runs on the phone |
+| **Heritage OCR + translation** | Photograph a Kannada/Hindi/English information board → which monument it is, its story in your language (offline), full board translated into 6 languages | Tesseract LSTM on the phone; KB grounding by heading-line names; Meta NLLB-200 (int8, glossary-protected names, streamed) on the server |
+| **Department insights** | Reviews in any language → sentiment + complaint topic per site; what tourists ask, in which language, about which place | Review model (char n-grams + polarity lexicon on the phone, multilingual-e5 on the server); anonymous usage counts |
 | **Open innovation** | Crowd-aware trip planner; 7-day water/waste/staff planning; Local Business Portal; offline PWA | LightGBM footfall forecasting with conformal intervals; exhaustive route optimisation |
 
 ## Results (honest numbers)
@@ -28,6 +30,10 @@ It covers all six problem statements in one product, instead of six disconnected
 | Forecast intervals | same | 79.2 % coverage for a nominal 80 % band (conformal) | — |
 | Parking (6 lots) | winter peak season hold-out | **±3.5 slots at 2 h ahead**; "lot full" alerts 81 % precise | "stays the same": ±7.9 |
 | Intent understanding (17 intents, 3 languages + romanised) | unseen phrasings / fresh test set | server hybrid **95.8 % / 88.6 %**; phone-only 91.2 % / 78.6 % | char model alone 51.7 % / 68.6 % |
+| Review sentiment (3 classes, 4 scripts/styles) | 30 separately written test reviews | **93.3 %** (multilingual-e5); complaint topic F1 0.98 | char model alone 73.3 % |
+| Heritage board reader | 4 real ASI boards (Commons photos) | 4/4 matched to the right monument or site; translation 3.9× faster with int8, first sentence in ~6 s | — |
+
+The phone's review lexicon scores 96.7 %, but the same team wrote its word lists and the test set, so the e5 number is the fair one.
 
 Full reports: `ml/vision/out/efficientnet_b0/`, `ml/forecast/out/`, `ml/assistant/out/`.
 
@@ -36,7 +42,11 @@ Full reports: `ml/vision/out/efficientnet_b0/`, `ml/forecast/out/`, `ml/assistan
 **Real:** 1,960 monument photos (Wikimedia Commons, CC licences, credits in `ml/vision/data/metadata.csv`);
 ASI annual footfall (Badami 4,44,542 · Pattadakal 3,24,615 · Durga temple Aihole 2,13,901); OpenStreetMap
 places, hospitals and road network (OSRM); facts cross-checked against the District Tourism Development
-Committee's book *Sounds and Emotions* (2022, paraphrased); Open-Meteo live weather.
+Committee's book *Sounds and Emotions* (2022, paraphrased); the District Administration's tourism pages
+(bagalkot.nic.in) and tourism office contact; Open-Meteo live weather.
+
+**AI-enhanced (and labelled):** the home-screen photos are real Commons photographs relit and upscaled to 4K
+with Nano Banana 2; the architecture is unchanged. 4K masters are in `docs/brand/hero-4k/`.
 
 **Simulated (and labelled in the app):** the daily/hourly shape of footfall (calibrated so the annual totals
 match ASI exactly), parking sensor streams, business prices/ratings/hours. Every pipeline retrains unchanged

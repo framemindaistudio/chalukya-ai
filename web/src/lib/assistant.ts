@@ -7,6 +7,7 @@ import { rankEateries, rankStays, type Ranked } from './recommend'
 import { getWeather, heatAdvice } from './weather'
 import { haversineKm } from './geo'
 import { now } from './clock'
+import { track } from './live'
 import type { Eatery, Stay } from './data'
 import { parseTrip } from './tripParse'
 import { plan as buildPlan, type DayPlan } from './itinerary'
@@ -74,6 +75,10 @@ export async function ask(question: string, uiLang: Lang): Promise<Answer> {
   if (r.confidence < 0.28) intent = 'fallback'
   // A trip description ("I have 6 hours…", "2 days", "plan…") always goes to the planner tool
   if (/\d+\s*(hours?|hrs?|ghante|gante|days?)\b/i.test(question) || /(ಗಂಟೆ|घंटे|घंटा|ದಿನಗಳು|ದಿನದ|दिन का|दिनों)/.test(question) || /\b(itinerary|plan (my|a|our))\b/i.test(question)) intent = 'itinerary'
+  // Questions for the Tourism Department itself, or about reaching the district from a major city, are
+  // answered from the District Administration's own published details (ಪ್ರವಾಸೋದ್ಯಮ = tourism, not ಪ್ರವಾಸ = trip)
+  else if (/(tourism (office|department|dept)|tourist (office|information cent)|contact (the )?(tourism|district)|ಪ್ರವಾಸೋದ್ಯಮ|पर्यटन (कार्यालय|विभाग|दफ़्तर))/i.test(question)) intent = 'official_office'
+  else if (/(bengaluru|bangalore|hubballi|hubli|vijayapura|bijapur|belagavi|belgaum|ಬೆಂಗಳೂರು|ಹುಬ್ಬಳ್ಳಿ|ವಿಜಯಪುರ|ಬೆಳಗಾವಿ|बेंगलुरु|बैंगलोर|हुबली|हुब्बल्ली|विजयपुर|बेलगावी|बेलगाम)/i.test(question)) intent = 'official_reach'
   let text = ''
 
   switch (intent) {
@@ -256,6 +261,8 @@ export async function ask(question: string, uiLang: Lang): Promise<Answer> {
     case 'shopping_crafts': text = faq('crafts')?.a[lang] ?? ''; cards.push({ type: 'place', id: 'ilkal' }, { type: 'link', to: '/local', label: { en: 'Meet local artisans', kn: 'ಸ್ಥಳೀಯ ಕುಶಲಕರ್ಮಿಗಳು', hi: 'स्थानीय कारीगर' } }); sources.push('dtdc_book'); break
     case 'guide': text = faq('guides')?.a[lang] ?? ''; cards.push({ type: 'link', to: '/local', label: { en: 'Find a local guide', kn: 'ಸ್ಥಳೀಯ ಮಾರ್ಗದರ್ಶಿ ಹುಡುಕಿ', hi: 'स्थानीय गाइड खोजें' } }); sources.push('dtdc_book'); break
     case 'adventure': text = faq('adventure')?.a[lang] ?? ''; cards.push({ type: 'place', id: 'yadahalli' }); sources.push('dtdc_book'); break
+    case 'official_office': text = faq('tourism_office')?.a[lang] ?? ''; cards.push({ type: 'link', to: '/safety', label: { en: 'Call the tourism office', kn: 'ಪ್ರವಾಸೋದ್ಯಮ ಕಚೇರಿಗೆ ಕರೆ ಮಾಡಿ', hi: 'पर्यटन कार्यालय को कॉल करें' } }); sources.push('district_site'); break
+    case 'official_reach': text = faq('reach_bagalkot')?.a[lang] ?? ''; cards.push({ type: 'link', to: '/plan', label: { en: 'Plan the day once you arrive', kn: 'ತಲುಪಿದ ಮೇಲೆ ದಿನದ ಯೋಜನೆ', hi: 'पहुँचकर दिन की योजना बनाएँ' } }); sources.push('district_site'); break
   }
 
   if (intent === 'fallback' || !text) {
@@ -271,6 +278,7 @@ export async function ask(question: string, uiLang: Lang): Promise<Answer> {
     }
   }
 
+  track({ kind: 'ask', key: intent, lang, place })
   return { text: text.trim(), lang, intent, confidence: r.confidence, cards, sources: [...new Set(sources)], suggestions: suggestionsFor(intent, lang, place) }
 }
 

@@ -74,5 +74,8 @@ for pid, cat in FROM_COMMONS.items():
     except Exception as e:
         print("fail", pid, e)
 
-(ML.parent / "web" / "src" / "data" / "photo_credits.json").write_text(json.dumps(credits, ensure_ascii=False, indent=1), encoding="utf8")
+out = ML.parent / "web" / "src" / "data" / "photo_credits.json"
+if out.exists():  # keep hand-curated entries (home-screen hero photos) that this script does not fetch
+    credits = {**{k: v for k, v in json.loads(out.read_text(encoding="utf8")).items() if k.startswith("hero_")}, **credits}
+out.write_text(json.dumps(credits, ensure_ascii=False, indent=1), encoding="utf8")
 print(len(credits), "photos")

@@ -4,6 +4,7 @@ import { Area, CartesianGrid, ComposedChart, Line, ReferenceLine, ResponsiveCont
 import { Activity, AlertTriangle, ArrowLeft, Bell, CarFront, CheckCircle2, Clock, CloudSun, Cpu, Droplets, Flame, Radio, Siren, Trash2, Users, Wifi, WifiOff } from 'lucide-react'
 import MapView from '../components/MapView'
 import CctvPanel from '../components/CctvPanel'
+import DeptInsights from '../components/DeptInsights'
 import { LangSwitch } from '../components/Shell'
 import { FOOTFALL, PARKING, placeById } from '../lib/data'
 import { crowdNow, dayForecast, LEVEL_COLOR, levelOf, capacityOf } from '../lib/crowd'
@@ -20,8 +21,8 @@ const WATER_L = 4, WASTE_KG = 0.12, PER_TOILET = 60, PER_GUIDE = 150
 
 function Panel({ title, icon, children, className = '', right }: { title: string; icon: React.ReactNode; children: React.ReactNode; className?: string; right?: React.ReactNode }) {
   return (
-    <section className={`rounded-2xl border border-white/8 bg-night-2 p-4 ${className}`}>
-      <div className="mb-3 flex items-center justify-between gap-2">
+    <section className={`min-w-0 rounded-2xl border border-white/8 bg-night-2 p-4 ${className}`}>
+      <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
         <h2 className="flex items-center gap-2 text-[13px] font-semibold uppercase tracking-[0.08em] text-white/60">{icon}{title}</h2>{right}
       </div>
       {children}
@@ -133,7 +134,7 @@ export default function Command() {
             <div className="mt-0.5 text-[12px] text-white/50">Bagalkot District Tourism · live operations</div>
           </div>
         </div>
-        <div className="flex items-center gap-3 text-[13px]">
+        <div className="flex flex-wrap items-center gap-2 text-[13px] sm:gap-3">
           <span className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 ${serverConnected() ? 'bg-lake/40 text-white' : 'bg-white/8 text-white/60'}`}>{serverConnected() ? <Wifi size={14} /> : <WifiOff size={14} />}{serverConnected() ? 'Server link' : 'Local link'}</span>
           <span className="num inline-flex items-center gap-1.5 rounded-full bg-white/8 px-2.5 py-1"><Clock size={14} />{at.toLocaleString('en-IN', { weekday: 'short', day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit' })}{isDemoClock() && <b className="text-lamp">DEMO</b>}</span>
           <LangSwitch dark />
@@ -171,7 +172,7 @@ export default function Command() {
                       {a.detail && <div className="mt-0.5 text-[12.5px] text-white/55">{a.detail}</div>}
                       <div className="num mt-1 text-[11px] text-white/40">{new Date(a.at).toLocaleTimeString('en-IN')} · {a.source}</div>
                     </div>
-                    {!a.ack && a.severity !== 'info' && <button onClick={() => ack(a)} className="shrink-0 rounded-full bg-lake px-3 py-1 text-[12px] font-semibold">Respond</button>}
+                    {!a.ack && a.severity !== 'info' && a.type !== 'review' && <button onClick={() => ack(a)} className="shrink-0 rounded-full bg-lake px-3 py-1 text-[12px] font-semibold">Respond</button>}
                     {a.ack && <CheckCircle2 size={16} className="shrink-0 text-lake-soft" />}
                   </div>
                 </li>
@@ -251,6 +252,8 @@ export default function Command() {
             <p className="mt-2 text-[11.5px] text-white/45">No hardware attached: nodes replay the simulated sensor stream. ESP32 firmware in /iot posts to /api/iot.</p>
           </Panel>
         </div>
+
+        <DeptInsights />
 
         <div className="grid gap-4 lg:grid-cols-2"><CctvPanel /><div className="hidden lg:block" /></div>
 

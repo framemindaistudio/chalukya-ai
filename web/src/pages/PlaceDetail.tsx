@@ -12,6 +12,7 @@ import { lotStatus, freeOnArrival } from '../lib/parking'
 import { haversineKm, fmtKm, mapsLink } from '../lib/geo'
 import { timeWord } from '../lib/assistant'
 import ExplainIn from '../components/ExplainIn'
+import ReviewBox from '../components/ReviewBox'
 
 const TX = {
   visit: { en: 'Plan your visit', kn: 'ಭೇಟಿ ಯೋಜನೆ', hi: 'यात्रा की योजना' }, time: { en: 'Time needed', kn: 'ಬೇಕಾದ ಸಮಯ', hi: 'लगने वाला समय' },
@@ -96,6 +97,8 @@ export default function PlaceDetail() {
             <Link to="/scan" className="mt-2 inline-block text-[14px] font-semibold text-lake">{t('scan')} →</Link>
           </Card>
         )}
+
+        <ReviewBox place={p.id} />
 
         <MapView height={200} pins={[{ id: p.id, lat: p.lat, lng: p.lng, label: p.name.en, color: '#c0562f', radius: 11 }, ...nearby.map(({ x }) => ({ id: x.id, lat: x.lat, lng: x.lng, label: x.name.en }))]} />
 

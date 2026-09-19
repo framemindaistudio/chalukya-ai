@@ -8,10 +8,22 @@ import { setLiveOccupancy } from './parking'
     • BroadcastChannel otherwise, so a tourist tab and a control-room tab on one machine still talk.
 */
 export type Alert = {
-  id: string; type: 'sos' | 'geofence' | 'crowd' | 'heat' | 'sensor' | 'parking' | 'checkin' | 'anomaly'
+  id: string; type: 'sos' | 'geofence' | 'crowd' | 'heat' | 'sensor' | 'parking' | 'checkin' | 'anomaly' | 'review'
   severity: 'info' | 'warn' | 'critical'; title: string; detail?: string; lat?: number; lng?: number; place?: string
-  at: number; ack?: boolean; source: 'tourist' | 'iot' | 'model' | 'cctv'
+  at: number; ack?: boolean; source: 'tourist' | 'iot' | 'model' | 'cctv'; data?: Record<string, unknown>
 }
+
+/* Usage analytics for the Tourism Department dashboard: what tourists ask, in which language,
+   about which places. Anonymous counts only: no names, no phone numbers, no location trail. */
+export type Stat = { kind: 'ask' | 'scan' | 'plan' | 'lang'; key: string; lang?: string; place?: string; at: number }
+const statListeners = new Set<(s: Stat) => void>()
+export function track(s: Omit<Stat, 'at'>) {
+  const full = { ...s, at: Date.now() }
+  statListeners.forEach((f) => f(full))
+  bc?.postMessage({ __stat: full })
+  if (wsOk && ws) ws.send(JSON.stringify({ kind: 'stat', stat: full }))
+}
+export function onStat(f: (s: Stat) => void) { statListeners.add(f); return () => { statListeners.delete(f) } }
 
 const bc = typeof BroadcastChannel !== 'undefined' ? new BroadcastChannel('chalukya-live') : null
 const listeners = new Set<(a: Alert) => void>()
@@ -35,6 +47,7 @@ function connect() {
       try {
         const m = JSON.parse(e.data)
         if (m.kind === 'alert') deliver(m.alert)
+        if (m.kind === 'stat') statListeners.forEach((f) => f(m.stat))
         // real (or simulated) ESP32 slot sensors override the replayed occupancy
         if (m.kind === 'iot' && m.reading?.node?.startsWith('p_') && m.reading.occupied != null) setLiveOccupancy(m.reading.node, m.reading.occupied)
       } catch { /* ignore */ }
@@ -44,7 +57,7 @@ function connect() {
   } catch { /* no server */ }
 }
 if (typeof window !== 'undefined') connect()
-bc?.addEventListener('message', (e) => deliver(e.data as Alert))
+bc?.addEventListener('message', (e) => { if (e.data?.__stat) statListeners.forEach((f) => f(e.data.__stat)); else deliver(e.data as Alert) })
 
 export function publish(a: Omit<Alert, 'id' | 'at'> & { id?: string; at?: number }) {
   const full: Alert = { id: a.id ?? Math.random().toString(36).slice(2, 10), at: a.at ?? Date.now(), ...a } as Alert

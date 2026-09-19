@@ -105,6 +105,14 @@ export default function Safety() {
             <a key={n} href={`tel:${n}`} className="card flex flex-col items-center py-3"><Phone size={16} className="text-sos" /><b className="num mt-1 text-[19px]">{n}</b><span className="text-[11px] text-ink-3">{l}</span></a>
           ))}
         </div>
+        <a href="tel:+918354235709" className="card flex items-center gap-3 px-4 py-3">
+          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-lake-soft"><Phone size={16} className="text-lake" /></span>
+          <span className="min-w-0 flex-1">
+            <b className="block text-[14.5px]">{lang === 'kn' ? 'ಜಿಲ್ಲಾ ಪ್ರವಾಸೋದ್ಯಮ ಕಚೇರಿ' : lang === 'hi' ? 'ज़िला पर्यटन कार्यालय' : 'District Tourism Office'}</b>
+            <span className="block truncate text-[12px] text-ink-3">{lang === 'kn' ? 'ಜಿಲ್ಲಾಧಿಕಾರಿಗಳ ಕಚೇರಿ, ನವನಗರ, ಬಾಗಲಕೋಟೆ' : lang === 'hi' ? 'ज़िलाधिकारी कार्यालय, नवनगर, बागलकोट' : 'DC Office, Navanagar, Bagalkote'}</span>
+          </span>
+          <b className="num text-[14.5px] text-lake">08354 235709</b>
+        </a>
 
         {adv && (
           <Card className={`flex gap-3 p-4 ${adv.level === 'hot' || adv.level === 'extreme' ? 'bg-sand-soft' : ''}`}>
@@ -117,7 +125,7 @@ export default function Safety() {
           <div className="flex items-center gap-2"><AlarmClock size={18} className="text-lake" /><div className="text-[15.5px] font-semibold">{L(TX.checkin)}</div></div>
           <p className="mt-1 text-[13.5px] text-ink-2">{L(TX.checkinSub)}</p>
           {!timer ? (
-            <div className="mt-3 flex gap-2">{[1, 30, 60, 90].map((m) => <Chip key={m} onClick={() => setTimer({ until: Date.now() + m * 60_000, mins: m })}>{m === 1 ? '1 min (demo)' : `${m} min`}</Chip>)}</div>
+            <div className="mt-3 flex flex-wrap gap-2">{[1, 30, 60, 90].map((m) => <Chip key={m} onClick={() => setTimer({ until: Date.now() + m * 60_000, mins: m })}>{m === 1 ? '1 min (demo)' : `${m} min`}</Chip>)}</div>
           ) : (
             <div className="mt-3 flex items-center justify-between rounded-xl bg-lake-soft/60 px-3 py-2">
               <span className="num text-[22px] font-bold text-lake">{Math.floor(Math.max(0, left) / 60)}:{String(Math.max(0, left) % 60).padStart(2, '0')}</span>

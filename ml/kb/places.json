@@ -935,6 +935,53 @@
     "activity"
    ],
    "src": "dtdc_book"
+  },
+  {
+   "id": "tourism_office",
+   "q": {
+    "en": "How do I contact the district tourism office?",
+    "kn": "ಜಿಲ್ಲಾ ಪ್ರವಾಸೋದ್ಯಮ ಕಚೇರಿಯನ್ನು ಹೇಗೆ ಸಂಪರ್ಕಿಸುವುದು?",
+    "hi": "ज़िला पर्यटन कार्यालय से कैसे संपर्क करें?"
+   },
+   "a": {
+    "en": "The Department of Tourism, Bagalkote works from the DC Office, Navanagar, Bagalkote. Phone: 08354 235709. It also runs the official 'Bagalkote Tourism' page with news of events at the monuments.",
+    "kn": "ಪ್ರವಾಸೋದ್ಯಮ ಇಲಾಖೆ, ಬಾಗಲಕೋಟೆ: ಜಿಲ್ಲಾಧಿಕಾರಿಗಳ ಕಚೇರಿ, ನವನಗರ, ಬಾಗಲಕೋಟೆ. ದೂರವಾಣಿ: 08354 235709. ಸ್ಮಾರಕಗಳಲ್ಲಿನ ಕಾರ್ಯಕ್ರಮಗಳ ಸುದ್ದಿಗಾಗಿ ಅಧಿಕೃತ 'Bagalkote Tourism' ಪುಟವೂ ಇದೆ.",
+    "hi": "पर्यटन विभाग, बागलकोट: ज़िलाधिकारी कार्यालय, नवनगर, बागलकोट। फ़ोन: 08354 235709। स्मारकों पर होने वाले कार्यक्रमों की जानकारी के लिए आधिकारिक 'Bagalkote Tourism' पेज भी है।"
+   },
+   "tags": [
+    "contact",
+    "office",
+    "tourism department",
+    "help",
+    "information",
+    "complaint",
+    "phone"
+   ],
+   "src": "district_site"
+  },
+  {
+   "id": "reach_bagalkot",
+   "q": {
+    "en": "How far is Bagalkot from Hubballi, Vijayapura, Belagavi and Bengaluru?",
+    "kn": "ಹುಬ್ಬಳ್ಳಿ, ವಿಜಯಪುರ, ಬೆಳಗಾವಿ, ಬೆಂಗಳೂರಿನಿಂದ ಬಾಗಲಕೋಟೆ ಎಷ್ಟು ದೂರ?",
+    "hi": "हुबली, विजयपुरा, बेलगावी और बेंगलुरु से बागलकोट कितनी दूर है?"
+   },
+   "a": {
+    "en": "By road (district website): Hubballi 122.6 km and Vijayapura 83.8 km via NH52, Belagavi 140.5 km, Bengaluru 529 km via NH48. The nearest airports are Hubballi and Belagavi. The Basava Express (17307) runs from Bengaluru to Bagalkot; check current train times before you travel.",
+    "kn": "ರಸ್ತೆ ಮೂಲಕ (ಜಿಲ್ಲಾ ಜಾಲತಾಣ): ಹುಬ್ಬಳ್ಳಿ 122.6 ಕಿ.ಮೀ, ವಿಜಯಪುರ 83.8 ಕಿ.ಮೀ (NH52), ಬೆಳಗಾವಿ 140.5 ಕಿ.ಮೀ, ಬೆಂಗಳೂರು 529 ಕಿ.ಮೀ (NH48). ಹತ್ತಿರದ ವಿಮಾನ ನಿಲ್ದಾಣಗಳು ಹುಬ್ಬಳ್ಳಿ ಮತ್ತು ಬೆಳಗಾವಿ. ಬೆಂಗಳೂರಿನಿಂದ ಬಾಗಲಕೋಟೆಗೆ ಬಸವ ಎಕ್ಸ್‌ಪ್ರೆಸ್ (17307) ಇದೆ; ಪ್ರಯಾಣದ ಮೊದಲು ಈಗಿನ ರೈಲು ಸಮಯ ಪರಿಶೀಲಿಸಿ.",
+    "hi": "सड़क से (ज़िला वेबसाइट): हुबली 122.6 किमी और विजयपुरा 83.8 किमी (NH52), बेलगावी 140.5 किमी, बेंगलुरु 529 किमी (NH48)। नज़दीकी हवाई अड्डे हुबली और बेलगावी हैं। बेंगलुरु से बागलकोट के लिए बसव एक्सप्रेस (17307) चलती है; यात्रा से पहले ट्रेन का ताज़ा समय देख लें।"
+   },
+   "tags": [
+    "reach",
+    "distance",
+    "road",
+    "train",
+    "airport",
+    "bus",
+    "travel",
+    "how to get"
+   ],
+   "src": "district_site"
   }
  ],
  "sources": [
@@ -949,6 +996,10 @@
   {
    "id": "wikidata",
    "title": "Wikipedia / Wikidata / OpenStreetMap (coordinates, basic facts)"
+  },
+  {
+   "id": "district_site",
+   "title": "Bagalkote District Administration: official tourism pages (bagalkot.nic.in/en/tourism) and the official Bagalkote Tourism page (DC Office, Navanagar)"
   }
  ]
 }
