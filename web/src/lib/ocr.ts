@@ -13,10 +13,14 @@ import { isStaticHost } from './server'
   3. Full translation of the board text (Meta NLLB-200 on the laptop server) when it is reachable.
 */
 let worker: Promise<Worker> | null = null
+// The worker is created once (possibly by the pre-load, with no listener), so progress goes to
+// whoever is reading right now rather than to the callback captured at creation.
+let progressTo: ((p: number) => void) | undefined
 export function ocrWorker(onProgress?: (p: number) => void) {
+  if (onProgress) progressTo = onProgress
   worker ??= createWorker(['kan', 'hin', 'eng'], 1, {
     workerPath: '/tess/worker.min.js', corePath: '/tess/core', langPath: '/tess/lang', gzip: true,
-    logger: (m: { status: string; progress: number }) => { if (m.status === 'recognizing text') onProgress?.(m.progress) },
+    logger: (m: { status: string; progress: number }) => { if (m.status === 'recognizing text') progressTo?.(m.progress) },
   })
   return worker
 }
