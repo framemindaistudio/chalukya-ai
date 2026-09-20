@@ -31,7 +31,7 @@
   .head span { font-size: 7pt; color: #BFD8D5; display: block; margin-top: .6mm; }
   .head .u { font-size: 7.6pt; font-weight: 700; color: var(--lamp-l); text-align: right; line-height: 1.5; }
 
-  h2 { font-size: 7.4pt; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--lake); margin: 4.5mm 10mm 2mm; display: flex; align-items: baseline; gap: 2.5mm; }
+  h2 { font-size: 7.4pt; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--lake); margin: 3.7mm 10mm 1.8mm; display: flex; align-items: baseline; gap: 2.5mm; }
   h2 span { font-size: 6.6pt; letter-spacing: 0; text-transform: none; color: var(--ink3); font-weight: 500; }
   table { width: calc(100% - 20mm); margin: 0 10mm; border-collapse: collapse; }
   th { text-align: left; font-size: 6.2pt; letter-spacing: .08em; text-transform: uppercase; color: var(--ink3); font-weight: 700; padding-bottom: 1mm; }
@@ -50,22 +50,26 @@
   .src li b { color: var(--ink); }
   .src li code { font-family: 'JetBrains Mono', monospace; font-size: 5.9pt; color: var(--lake); }
 
-  .qa { margin: 0 10mm; display: grid; grid-template-columns: 1fr 1fr; gap: 2mm 5mm; }
+  .qa { margin: 0 10mm; display: grid; grid-template-columns: 1fr 1fr; gap: 1.7mm 4.5mm; }
   .qa div { background: var(--paper); border: .25mm solid var(--line); border-radius: 2.4mm; padding: 2mm 2.6mm; }
+  .qa div.big { grid-column: span 2; background: var(--lake); border-color: var(--lake); }
+  .qa div.big b { color: var(--paper); font-size: 8pt; }
+  .qa div.big span { color: #DCEBE6; font-size: 6.7pt; }
+  .qa div.big em { color: var(--lamp-l); }
   .qa b { display: block; font-size: 7pt; color: var(--ink); line-height: 1.25; }
-  .qa span { display: block; font-size: 6.5pt; color: var(--ink2); line-height: 1.35; margin-top: .8mm; }
+  .qa span { display: block; font-size: 6.4pt; color: var(--ink2); line-height: 1.35; margin-top: .8mm; }
   .qa em { font-style: normal; color: var(--lake); font-weight: 700; }
 
   .where { margin: 0 10mm; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3mm; }
-  .where div { border-radius: 2.6mm; padding: 2.4mm 3mm; }
+  .where div { border-radius: 2.6mm; padding: 2mm 2.6mm; }
   .where .a { background: var(--lake); color: var(--paper); }
   .where .b { background: var(--night); color: var(--paper); }
   .where .c { background: var(--paper); border: .25mm solid var(--line); }
   .where b { display: block; font-size: 7.2pt; line-height: 1.2; }
   .where i { font-style: normal; display: block; font-size: 6.2pt; opacity: .8; margin-top: .4mm; }
-  .where p { font-size: 6.4pt; line-height: 1.45; margin-top: 1.6mm; }
+  .where p { font-size: 6.2pt; line-height: 1.38; margin-top: 1.6mm; }
   .where .c p { color: var(--ink2); }
-  .foot { margin: auto 10mm 7mm; padding-top: 2.6mm; border-top: .3mm solid var(--line); display: grid; grid-template-columns: 1fr auto; gap: 6mm;
+  .foot { margin: auto 10mm 5mm; padding-top: 2mm; border-top: .3mm solid var(--line); display: grid; grid-template-columns: 1fr auto; gap: 6mm;
           font-size: 6.6pt; color: var(--ink2); line-height: 1.4; }
   .foot b { color: var(--ink); }
   .foot .u { font-size: 8pt; font-weight: 700; color: var(--lake); text-align: right; }
@@ -141,7 +145,6 @@
 
 <!-- ─────────── RIGHT: the district, the data, the cross-questions ─────────── -->
 <section class="panel right">
-  <div class="foldmark">fold</div><div class="foldmark b">fold</div>
 
   <div class="head">
     <div class="l"><div class="t"><img src="../brand/logo/chalukya-ai-logo-2048.png" alt=""></div>
@@ -184,13 +187,12 @@
 
   <h2>The questions you are about to ask</h2>
   <div class="qa">
+    <div class="big"><b>Where is the AI in this project?</b><span>Five models were <em>trained for Bagalkote</em>: the sculpture recogniser (EfficientNet-B0, on the phone), the footfall forecaster and the parking forecaster (LightGBM), the question classifier (char n-grams + lexicon + multilingual-e5) and the review sentiment and complaint-topic model. Five open models are used as they are: <em>NLLB-200</em> for translation, <em>MMS-TTS</em> for Kannada and Hindi speech, <em>Tesseract</em> for reading boards, <em>Faster R-CNN</em> for counting people, <em>multilingual-e5</em> for meaning. Around them sit classical algorithms: exhaustive route search, conformal prediction for the forecast band, robust z-scores for sensor faults, MMR for variety, and a dark-ridge filter for the crack check. <em>No LLM and no paid API.</em> Every model is measured against a simple baseline, so you can see what the AI adds. Training scripts and reports: <em>ml/*/</em> and <em>ml/*/out/</em>.</span></div>
     <div><b>How do you get the weather?</b><span>Open-Meteo's public forecast API by latitude and longitude, no key. We use the <em>apparent</em> temperature — what it feels like on hot stone — and warn above 38 °C.</span></div>
     <div><b>How is traffic estimated?</b><span><em>It is not.</em> Drive times come from OSRM routing on the OSM road network at typical speeds, cached per pair of sites. A live traffic feed is a version-2 item; I would rather say so than pretend.</span></div>
     <div><b>How is the route chosen?</b><span>For the stops that fit your hours, <em>every order is tried</em> and scored on driving time, the crowd forecast at your arrival hour, midday heat on stairs, opening hours and budget.</span></div>
-    <div><b>How were the models trained?</b><span>On this laptop. Photos split by photographer; forecasts on four years of daily data; intents on 400 written examples. Scripts and reports are in <em>ml/*/</em> and <em>ml/*/out/</em>.</span></div>
-    <div><b>Is the data real?</b><span>Photos, ticket totals, roads, places and weather: real. The hour-by-hour crowd shape, parking streams and business prices: <em>simulated and labelled in the app</em>, calibrated so yearly totals match ASI exactly.</span></div>
-    <div><b>Did you use ChatGPT or an API?</b><span>No LLM, no paid API. Five models trained for Bagalkote and five open models used as they are. The assistant answers only from tools and a verified knowledge base.</span></div>
-    <div><b>What still works with no signal?</b><span>Recognition, live lens, board reading, planning, forecasts, parking, the knowledge base and SOS queueing. Translation, Grad-CAM and people counting need the district server.</span></div>
+        <div><b>Is the data real?</b><span>Photos, ticket totals, roads, places and weather: real. The hour-by-hour crowd shape, parking streams and business prices: <em>simulated and labelled in the app</em>, calibrated so yearly totals match ASI exactly.</span></div>
+        <div><b>What still works with no signal?</b><span>Recognition, live lens, board reading, planning, forecasts, parking, the knowledge base and SOS queueing. Translation, Grad-CAM and people counting need the district server.</span></div>
     <div><b>What about privacy?</b><span>CCTV frames are blurred and only counts are stored. Questions are counted anonymously. The emergency contact never leaves the phone. No accounts, no tracking, no ads.</span></div>
   </div>
 
