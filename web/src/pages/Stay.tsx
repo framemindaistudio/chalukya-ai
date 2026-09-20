@@ -1,7 +1,9 @@
 import { useMemo, useState } from 'react'
 import { reveal } from '../lib/reveal'
 import { BedDouble, ChevronDown, MapPin, Star } from 'lucide-react'
-import { Card, Chip, DemoTag, Eyebrow, PageHead } from '../components/ui'
+import { Link } from 'react-router'
+import { Leaf } from 'lucide-react'
+import { Card, Chip, DemoTag, Eyebrow, PageHead, V1Tag } from '../components/ui'
 import MapView from '../components/MapView'
 import { useLang } from '../lib/i18n'
 import { AMENITIES, pretty, rankStays, type Priority } from '../lib/recommend'
@@ -12,6 +14,10 @@ const TX = {
   title: { en: 'Where to stay', kn: 'ಎಲ್ಲಿ ಉಳಿಯಬೇಕು', hi: 'कहाँ ठहरें' },
   sub: { en: 'Ranked for you, with the reasons shown. Locally owned stays get a small boost.', kn: 'ನಿಮಗಾಗಿ ಶ್ರೇಣೀಕರಿಸಲಾಗಿದೆ, ಕಾರಣಗಳೊಂದಿಗೆ. ಸ್ಥಳೀಯರ ಮಾಲೀಕತ್ವದ ವಸತಿಗಳಿಗೆ ಸ್ವಲ್ಪ ಆದ್ಯತೆ.', hi: 'आपके लिए क्रम में, कारणों के साथ। स्थानीय मालिकों वाली जगहों को थोड़ी प्राथमिकता।' },
   budget: { en: 'Budget per night', kn: 'ರಾತ್ರಿಗೆ ಬಜೆಟ್', hi: 'प्रति रात बजट' }, near: { en: 'Close to', kn: 'ಇದರ ಹತ್ತಿರ', hi: 'इसके पास' },
+  green: { en: 'Green stays only', kn: 'ಪರಿಸರಸ್ನೇಹಿ ಮಾತ್ರ', hi: 'केवल हरित ठहराव' },
+  greenNone: { en: 'No stay has declared yet', kn: 'ಇನ್ನೂ ಯಾವ ವಸತಿಯೂ ಘೋಷಿಸಿಲ್ಲ', hi: 'अभी किसी ठहराव ने घोषित नहीं किया' },
+  greenHow: { en: 'Owners declare solar water heating, rainwater harvesting, a drinking-water refill point and no single-use plastic in the business portal. The district verifies each one before it shows here.', kn: 'ಸೌರ ನೀರು ಕಾಯಿಸುವಿಕೆ, ಮಳೆನೀರು ಕೊಯ್ಲು, ಕುಡಿಯುವ ನೀರಿನ ಮರುಭರ್ತಿ, ಏಕಬಳಕೆ ಪ್ಲಾಸ್ಟಿಕ್ ಇಲ್ಲ: ಮಾಲೀಕರು ವ್ಯಾಪಾರ ಪೋರ್ಟಲ್‌ನಲ್ಲಿ ಘೋಷಿಸುತ್ತಾರೆ. ಜಿಲ್ಲೆ ಪರಿಶೀಲಿಸಿದ ನಂತರವೇ ಇಲ್ಲಿ ಕಾಣುತ್ತದೆ.', hi: 'मालिक पोर्टल में सौर जल तापन, वर्षा जल संचयन, पेयजल रीफ़िल और सिंगल-यूज़ प्लास्टिक न होना घोषित करते हैं। ज़िले की जाँच के बाद ही यहाँ दिखता है।' },
+  greenPortal: { en: 'Own a stay? Declare in the portal', kn: 'ವಸತಿ ಇದೆಯೇ? ಪೋರ್ಟಲ್‌ನಲ್ಲಿ ಘೋಷಿಸಿ', hi: 'ठहराव है? पोर्टल में घोषित करें' },
   must: { en: 'Must have', kn: 'ಬೇಕೇ ಬೇಕು', hi: 'ज़रूरी' }, prio: { en: 'What matters most', kn: 'ಯಾವುದು ಮುಖ್ಯ', hi: 'सबसे ज़रूरी क्या' },
 }
 const PRIO: { id: Priority; en: string; kn: string; hi: string }[] = [
@@ -27,7 +33,10 @@ export default function Stay() {
   const [must, setMust] = useState<string[]>(['parking'])
   const [prio, setPrio] = useState<Priority>('balanced')
   const [open, setOpen] = useState<string | null>(null)
-  const res = useMemo(() => rankStays({ budget, places: near, amenities: must, priority: prio }), [budget, near, must, prio])
+  const [greenOnly, setGreenOnly] = useState(false)
+  const ranked = useMemo(() => rankStays({ budget, places: near, amenities: must, priority: prio }), [budget, near, must, prio])
+  // a stay is green only when its owner has declared it and the district has verified it: none yet
+  const res = greenOnly ? ranked.filter((r) => (r.item as { green?: boolean }).green) : ranked
   const tog = <T,>(a: T[], x: T) => (a.includes(x) ? a.filter((y) => y !== x) : [...a, x])
 
   return (
@@ -41,11 +50,22 @@ export default function Stay() {
           </div>
           <div><Eyebrow>{L(TX.near)}</Eyebrow><div className="no-scrollbar mt-2 flex gap-2 overflow-x-auto">{NEAR.map((id) => <Chip key={id} active={near.includes(id)} onClick={() => setNear((a) => (tog(a, id).length ? tog(a, id) : a))}>{L(placeById[id].name).split(':')[0]}</Chip>)}</div></div>
           <div><Eyebrow>{L(TX.must)}</Eyebrow><div className="mt-2 flex flex-wrap gap-2">{AMENITIES.map((a) => <Chip key={a} active={must.includes(a)} onClick={() => setMust((m) => tog(m, a))}>{pretty(a)}</Chip>)}</div></div>
+          <div>
+            <div className="flex items-center justify-between"><Eyebrow>{L(TX.green)}</Eyebrow><V1Tag /></div>
+            <div className="mt-2 flex flex-wrap gap-2"><Chip active={greenOnly} onClick={() => setGreenOnly((g) => !g)}><Leaf size={14} className="-mt-0.5 mr-1 inline" />{L(TX.green)}</Chip></div>
+          </div>
           <div><Eyebrow>{L(TX.prio)}</Eyebrow><div className="no-scrollbar mt-2 flex gap-2 overflow-x-auto">{PRIO.map((p) => <Chip key={p.id} active={prio === p.id} onClick={() => setPrio(p.id)}>{p[lang]}</Chip>)}</div></div>
         </Card>
 
         <MapView height={210} pins={[...near.map((id) => ({ id, lat: placeById[id].lat, lng: placeById[id].lng, label: placeById[id].name.en, color: '#14211d', radius: 6 })), ...res.slice(0, 6).map((r, i) => ({ id: r.item.id, lat: r.item.lat, lng: r.item.lng, label: `${i + 1}. ${r.item.name}`, color: i === 0 ? '#c0562f' : '#1f5e57' }))]} />
 
+        {greenOnly && res.length === 0 && (
+          <Card className="p-4">
+            <div className="flex items-center gap-2 text-lake"><Leaf size={18} /><b className="text-[15.5px]">{L(TX.greenNone)}</b></div>
+            <p className="mt-1 text-[13.5px] leading-snug text-ink-2">{L(TX.greenHow)}</p>
+            <Link to="/local" className="mt-3 inline-block rounded-full border border-lake px-4 py-2 text-[14px] font-semibold text-lake">{L(TX.greenPortal)}</Link>
+          </Card>
+        )}
         {res.map((r, i) => (
           <Card key={r.item.id} className="p-4">
             <button className="w-full text-left" onClick={(e) => { const card = e.currentTarget.parentElement; if (open !== r.item.id) reveal(() => card); setOpen(open === r.item.id ? null : r.item.id) }} aria-expanded={open === r.item.id}>

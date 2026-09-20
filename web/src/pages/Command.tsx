@@ -8,7 +8,7 @@ import CctvPanel from '../components/CctvPanel'
 import DeptInsights from '../components/DeptInsights'
 import { LangSwitch } from '../components/Shell'
 import { FOOTFALL, PARKING, placeById } from '../lib/data'
-import { crowdNow, dayForecast, LEVEL_COLOR, levelOf, capacityOf } from '../lib/crowd'
+import { crowdNow, dayForecast, LEVEL_COLOR, levelOf, capacityOf, OPEN_H, CLOSE_H } from '../lib/crowd'
 import { lotStatus, LOT_IDS, predictFree, setLiveOccupancy } from '../lib/parking'
 import { useNow, setDemoClock, isDemoClock, ymd, hourLabel } from '../lib/clock'
 import { publish, serverConnected, useAlerts, type Alert } from '../lib/live'
@@ -19,6 +19,7 @@ import { useLang } from '../lib/i18n'
 const SITES = ['badami_caves', 'pattadakal', 'aihole', 'banashankari', 'mahakuta', 'kudalasangama']
 // Planning coefficients (editable assumptions, shown on screen)
 const WATER_L = 4, WASTE_KG = 0.12, PER_TOILET = 60, PER_GUIDE = 150
+const BIN_KG = 20, BINS_PER_TRIP = 12   // a 120 L bin holds about 20 kg of visitor waste; a tempo carries a dozen
 
 function Panel({ title, icon, children, className = '', right }: { title: string; icon: React.ReactNode; children: React.ReactNode; className?: string; right?: React.ReactNode }) {
   return (
@@ -91,6 +92,14 @@ export default function Command() {
   const lots = LOT_IDS.map((id) => lotStatus(id, at))
   const freeSlots = lots.reduce((a, l) => a + l.free, 0), capSlots = lots.reduce((a, l) => a + l.capacity, 0)
   const critical = alerts.filter((a) => a.severity === 'critical' && !a.ack).length
+
+  const [m2, setM2] = useState(4)          // space per visitor, an assumption the department can change
+  const [dwell, setDwell] = useState(45)   // average minutes a visitor spends on site
+  const openH = CLOSE_H - OPEN_H
+  const capacity = today.map((x) => {
+    const daily = Math.round(x.cap * (openH / Math.max(0.25, dwell / 60)))
+    return { s: x.s, cap: x.cap, expected: x.f?.p50 ?? 0, impliedArea: Math.round(x.cap * m2), daily, over: (x.f?.p50 ?? 0) > daily }
+  })
 
   const chart = useMemo(() => {
     const s = FOOTFALL.sites[site]
@@ -221,22 +230,50 @@ export default function Command() {
           </Panel>
         </div>
 
+        <Panel title="Carrying capacity · how many a site can hold" icon={<Users size={15} />} right={<span className="rounded-full bg-lamp/20 px-2 py-0.5 text-[10.5px] font-bold uppercase tracking-[0.08em] text-lamp">v1</span>}>
+          <div className="flex flex-wrap items-center gap-4 text-[12.5px] text-white/70">
+            <label className="flex items-center gap-2">Space per visitor
+              <input type="number" min={1} max={20} value={m2} onChange={(e) => setM2(Math.max(1, +e.target.value || 1))} className="num w-16 rounded-lg border border-white/15 bg-white/5 px-2 py-1 text-white" /> m²
+            </label>
+            <label className="flex items-center gap-2">Average stay
+              <input type="number" min={10} max={240} step={5} value={dwell} onChange={(e) => setDwell(Math.max(10, +e.target.value || 10))} className="num w-16 rounded-lg border border-white/15 bg-white/5 px-2 py-1 text-white" /> min
+            </label>
+            <span className="text-white/50">Open {openH} h a day</span>
+          </div>
+          <div className="mt-3 overflow-x-auto">
+            <table className="num w-full min-w-[560px] text-[13px]">
+              <thead><tr className="text-left text-white/60"><th className="pb-2 font-medium">Site</th><th className="font-medium">At once</th><th className="font-medium">Implied space</th><th className="font-medium">A day</th><th className="font-medium">Expected today</th></tr></thead>
+              <tbody>{capacity.map((x) => (
+                <tr key={x.s} className="border-t border-white/8">
+                  <td className="py-2 font-semibold">{L(placeById[x.s].name).split(':')[0]}</td>
+                  <td>{x.cap.toLocaleString('en-IN')}</td>
+                  <td className="text-white/60">{(x.impliedArea / 1000).toFixed(1)}k m²</td>
+                  <td>{x.daily.toLocaleString('en-IN')}</td>
+                  <td style={{ color: x.over ? '#ff8a6b' : undefined }}>{x.expected.toLocaleString('en-IN')}{x.over ? ' · over' : ''}</td>
+                </tr>
+              ))}</tbody>
+            </table>
+          </div>
+          <p className="mt-2 text-[11.5px] text-white/60">A day = how many the site can hold at once × the visits it turns over in {openH} open hours. “Implied space” is what today's setting works out to at {m2} m² each — version 2 replaces it with measured site areas and crowding reported by visitors.</p>
+        </Panel>
+
         <div className="grid gap-4 lg:grid-cols-[1.35fr_1fr]">
           <Panel title="Resource planning · next 7 days" icon={<Droplets size={15} />}>
             <div className="overflow-x-auto">
               <table className="num w-full min-w-[520px] text-[13px]">
-                <thead><tr className="text-left text-white/60"><th className="pb-2 font-medium">Day</th><th className="font-medium">Visitors</th><th className="font-medium"><Droplets size={12} className="inline" /> Water</th><th className="font-medium"><Trash2 size={12} className="inline" /> Waste</th><th className="font-medium">Toilets at peak</th><th className="font-medium">Guides</th></tr></thead>
+                <thead><tr className="text-left text-white/60"><th className="pb-2 font-medium">Day</th><th className="font-medium">Visitors</th><th className="font-medium"><Droplets size={12} className="inline" /> Water</th><th className="font-medium"><Trash2 size={12} className="inline" /> Waste</th><th className="font-medium">Toilets at peak</th><th className="font-medium">Guides</th><th className="font-medium">Bins / trips</th></tr></thead>
                 <tbody>{week.map((x) => (
                   <tr key={+x.d} className="border-t border-white/8">
                     <td className="py-2">{x.d.toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric' })}{x.tag && <span className="ml-1.5 rounded bg-lamp/20 px-1 text-[10.5px] text-lamp">{x.tag}</span>}</td>
                     <td className="font-semibold">{x.tot.toLocaleString('en-IN')}</td>
                     <td>{Math.round((x.tot * WATER_L) / 100) / 10} kL</td><td>{Math.round(x.tot * WASTE_KG)} kg</td>
                     <td>{Math.ceil(x.peak / PER_TOILET)}</td><td>{Math.ceil(x.peak / PER_GUIDE)}</td>
+                    <td>{Math.ceil((x.tot * WASTE_KG) / BIN_KG)} / {Math.ceil(Math.ceil((x.tot * WASTE_KG) / BIN_KG) / BINS_PER_TRIP)}</td>
                   </tr>
                 ))}</tbody>
               </table>
             </div>
-            <p className="mt-2 text-[11.5px] text-white/60">Assumptions (editable per site): {WATER_L} L water and {WASTE_KG} kg waste per visitor; one toilet seat per {PER_TOILET} people on site; one Pravasi Mitra per {PER_GUIDE}.</p>
+            <p className="mt-2 text-[11.5px] text-white/60">Assumptions (editable per site): {WATER_L} L water and {WASTE_KG} kg waste per visitor; one toilet seat per {PER_TOILET} people on site; one Pravasi Mitra per {PER_GUIDE}; a 120 L bin holds {BIN_KG} kg and one tempo carries {BINS_PER_TRIP} bins.</p>
           </Panel>
 
           <Panel title="IoT devices" icon={<Cpu size={15} />}>

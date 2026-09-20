@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router'
-import { Accessibility, ArrowRight, PlayCircle, BedDouble, Camera, CarFront, ChevronRight, Cpu, HandHeart, LayoutDashboard, Mic, Search, ShieldCheck, Sparkles, Sun, UtensilsCrossed } from 'lucide-react'
+import { Accessibility, ArrowRight, Megaphone, PlayCircle, BedDouble, Camera, CarFront, ChevronRight, Cpu, HandHeart, LayoutDashboard, Mic, Search, ShieldCheck, Sparkles, Sun, UtensilsCrossed } from 'lucide-react'
 import CircuitLine from '../components/CircuitLine'
 import InstallCard from '../components/InstallCard'
 import { startTour } from '../components/Tour'
@@ -33,6 +33,7 @@ const HERO_TX = {
   plan: { en: 'Plan my day', kn: 'ನನ್ನ ದಿನ ಯೋಜಿಸಿ', hi: 'मेरा दिन प्लान करें' },
   planSub: { en: 'Tell it your hours, budget and who is with you', kn: 'ಸಮಯ, ಬಜೆಟ್, ಜೊತೆಯಲ್ಲಿ ಯಾರು ಎಂದು ಹೇಳಿ', hi: 'समय, बजट और साथ कौन है, बताइए' },
   access: { en: 'Accessible', kn: 'ಸುಗಮ ಪ್ರವೇಶ', hi: 'सुगम पहुँच' },
+  report: { en: 'Report', kn: 'ವರದಿ', hi: 'रिपोर्ट' },
   tour: { en: 'Take the 90-second tour', kn: '90 ಸೆಕೆಂಡಿನ ಪರಿಚಯ ನೋಡಿ', hi: '90 सेकंड का टूर देखें' },
   busyDays: { en: 'Busy days coming up', kn: 'ಮುಂಬರುವ ಜನದಟ್ಟಣೆಯ ದಿನಗಳು', hi: 'आने वाले भीड़ वाले दिन' },
   aiPhoto: { en: 'AI-enhanced from photo', kn: 'AI ಸುಧಾರಿತ, ಮೂಲ ಫೋಟೋ', hi: 'AI से निखारा, मूल फ़ोटो' },
@@ -80,6 +81,7 @@ export default function Home() {
     { to: '/local', icon: HandHeart, label: t('local'), bg: 'bg-sand-soft', fg: 'text-sand' },
     { to: '/access', icon: Accessibility, label: L(HERO_TX.access), bg: 'bg-[#ece6f6]', fg: 'text-[#6a4c9c]' },
     { to: '/safety', icon: ShieldCheck, label: t('safety'), bg: 'bg-[#fbe3e6]', fg: 'text-sos' },
+    { to: '/report', icon: Megaphone, label: L(HERO_TX.report), bg: 'bg-[#f7ecd4]', fg: 'text-[#8a6412]' },
   ]
 
   return (

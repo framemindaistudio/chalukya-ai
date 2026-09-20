@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useReveal } from '../lib/reveal'
 import { Link } from 'react-router'
 import { Camera, ChevronDown, ImagePlus, Languages, Loader2, MapPin, ScanText, WifiOff } from 'lucide-react'
-import { Card, Eyebrow } from './ui'
+import { Card, Eyebrow, V1Tag } from './ui'
 import ExplainIn from './ExplainIn'
 import { useLang } from '../lib/i18n'
 import { ocrWorker, readBoard, translate, TRANSLATE_TO, type BoardResult } from '../lib/ocr'
@@ -12,6 +12,8 @@ import { track } from '../lib/live'
 import samples from '../data/board_samples.json'
 
 const T = {
+  anyTitle: { en: 'Translate anything', kn: 'ಏನನ್ನಾದರೂ ಅನುವಾದಿಸಿ', hi: 'कुछ भी अनुवाद करें' },
+  anySub: { en: 'Type or paste anything — a sign, a menu, a message — and read it in your language. Needs the district server.', kn: 'ಫಲಕ, ಮೆನು, ಸಂದೇಶ: ಏನನ್ನಾದರೂ ಬರೆಯಿ ನಿಮ್ಮ ಭಾಷೆಯಲ್ಲಿ ೋದಿ. ಜಿಲ್ಲಾ ಸರ್ವರ್ ಬೇಕು.', hi: 'साइन, मेन्यू, संदेश — कुछ भी लिखिए और अपनी भाषा में पढ़िए। ज़िला सर्वर चाहिए।' },
   take: { en: 'Photograph a board', kn: 'ಫಲಕದ ಫೋಟೋ ತೆಗೆಯಿರಿ', hi: 'बोर्ड की फ़ोटो लें' },
   upload: { en: 'Choose from gallery', kn: 'ಗ್ಯಾಲರಿಯಿಂದ ಆರಿಸಿ', hi: 'गैलरी से चुनें' },
   samples: { en: 'Or try a real ASI board', kn: 'ಅಥವಾ ನಿಜವಾದ ASI ಫಲಕ ಪ್ರಯತ್ನಿಸಿ', hi: 'या असली ASI बोर्ड आज़माएँ' },
@@ -38,9 +40,19 @@ export default function BoardReader() {
   const [credit, setCredit] = useState<string | null>(null)
   const [showText, setShowText] = useState(false)
   const [tx, setTx] = useState<{ to: string; text: string | null | 'busy'; partial?: boolean } | null>(null)
-  const resRef = useRef<HTMLDivElement>(null), txRef = useRef<HTMLDivElement>(null)
+  const resRef = useRef<HTMLDivElement>(null), txRef = useRef<HTMLDivElement>(null), anyRef = useRef<HTMLDivElement>(null)
+  const [anyText, setAnyText] = useState('')
+  const [anyOut, setAnyOut] = useState<{ to: string; text: string | null | 'busy' } | null>(null)
   useReveal(resRef, state === 'done' ? res : null)
   useReveal(txRef, tx?.to)
+  useReveal(anyRef, anyOut?.to)
+  /** The same NLLB-200 translator, for any text a visitor types: a sign, a menu, a message. */
+  async function translateAny(to: string) {
+    if (!anyText.trim()) return
+    setAnyOut({ to, text: 'busy' })
+    const out = await translate(anyText.trim(), to, (soFar) => setAnyOut({ to, text: soFar }))
+    setAnyOut({ to, text: out })
+  }
   // start downloading the reader (~10 MB, cached after the first visit) while the tourist frames the photo
   useEffect(() => { const id = setTimeout(() => { ocrWorker().catch(() => {}) }, 400); return () => clearTimeout(id) }, [])
 
@@ -170,6 +182,28 @@ export default function BoardReader() {
           </div>
         </Card>
       )}
+      <Card className="p-4">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2 text-[15px] font-semibold"><Languages size={16} className="text-lake" />{L(T.anyTitle)}</div>
+          <V1Tag />
+        </div>
+        <p className="mt-1 text-[13px] leading-snug text-ink-2">{L(T.anySub)}</p>
+        <textarea value={anyText} onChange={(e) => setAnyText(e.target.value)} rows={2}
+          className="mt-2 w-full resize-none rounded-xl border border-line bg-paper p-3 text-[15px] outline-none focus:border-lake" />
+        <div className="mt-2 flex flex-wrap gap-1.5">
+          {TRANSLATE_TO.map((t) => (
+            <button key={t.code} onClick={() => translateAny(t.code)} disabled={!anyText.trim() || anyOut?.text === 'busy'}
+              className={`rounded-full px-3 py-1.5 text-[13px] font-semibold ${anyOut?.to === t.code ? 'bg-lake text-white' : 'border border-line text-ink'} disabled:opacity-50`}>{t.label}</button>
+          ))}
+        </div>
+        <div ref={anyRef}>
+          {anyOut?.text === 'busy' && <div className="mt-3 flex items-center gap-2 text-[14px] text-ink-2"><Loader2 size={15} className="animate-spin" />{L(T.translating)}</div>}
+          {anyOut && anyOut.text === null && <p className="mt-3 rounded-xl bg-sand-soft p-3 text-[13.5px] text-ink">{L(T.noServer)}</p>}
+          {anyOut && typeof anyOut.text === 'string' && anyOut.text !== 'busy' && (
+            <p className="rise mt-3 whitespace-pre-line rounded-xl bg-mist p-3 text-[15px] leading-relaxed">{anyOut.text}</p>
+          )}
+        </div>
+      </Card>
     </div>
   )
 }

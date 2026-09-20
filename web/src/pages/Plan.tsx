@@ -19,6 +19,7 @@ const TX = {
   sub: { en: 'The planner tries every visiting order and picks the one with the least travel, crowds and midday heat on stairs.', kn: 'ಪ್ರತಿಯೊಂದು ಭೇಟಿ ಕ್ರಮವನ್ನೂ ಪರೀಕ್ಷಿಸಿ, ಕಡಿಮೆ ಪ್ರಯಾಣ, ಕಡಿಮೆ ಜನಸಂದಣಿ ಮತ್ತು ಮಧ್ಯಾಹ್ನದ ಬಿಸಿಲಿನಲ್ಲಿ ಕಡಿಮೆ ಮೆಟ್ಟಿಲು ಇರುವ ಕ್ರಮವನ್ನು ಆರಿಸುತ್ತದೆ.', hi: 'प्लानर हर क्रम आज़माकर वह चुनता है जिसमें सबसे कम यात्रा, भीड़ और दोपहर की धूप में सीढ़ियाँ हों।' },
   when: { en: 'Starting', kn: 'ಆರಂಭ', hi: 'शुरुआत' }, days: { en: 'Days', kn: 'ದಿನಗಳು', hi: 'दिन' },
   interests: { en: 'I love', kn: 'ನನಗೆ ಇಷ್ಟ', hi: 'मुझे पसंद है' }, who: { en: 'Who is travelling', kn: 'ಯಾರು ಪ್ರಯಾಣಿಸುತ್ತಿದ್ದಾರೆ', hi: 'कौन यात्रा कर रहा है' },
+  greener2: { en: 'Lower carbon', kn: 'ಕಡಿಮೆ ಇಂಗಾಲ', hi: 'कम कार्बन' },
   how: { en: 'Getting around', kn: 'ಪ್ರಯಾಣದ ವಿಧಾನ', hi: 'आने-जाने का तरीका' }, go: { en: 'Build my plan', kn: 'ಯೋಜನೆ ರಚಿಸಿ', hi: 'योजना बनाएँ' },
   day: { en: 'Day', kn: 'ದಿನ', hi: 'दिन' }, lunch: { en: 'Lunch', kn: 'ಮಧ್ಯಾಹ್ನದ ಊಟ', hi: 'दोपहर का खाना' },
   back: { en: 'Back to base', kn: 'ಮರಳಿ ತಂಗುದಾಣಕ್ಕೆ', hi: 'वापस ठहरने की जगह' },
@@ -148,6 +149,7 @@ export default function Plan() {
               {([['car', Car, 'Car / taxi'], ['bus', Bus, 'KSRTC bus'], ['bike', Bike, 'Two-wheeler']] as const).map(([id, Icon, label]) => (
                 <Chip key={id} active={mode === id} onClick={() => setMode(id)}><Icon size={15} className="-mt-0.5 mr-1 inline" />{label}</Chip>
               ))}
+              <Chip active={mode === 'bus'} onClick={() => { setMode('bus'); setNl(null); setGo((g) => g + 1) }}><Leaf size={15} className="-mt-0.5 mr-1 inline" />{L(TX.greener2)}</Chip>
             </div>
           </div>
           <button onClick={() => { setNl(null); setGo((g) => g + 1) }} className="flex w-full items-center justify-center gap-2 rounded-xl bg-lake py-3.5 text-[16px] font-semibold text-white"><Sparkles size={18} />{L(TX.go)}</button>

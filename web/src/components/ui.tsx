@@ -51,6 +51,11 @@ export function DemoTag({ className = '' }: { className?: string }) {
   return <span title="Prices, ratings and hours are simulated for this prototype. Names and locations are real (OpenStreetMap)." className={`rounded bg-lamp-soft px-1.5 py-0.5 text-[11px] font-semibold text-[#8a6412] ${className}`}>{t('demoData')}</span>
 }
 
+/** Marks a module that ships at version 1 depth; the page says what version 2 adds. */
+export function V1Tag({ className = '' }: { className?: string }) {
+  return <span title="Version 1: works today, deeper in version 2." className={`rounded-full bg-lamp-soft px-2 py-0.5 text-[11px] font-bold uppercase tracking-[0.08em] text-[#8a6412] ${className}`}>v1</span>
+}
+
 export function Meter({ value, max, color = '#1f5e57' }: { value: number; max: number; color?: string }) {
   const pct = Math.max(0, Math.min(100, (value / max) * 100))
   return (

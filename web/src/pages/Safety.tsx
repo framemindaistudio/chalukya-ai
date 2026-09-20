@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
 import { useReveal } from '../lib/reveal'
 import { AlarmClock, CheckCircle2, Hospital, Loader2, MessageSquareText, Phone, Share2, Siren, ThermometerSun, TriangleAlert, WifiOff } from 'lucide-react'
-import { Card, Chip, Eyebrow, PageHead } from '../components/ui'
+import { Card, Chip, Eyebrow, PageHead, V1Tag } from '../components/ui'
 import { useLang } from '../lib/i18n'
 import { publish, onAlert, onDelivery, type Delivery } from '../lib/live'
 import { getPosition, zoneAt, ZONES } from '../lib/safety'
 import { HOSPITALS, placeById } from '../lib/data'
+import { dayForecast, capacityOf, OPEN_H } from '../lib/crowd'
+import { useNow } from '../lib/clock'
 import { haversineKm, fmtKm, mapsLink } from '../lib/geo'
 import { heatAdvice, useWeather } from '../lib/weather'
 
@@ -36,6 +38,9 @@ const TX = {
   contactSub: { en: 'Saved only on this phone. The SOS text goes to this number.', kn: 'ಈ ಫೋನ್‌ನಲ್ಲಿ ಮಾತ್ರ ಉಳಿಯುತ್ತದೆ. SOS ಸಂದೇಶ ಈ ಸಂಖ್ಯೆಗೆ ಹೋಗುತ್ತದೆ.', hi: 'सिर्फ़ इसी फ़ोन पर सेव होता है। SOS संदेश इसी नंबर पर जाएगा।' },
   save: { en: 'Save', kn: 'ಉಳಿಸಿ', hi: 'सेव करें' },
   saved: { en: 'Saved', kn: 'ಉಳಿಸಲಾಗಿದೆ', hi: 'सेव हो गया' },
+  timing: { en: 'Safer hours today', kn: 'ಇಂದು ಸುರಕ್ಷಿತ ಸಮಯ', hi: 'आज के सुरक्षित घंटे' },
+  timingSub: { en: 'Neither crowded nor deserted, from this site’s forecast. Useful when you are visiting alone, with elders or with small children.', kn: 'ಈ ತಾಣದ ಮುನ್ಸೂಚನೆಯಿಂದ: ಹೆಚ್ಚು ಜನವೂ ಅಲ್ಲ, ನಿರ್ಜನವೂ ಅಲ್ಲ. ಒಬ್ಬರೇ, ಹಿರಿಯರೊಂದಿಗೆ ಅಥವಾ ಮಕ್ಕಳೊಂದಿಗೆ ಹೋಗುವವರಿಗೆ ಉಪಯುಕ್ತ.', hi: 'इस स्थल के पूर्वानुमान से: न ज़्यादा भीड़, न सुनसान। अकेले, बुज़ुर्गों या छोटे बच्चों के साथ जाने पर उपयोगी।' },
+  timingNone: { en: 'This site is closed or quiet all day today.', kn: 'ಇಂದು ಈ ತಾಣ ಮುಚ್ಚಿದೆ ಅಥವಾ ದಿನವಿಡೀ ನಿರ್ಜನ.', hi: 'आज यह स्थल बंद है या दिन भर सुनसान है।' },
   offline: { en: 'You are offline. SOS still works: call 112 and text your location; the alert reaches the control room when the signal returns.', kn: 'ನೀವು ಆಫ್‌ಲೈನ್‌ನಲ್ಲಿದ್ದೀರಿ. SOS ಕೆಲಸ ಮಾಡುತ್ತದೆ: 112 ಗೆ ಕರೆ ಮಾಡಿ, ಸ್ಥಳ SMS ಮಾಡಿ; ಸಿಗ್ನಲ್ ಬಂದಾಗ ಎಚ್ಚರಿಕೆ ನಿಯಂತ್ರಣ ಕೊಠಡಿಗೆ ತಲುಪುತ್ತದೆ.', hi: 'आप ऑफ़लाइन हैं। SOS फिर भी काम करता है: 112 पर कॉल करें, लोकेशन SMS करें; सिग्नल लौटते ही अलर्ट कंट्रोल रूम पहुँचेगा।' },
 }
 const CONTACT_KEY = 'chalukya.sosContact'
@@ -79,6 +84,16 @@ export default function Safety() {
     return () => clearInterval(id)
   }, [timer]) // eslint-disable-line react-hooks/exhaustive-deps
 
+  const at = useNow()
+  // hours when the site is busy enough not to feel lonely, but not crowded
+  const safeHours = (() => {
+    const f = dayForecast(near, at); if (!f) return [] as string[]
+    const cap = capacityOf(near)
+    const hrs = f.hourly.map((v, i) => ({ h: OPEN_H + i, r: v / cap })).filter((x) => x.r >= 0.1 && x.r <= 0.6)
+    return hrs.sort((a, b) => Math.abs(a.r - 0.3) - Math.abs(b.r - 0.3)).slice(0, 4)   // busy enough to feel safe, quiet enough to enjoy
+      .sort((a, b) => a.h - b.h).map((x) => `${x.h > 12 ? x.h - 12 : x.h} ${x.h >= 12 ? 'PM' : 'AM'}`)
+  })()
+
   const ref = gps ?? placeById[near]
   const zone = gps ? zoneAt(gps.lat, gps.lng) : null
   const hospitals = [...HOSPITALS].sort((a, b) => haversineKm(ref, a) - haversineKm(ref, b)).slice(0, 2)
@@ -118,6 +133,15 @@ export default function Safety() {
         {zone && (
           <Card className="flex gap-3 border border-sand/40 bg-sand-soft p-4 text-sand"><TriangleAlert className="shrink-0" /><div><b>{L(TX.youAreIn)}</b><p className="text-[14px] text-ink">{zone[lang]}</p></div></Card>
         )}
+
+        <Card className="p-4">
+          <div className="flex items-center justify-between"><Eyebrow>{L(TX.timing)}</Eyebrow><V1Tag /></div>
+          <p className="mt-1 text-[13.5px] leading-snug text-ink-2">{L(TX.timingSub)}</p>
+          <div className="mt-2 flex flex-wrap gap-1.5">
+            {safeHours.length ? safeHours.map((h) => <span key={h} className="num rounded-full bg-lake-soft px-2.5 py-1 text-[13px] font-semibold text-lake">{h}</span>)
+              : <span className="text-[13.5px] text-ink-2">{L(TX.timingNone)}</span>}
+          </div>
+        </Card>
 
         {!sos ? (
           <Card className="p-5 text-center">

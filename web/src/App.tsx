@@ -10,6 +10,7 @@ const Scan = lazy(() => import('./pages/Scan'))
 const Ask = lazy(() => import('./pages/Ask'))
 const Plan = lazy(() => import('./pages/Plan'))
 const Stay = lazy(() => import('./pages/Stay'))
+const Report = lazy(() => import('./pages/Report'))
 const Food = lazy(() => import('./pages/Food'))
 const Parking = lazy(() => import('./pages/Parking'))
 const Safety = lazy(() => import('./pages/Safety'))
@@ -39,6 +40,7 @@ export default function App() {
               <Route path="parking" element={<Parking />} />
               <Route path="safety" element={<Safety />} />
               <Route path="local" element={<Local />} />
+              <Route path="report" element={<Report />} />
               <Route path="how" element={<HowAI />} />
               <Route path="access" element={<Access />} />
               <Route path="place/:id" element={<PlaceDetail />} />

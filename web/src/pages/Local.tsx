@@ -2,9 +2,10 @@ import { useRef, useState } from 'react'
 import { useReveal } from '../lib/reveal'
 import { Link } from 'react-router'
 import { BadgeCheck, CookingPot, Mountain, Scissors, Store, Users } from 'lucide-react'
-import { Card, Chip, Eyebrow, PageHead } from '../components/ui'
+import { Card, Chip, Eyebrow, PageHead, V1Tag } from '../components/ui'
 import { useLang } from '../lib/i18n'
 import { placeById } from '../lib/data'
+import { haversineKm, fmtKm } from '../lib/geo'
 import { publish } from '../lib/live'
 
 const TX = {
@@ -17,6 +18,9 @@ const TX = {
   name: { en: 'Business name', kn: 'ವ್ಯಾಪಾರದ ಹೆಸರು', hi: 'व्यापार का नाम' }, phone: { en: 'Phone', kn: 'ಫೋನ್', hi: 'फ़ोन' }, town: { en: 'Town', kn: 'ಊರು', hi: 'शहर' },
   submit: { en: 'Submit for verification', kn: 'ಪರಿಶೀಲನೆಗೆ ಸಲ್ಲಿಸಿ', hi: 'सत्यापन के लिए भेजें' }, done: { en: 'Submitted. The district tourism office will verify and call you.', kn: 'ಸಲ್ಲಿಸಲಾಗಿದೆ. ಜಿಲ್ಲಾ ಪ್ರವಾಸೋದ್ಯಮ ಕಚೇರಿ ಪರಿಶೀಲಿಸಿ ಕರೆ ಮಾಡುತ್ತದೆ.', hi: 'भेज दिया। ज़िला पर्यटन कार्यालय सत्यापन कर आपको कॉल करेगा।' },
   guides: { en: 'Pravasi Mitra guides', kn: 'ಪ್ರವಾಸಿ ಮಿತ್ರ ಮಾರ್ಗದರ್ಶಿಗಳು', hi: 'प्रवासी मित्र गाइड' },
+  greenTitle: { en: 'Green declarations (stays)', kn: 'ಪರಿಸರ ಘೋಷಣೆ (ವಸತಿ)', hi: 'हरित घोषणाएँ (ठहराव)' },
+  nearTitle: { en: 'Crafts near a site', kn: 'ತಾಣದ ಹತ್ತಿರದ ಕರಕುಶಲ', hi: 'स्थल के पास शिल्प' },
+  nearSub: { en: 'Pick where you will be and the crafts are ordered by how far their town is.', kn: 'ನೀವು ಇರುವ ತಾಣ ಆರಿಸಿ; ಕರಕುಶಲಗಳ ಊರಿನ ದೂರದ ಪ್ರಕಾರ ಕ್ರಮ.', hi: 'आप कहाँ होंगे चुनिए; शिल्प उनके शहर की दूरी के क्रम में आते हैं।' },
   guidesSub: { en: 'The district has placed Pravasi Mitra tourist helpers at the UNESCO site and major monuments. Look for them at the entrance, or ask the guide in this app.', kn: 'ಯುನೆಸ್ಕೋ ತಾಣ ಮತ್ತು ಪ್ರಮುಖ ಸ್ಮಾರಕಗಳಲ್ಲಿ ಜಿಲ್ಲಾಡಳಿತ ಪ್ರವಾಸಿ ಮಿತ್ರರನ್ನು ನೇಮಿಸಿದೆ. ಪ್ರವೇಶದ್ವಾರದಲ್ಲಿ ಅವರನ್ನು ಹುಡುಕಿ.', hi: 'ज़िले ने यूनेस्को स्थल और प्रमुख स्मारकों पर प्रवासी मित्र नियुक्त किए हैं। उन्हें प्रवेश द्वार पर खोजें।' },
 }
 const CRAFTS = [
@@ -31,19 +35,30 @@ const EXPERIENCES = [
   { icon: Mountain, en: 'Intro to rock climbing with a certified instructor', kn: 'ಪ್ರಮಾಣಿತ ತರಬೇತುದಾರರೊಂದಿಗೆ ಬಂಡೆ ಹತ್ತುವ ಪರಿಚಯ', hi: 'प्रमाणित प्रशिक्षक के साथ रॉक क्लाइंबिंग परिचय' },
 ]
 const KINDS = ['Homestay', 'Eatery', 'Craft shop', 'Guide', 'Transport']
+const NEAR_SITES = ['badami_caves', 'pattadakal', 'aihole', 'kudalasangama']
+const GREEN = [
+  { id: 'solar', en: 'Solar water heating', kn: 'ಸೌರ ನೀರು ಕಾಯಿಸುವಿಕೆ', hi: 'सौर जल तापन' },
+  { id: 'rain', en: 'Rainwater harvesting', kn: 'ಮಳೆನೀರು ಕೊಯ್ಲು', hi: 'वर्षा जल संचयन' },
+  { id: 'refill', en: 'Drinking-water refill', kn: 'ಕುಡಿಯುವ ನೀರು ಮರುಭರ್ತಿ', hi: 'पेयजल रीफ़िल' },
+  { id: 'noplastic', en: 'No single-use plastic', kn: 'ಏಕಬಳಕೆ ಪ್ಲಾಸ್ಟಿಕ್ ಇಲ್ಲ', hi: 'सिंगल-यूज़ प्लास्टिक नहीं' },
+]
 
 export default function Local() {
   const { L, lang } = useLang()
   const [kind, setKind] = useState('Homestay')
   const [form, setForm] = useState({ name: '', phone: '', town: 'Badami' })
   const [done, setDone] = useState(false)
+  const [nearSite, setNearSite] = useState('badami_caves')
+  const [green, setGreen] = useState<string[]>([])
+  // crafts ordered by how far their town is from where the visitor will be
+  const craftsNear = [...CRAFTS].map((c) => ({ c, km: haversineKm(placeById[nearSite], placeById[c.id]) })).sort((a, b) => a.km - b.km)
   const doneRef = useRef<HTMLParagraphElement>(null)
   useReveal(doneRef, done)
   function submit(e: React.FormEvent) {
     e.preventDefault()
     if (!form.name.trim()) return
-    publish({ type: 'anomaly', severity: 'info', source: 'tourist', title: `New local listing to verify: ${form.name} (${kind}, ${form.town})`, detail: form.phone ? `phone ${form.phone}` : undefined })
-    fetch('/api/business', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ ...form, kind }) }).catch(() => {})
+    publish({ type: 'anomaly', severity: 'info', source: 'tourist', title: `New local listing to verify: ${form.name} (${kind}, ${form.town})`, detail: [form.phone ? `phone ${form.phone}` : '', green.length ? `declares: ${green.join(', ')}` : ''].filter(Boolean).join(' · ') || undefined, data: { kind, green } })
+    fetch('/api/business', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ ...form, kind, green }) }).catch(() => {})
     setDone(true)
   }
   return (
@@ -51,11 +66,15 @@ export default function Local() {
       <PageHead title={L(TX.title)} sub={L(TX.sub)} />
       <div className="space-y-4 px-4">
         <section>
-          <Eyebrow className="mb-2">{L(TX.crafts)}</Eyebrow>
-          <div className="space-y-2.5">{CRAFTS.map((c) => (
+          <div className="mb-2 flex items-center justify-between"><Eyebrow>{L(TX.nearTitle)}</Eyebrow><V1Tag /></div>
+          <p className="mb-2 text-[13px] text-ink-2">{L(TX.nearSub)}</p>
+          <div className="no-scrollbar mb-2.5 flex gap-2 overflow-x-auto">
+            {NEAR_SITES.map((id) => <Chip key={id} active={nearSite === id} onClick={() => setNearSite(id)}>{L(placeById[id].name).split(':')[0]}</Chip>)}
+          </div>
+          <div className="space-y-2.5">{craftsNear.map(({ c, km }) => (
             <Link key={c.id} to={`/place/${c.id}`} className="card flex gap-3 p-4">
               <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-lamp-soft text-[#8a6412]"><c.icon size={19} /></span>
-              <div><div className="text-[15.5px] font-semibold">{c[lang]}</div><div className="text-[13.5px] text-ink-2">{c.d[lang]}</div><div className="mt-0.5 text-[12px] text-ink-3">{placeById[c.id]?.town}</div></div>
+              <div><div className="text-[15.5px] font-semibold">{c[lang]}</div><div className="text-[13.5px] text-ink-2">{c.d[lang]}</div><div className="mt-0.5 text-[12px] text-ink-3"><b className="num text-ink-2">{fmtKm(km)}</b> · {placeById[c.id]?.town}</div></div>
             </Link>
           ))}</div>
         </section>
@@ -78,6 +97,14 @@ export default function Local() {
             <form onSubmit={submit} className="mt-3 space-y-3">
               <div className="no-scrollbar flex gap-2 overflow-x-auto">{KINDS.map((k) => <Chip key={k} active={kind === k} onClick={() => setKind(k)}>{k}</Chip>)}</div>
               <input required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder={L(TX.name)} className="h-11 w-full rounded-xl border border-line bg-paper px-3 text-[15px] outline-none focus:border-lake" />
+              {kind === 'Homestay' && (
+                <div className="rounded-xl bg-mist p-3">
+                  <div className="flex items-center justify-between"><Eyebrow>{L(TX.greenTitle)}</Eyebrow><V1Tag /></div>
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    {GREEN.map((g) => <Chip key={g.id} active={green.includes(g.id)} onClick={() => setGreen((v) => (v.includes(g.id) ? v.filter((x) => x !== g.id) : [...v, g.id]))}>{g[lang]}</Chip>)}
+                  </div>
+                </div>
+              )}
               <div className="grid grid-cols-2 gap-2">
                 <input value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder={L(TX.phone)} inputMode="tel" className="h-11 rounded-xl border border-line bg-paper px-3 text-[15px] outline-none focus:border-lake" />
                 <select value={form.town} onChange={(e) => setForm({ ...form, town: e.target.value })} aria-label={L(TX.town)} className="h-11 rounded-xl border border-line bg-paper px-3 text-[15px]">

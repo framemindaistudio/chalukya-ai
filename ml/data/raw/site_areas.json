@@ -1,0 +1,30 @@
+{
+ "badami_caves": {
+  "area_m2": 631,
+  "from": null
+ },
+ "bhutanatha": {
+  "area_m2": 86,
+  "from": "Koshtaraya Temple"
+ },
+ "pattadakal": {
+  "area_m2": 570,
+  "from": "Virupaksha temple"
+ },
+ "aihole": {
+  "area_m2": 836,
+  "from": null
+ },
+ "banashankari": {
+  "area_m2": 0,
+  "from": null
+ },
+ "mahakuta": {
+  "area_m2": 0,
+  "from": null
+ },
+ "kudalasangama": {
+  "area_m2": 0,
+  "from": null
+ }
+}
