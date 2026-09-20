@@ -6,8 +6,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400..800&family=Tiro+Kannada&family=Noto+Sans+Kannada:wght@500&family=Noto+Sans+Devanagari:wght@500&display=swap" rel="stylesheet">
 <style>
-  /* A3 landscape, folded down the middle: each half is a whole A4 page, and nothing crosses the fold.
-     Left half: the app a visitor opens. Right half: the district's side and the evidence. */
+  /* Sheet 1 of 2, A3 landscape folded down the middle: the project, shown rather than explained.
+     Left half: what a visitor opens. Right half: the rest of the app and what the district sees. */
   :root { --night:#0F1A17; --night2:#16241F; --mist:#EEF3F0; --paper:#FBFCFA; --ink:#14211D; --ink2:#4A5A54; --ink3:#5D6C66;
           --lake:#1F5E57; --lake-soft:#D5E6E1; --lamp:#D9A441; --lamp-l:#F3C56B; --lamp-d:#8A6412; --sand:#C0562F; --line:#D6E0DB; }
   @page { size: 420mm 297mm; margin: 0; }
@@ -17,165 +17,168 @@
          -webkit-print-color-adjust: exact; print-color-adjust: exact; overflow: hidden; display: grid; grid-template-columns: 210mm 210mm; }
   .panel { position: relative; width: 210mm; height: 297mm; overflow: hidden; display: flex; flex-direction: column; }
   .panel.right { border-left: .35mm dashed #a9bdb5; }
-  .foldmark { position: absolute; top: 3mm; left: 2.5mm; font-size: 6pt; letter-spacing: .3em;
-              text-transform: uppercase; color: #9fb3ab; background: var(--mist); padding: 0 2mm; }
+  .foldmark { position: absolute; top: 3mm; left: 2.5mm; font-size: 6pt; letter-spacing: .3em; text-transform: uppercase; color: #9fb3ab; }
   .foldmark.b { top: auto; bottom: 3mm; }
 
-  /* ── left: the visitor's app ── */
+  /* header */
   .top { background: radial-gradient(120% 140% at 100% 0%, #1d3a33 0%, var(--night) 55%); color: var(--paper);
-         padding: 9mm 10mm 8mm; display: grid; grid-template-columns: 1fr 46mm; gap: 7mm; align-items: center; }
+         padding: 8mm 10mm 7mm; display: grid; grid-template-columns: 1fr 44mm; gap: 7mm; align-items: center; }
   .brand { display: flex; align-items: center; gap: 4mm; }
-  .tile { width: 14mm; height: 14mm; border-radius: 3.8mm; background: var(--paper); display: grid; place-items: center; box-shadow: 0 3mm 8mm -3mm rgba(217,164,65,.6); }
-  .tile img { width: 10mm; height: 10mm; object-fit: contain; }
-  .event { font-size: 7.4pt; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--lamp-l); }
-  h1 { font-size: 32pt; font-weight: 800; letter-spacing: -.03em; line-height: 1; margin-top: 3.5mm; }
-  h1 .kn { font-family: 'Tiro Kannada', serif; font-weight: 400; color: var(--lamp-l); font-size: 23pt; letter-spacing: 0; margin-left: 3mm; }
-  .tag { font-size: 10.6pt; line-height: 1.35; color: #DCE8E3; margin-top: 2.6mm; max-width: 108mm; }
-  .qr { background: var(--paper); border-radius: 4.5mm; padding: 3mm; text-align: center; color: var(--ink); }
-  .qr img { width: 40mm; height: 40mm; display: block; }
-  .qr b { display: block; font-size: 8.6pt; margin-top: 1.4mm; }
-  .qr span { display: block; font-size: 6.8pt; color: var(--ink2); margin-top: .5mm; line-height: 1.3; }
+  .tile { width: 13mm; height: 13mm; border-radius: 3.6mm; background: var(--paper); display: grid; place-items: center; box-shadow: 0 3mm 8mm -3mm rgba(217,164,65,.6); }
+  .tile img { width: 9.4mm; height: 9.4mm; object-fit: contain; }
+  .event { font-size: 7.2pt; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--lamp-l); }
+  h1 { font-size: 30pt; font-weight: 800; letter-spacing: -.03em; line-height: 1; margin-top: 3mm; }
+  h1 .kn { font-family: 'Tiro Kannada', serif; font-weight: 400; color: var(--lamp-l); font-size: 21pt; letter-spacing: 0; margin-left: 3mm; }
+  .tag { font-size: 10pt; line-height: 1.35; color: #DCE8E3; margin-top: 2.4mm; max-width: 106mm; }
+  .tag b { color: var(--lamp-l); font-weight: 700; }
+  .qr { background: var(--paper); border-radius: 4.2mm; padding: 2.6mm; text-align: center; color: var(--ink); }
+  .qr img { width: 38mm; height: 38mm; display: block; }
+  .qr b { display: block; font-size: 8.2pt; margin-top: 1.2mm; }
+  .qr span { display: block; font-size: 6.6pt; color: var(--ink2); margin-top: .4mm; line-height: 1.3; }
 
-  .phones { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3mm; padding: 5mm 10mm 0; }
-  .phone { text-align: center; }
-  .phone .f { background: var(--ink); border-radius: 4.6mm; padding: 1.1mm; box-shadow: 0 3mm 6mm -3mm rgba(20,33,29,.45); }
-  .phone img { width: 100%; aspect-ratio: 780 / 1688; object-fit: cover; border-radius: 3.6mm; display: block; }
-  .phone p { font-size: 7pt; color: var(--ink2); margin-top: 1.5mm; line-height: 1.25; }
-  .phone p b { color: var(--ink); display: block; font-size: 7.8pt; }
-
-  h2 { font-size: 7.4pt; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--lake); margin: 5mm 10mm 2.2mm; display: flex; align-items: baseline; gap: 2.5mm; }
+  h2 { font-size: 7.4pt; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--lake); margin: 4.6mm 10mm 2.2mm; display: flex; align-items: baseline; gap: 2.5mm; }
   h2 span { font-size: 6.6pt; letter-spacing: 0; text-transform: none; color: var(--ink3); font-weight: 500; }
+
+  /* screenshot galleries */
+  .shots { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2.6mm; padding: 0 10mm; }
+  .shot { text-align: center; }
+  .shot .f { background: var(--ink); border-radius: 3.8mm; padding: .9mm; box-shadow: 0 2.5mm 5mm -2.5mm rgba(20,33,29,.45); }
+  .shot img { width: 100%; aspect-ratio: 780 / 1688; object-fit: cover; border-radius: 3mm; display: block; }
+  .shot b { display: block; font-size: 7pt; margin-top: 1.4mm; line-height: 1.15; }
+  .shot span { display: block; font-size: 6.3pt; color: var(--ink2); line-height: 1.25; margin-top: .3mm; }
+
+  /* feature cards */
   .feats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.6mm; padding: 0 10mm; }
-  .feat { background: var(--paper); border: .25mm solid var(--line); border-radius: 2.4mm; padding: 1.7mm 2.2mm; }
-  .feat b { font-size: 7.6pt; display: block; line-height: 1.2; }
-  .feat span { font-size: 6.6pt; color: var(--ink2); line-height: 1.3; display: block; margin-top: .4mm; }
-  .feat.v1 { background: #fdf7ea; border-color: #ecd9ab; }
-  .feat.v1 i { font-style: normal; font-size: 5.6pt; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--lamp-d);
-               background: var(--lamp-l); border-radius: 1mm; padding: .2mm 1mm; margin-left: 1.2mm; vertical-align: .6mm; }
+  .feat { background: var(--paper); border: .25mm solid var(--line); border-radius: 2.4mm; padding: 2.1mm 2.4mm; }
+  .feat b { font-size: 7.5pt; display: block; line-height: 1.2; }
+  .feat span { font-size: 6.5pt; color: var(--ink2); line-height: 1.3; display: block; margin-top: .4mm; }
+  .feat i { font-style: normal; font-size: 5.4pt; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--lamp-d);
+            background: var(--lamp-l); border-radius: 1mm; padding: .2mm 1mm; margin-left: 1mm; vertical-align: .5mm; }
 
-  .band { margin: 5mm 10mm 0; background: var(--night); color: var(--paper); border-radius: 3mm; padding: 3mm 4mm; display: grid; grid-template-columns: repeat(5, 1fr); gap: 3mm; }
-  .band b { font-size: 13.5pt; font-weight: 800; color: var(--lamp-l); display: block; letter-spacing: -.02em; line-height: 1.05; }
-  .band span { font-size: 6.2pt; color: #BFD8D5; line-height: 1.25; display: block; margin-top: .5mm; }
+  .band { margin: 4.4mm 10mm 0; background: var(--night); color: var(--paper); border-radius: 3mm; padding: 3mm 4mm; display: grid; grid-template-columns: repeat(5, 1fr); gap: 3mm; }
+  .band b { font-size: 13pt; font-weight: 800; color: var(--lamp-l); display: block; letter-spacing: -.02em; line-height: 1.05; }
+  .band span { font-size: 6.1pt; color: #BFD8D5; line-height: 1.25; display: block; margin-top: .5mm; }
 
-  /* ── right: the district and the evidence ── */
-  .rtop { background: radial-gradient(120% 200% at 0% 0%, #1d3a33 0%, var(--night) 60%); color: var(--paper); padding: 5mm 10mm;
+  .steps { margin: 4mm 10mm 0; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3mm; }
+  .steps > div { background: var(--paper); border: .25mm solid var(--line); border-radius: 2.6mm; padding: 3mm 3.2mm; display: flex; gap: 2.6mm; align-items: flex-start; }
+  .steps > div > div { flex: 1; min-width: 0; }
+  .steps em { font-style: normal; font-size: 12pt; font-weight: 800; color: var(--lamp); line-height: 1; }
+  .steps b { display: block; font-size: 7.4pt; line-height: 1.2; }
+  .steps span { display: block; font-size: 6.5pt; color: var(--ink2); line-height: 1.3; margin-top: .5mm; }
+
+  /* right half */
+  .rtop { background: radial-gradient(120% 200% at 0% 0%, #1d3a33 0%, var(--night) 60%); color: var(--paper); padding: 4.6mm 10mm;
           display: flex; align-items: center; justify-content: space-between; gap: 6mm; }
   .rtop .l { display: flex; align-items: center; gap: 3.5mm; }
-  .rtop .t { width: 9mm; height: 9mm; border-radius: 2.6mm; background: var(--paper); display: grid; place-items: center; }
-  .rtop .t img { width: 6.4mm; height: 6.4mm; object-fit: contain; }
-  .rtop b { font-size: 10.5pt; font-weight: 800; letter-spacing: -.01em; }
-  .rtop .kn { font-family: 'Tiro Kannada', serif; font-weight: 400; color: var(--lamp-l); font-size: 9pt; margin-left: 1.6mm; }
-  .rtop span { font-size: 7pt; color: #BFD8D5; display: block; margin-top: .6mm; }
-  .rtop .u { font-size: 7.6pt; font-weight: 700; color: var(--lamp-l); }
-  .shot { margin: 0 10mm; border-radius: 3mm; overflow: hidden; border: .3mm solid #cbd9d3; }
-  .shot img { width: 100%; display: block; }
-  .cap { font-size: 6.6pt; color: var(--ink3); margin: 1.4mm 10mm 0; }
-  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6mm 4mm; padding: 0 10mm; }
-  .two li { font-size: 7.2pt; line-height: 1.35; color: var(--ink2); list-style: none; padding-left: 3.2mm; position: relative; }
+  .rtop .t { width: 8.6mm; height: 8.6mm; border-radius: 2.4mm; background: var(--paper); display: grid; place-items: center; }
+  .rtop .t img { width: 6.2mm; height: 6.2mm; object-fit: contain; }
+  .rtop b { font-size: 10pt; font-weight: 800; }
+  .rtop span { font-size: 6.8pt; color: #BFD8D5; display: block; margin-top: .5mm; }
+  .rtop .u { font-size: 7.4pt; font-weight: 700; color: var(--lamp-l); }
+
+  .wide { margin: 0 10mm; border-radius: 3mm; overflow: hidden; border: .3mm solid #cbd9d3; }
+  .wide img { width: 100%; display: block; }
+  .cap { font-size: 6.4pt; color: var(--ink3); margin: 1.2mm 10mm 0; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4mm 4mm; padding: 0 10mm; margin-top: 2mm; }
+  .two li { font-size: 7pt; line-height: 1.35; color: var(--ink2); list-style: none; padding-left: 3.2mm; position: relative; }
   .two li:before { content: ""; position: absolute; left: 0; top: 1.5mm; width: 1.4mm; height: 1.4mm; border-radius: 50%; background: var(--lake); }
   .two li b { color: var(--ink); }
-  table { width: calc(100% - 20mm); margin: 0 10mm; border-collapse: collapse; font-size: 7pt; }
-  th { text-align: left; font-size: 6.4pt; letter-spacing: .06em; text-transform: uppercase; color: var(--ink3); font-weight: 700; padding-bottom: 1mm; }
-  td { padding: 1.1mm 0; border-top: .25mm solid var(--line); vertical-align: top; line-height: 1.25; }
-  td.r { color: var(--lake); font-weight: 700; }
-  td.b { color: var(--ink3); }
-  .cov { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.4mm; padding: 0 10mm; }
-  .cov div { background: var(--paper); border: .25mm solid var(--line); border-radius: 2mm; padding: 1.3mm 2mm; font-size: 6.7pt; line-height: 1.2; display: flex; align-items: center; gap: 1.6mm; }
-  .cov i { font-style: normal; font-weight: 800; color: var(--lake); font-size: 7.4pt; }
+
+  .cov { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.3mm; padding: 0 10mm; }
+  .cov div { background: var(--paper); border: .25mm solid var(--line); border-radius: 2mm; padding: 1.1mm 1.8mm; font-size: 6.5pt; line-height: 1.2; display: flex; align-items: center; gap: 1.4mm; }
+  .cov i { font-style: normal; font-weight: 800; color: var(--lake); font-size: 7.2pt; }
   .cov div.p { background: #fdf7ea; border-color: #ecd9ab; }
-  .cov div.p i { color: var(--lamp-d); font-size: 5.8pt; letter-spacing: .06em; text-transform: uppercase; }
+  .cov div.p i { color: var(--lamp-d); font-size: 5.6pt; letter-spacing: .06em; text-transform: uppercase; }
   .cov b { color: var(--ink3); font-weight: 700; font-variant-numeric: tabular-nums; }
-  .note { margin: 3.5mm 10mm 0; font-size: 6.8pt; color: var(--ink2); line-height: 1.4; }
+
+  .note { margin: 3mm 10mm 0; font-size: 6.6pt; color: var(--ink2); line-height: 1.4; }
   .note b { color: var(--ink); }
-  .foot { margin: auto 10mm 8mm; padding-top: 3mm; border-top: .3mm solid var(--line); display: grid; grid-template-columns: 1fr auto; gap: 6mm; font-size: 6.8pt; color: var(--ink2); line-height: 1.4; }
+  .foot { margin: auto 10mm 7mm; padding-top: 2.6mm; border-top: .3mm solid var(--line); display: grid; grid-template-columns: 1fr auto; gap: 6mm; font-size: 6.8pt; color: var(--ink2); line-height: 1.4; }
   .foot b { color: var(--ink); }
-  .foot .url { font-size: 8.4pt; font-weight: 700; color: var(--lake); }
+  .foot .u { font-size: 8.4pt; font-weight: 700; color: var(--lake); text-align: right; }
 </style>
 </head>
 <body>
 
-<!-- ─────────── LEFT: what a visitor gets ─────────── -->
+<!-- ─────────── LEFT: what a visitor opens ─────────── -->
 <section class="panel">
   <div class="top">
     <div>
       <div class="brand"><div class="tile"><img src="../brand/logo/chalukya-ai-logo-2048.png" alt="Chalukya AI logo"></div><div class="event">AI to Redesign Tourism · Bagalkote 2026</div></div>
       <h1>Chalukya AI<span class="kn">ಚಾಲುಕ್ಯ AI</span></h1>
-      <p class="tag">One offline-first AI companion for every visitor to Badami, Pattadakal, Aihole and the whole of Bagalkote district — and a live command centre for the people who run it.</p>
+      <p class="tag">One app for every visitor to Badami, Pattadakal, Aihole and the whole of Bagalkote district — in <b>Kannada, Hindi and English</b>, and it keeps working <b>inside the caves with no signal</b>.</p>
     </div>
-    <div class="qr"><img src="../brand/qr/chalukya-ai-qr.png" alt="QR code for chalukya-ai.vercel.app"><b>chalukya-ai.vercel.app</b><span>Scan, then tap “Take the 90-second tour”. No install; works offline.</span></div>
+    <div class="qr"><img src="../brand/qr/chalukya-ai-qr.png" alt="QR code for chalukya-ai.vercel.app"><b>chalukya-ai.vercel.app</b><span>Scan, then tap “Take the 90-second tour”. No install.</span></div>
   </div>
 
-  <div class="phones">
-    <div class="phone"><div class="f"><img src="../screens/v3/home.png" alt=""></div><p><b>Home and tour</b>live circuit, 90-second tour</p></div>
-    <div class="phone"><div class="f"><img src="../screens/v3/ask_plan.png" alt=""></div><p><b>Ask the guide</b>“6 hours, ₹3,000, two kids…”</p></div>
-    <div class="phone"><div class="f"><img src="../screens/v3/live_lens.png" alt=""></div><p><b>Live lens</b>names sculptures on camera</p></div>
-    <div class="phone"><div class="f"><img src="../screens/v3/sos_offline.png" alt=""></div><p><b>SOS, no signal</b>saved, call 112, text location</p></div>
+  <h2>Open it, and this is the day <span>every picture here is the live app</span></h2>
+  <div class="shots">
+    <div class="shot"><div class="f"><img src="../screens/v3/home.png" alt=""></div><b>The circuit, live</b><span>real roads, crowd, parking</span></div>
+    <div class="shot"><div class="f"><img src="../screens/v3/ask_plan.png" alt=""></div><b>Ask in your words</b><span>“6 hours, ₹3,000, two kids”</span></div>
+    <div class="shot"><div class="f"><img src="../screens/v3/plan.png" alt=""></div><b>A timed plan</b><span>around crowds and heat</span></div>
+    <div class="shot"><div class="f"><img src="../screens/v3/live_lens.png" alt=""></div><b>Live lens</b><span>names it on the camera</span></div>
+    <div class="shot"><div class="f"><img src="../screens/v3/sos_offline.png" alt=""></div><b>SOS, no signal</b><span>saved, 112, text location</span></div>
   </div>
 
-  <h2>What a visitor gets <span>Kannada · हिन्दी · English, on the phone, offline</span></h2>
+  <h2>What a visitor gets <span>all of it from one QR code, nothing to install</span></h2>
   <div class="feats">
-    <div class="feat"><b>Live circuit map</b><span>Real roads; crowd, free parking and drive time on every site.</span></div>
-    <div class="feat"><b>Ask the guide</b><span>Typed or spoken, three languages; answers only from verified sources.</span></div>
-    <div class="feat"><b>Crowd-smart planner</b><span>One sentence in, a timed plan out; shares to WhatsApp or Maps.</span></div>
-    <div class="feat"><b>Scan a sculpture</b><span>25 monuments named on the phone, offline, with the story.</span></div>
-    <div class="feat"><b>Live lens (AR)</b><span>The name appears over the camera view as you hold it.</span></div>
+    <div class="feat"><b>Live circuit map</b><span>Real roads between the three sites; how busy each is, and free parking.</span></div>
+    <div class="feat"><b>Ask the guide</b><span>Typed or spoken, three languages; answers from verified sources only.</span></div>
+    <div class="feat"><b>Crowd-smart planner</b><span>One sentence in, a timed day out; shares to WhatsApp or Maps.</span></div>
+    <div class="feat"><b>Scan a sculpture</b><span>25 monuments named on the phone, offline, with the story read aloud.</span></div>
+    <div class="feat"><b>Live lens (AR)</b><span>The name appears over the camera as you hold it up.</span></div>
     <div class="feat"><b>Read a board</b><span>Kannada, Hindi and English boards read, then translated into six.</span></div>
-    <div class="feat"><b>Translate anything<i>v1</i></b><span>A sign, a menu, a message — in your language.</span></div>
-    <div class="feat"><b>Stay and food</b><span>19 stays, 34 eateries ranked with the reason; local owners boosted.</span></div>
-    <div class="feat"><b>Green stays<i>v1</i></b><span>Owners declare solar, rainwater and refill; the district verifies.</span></div>
-    <div class="feat"><b>Smart parking</b><span>Free slots predicted for the time you will arrive.</span></div>
-    <div class="feat"><b>Safety and SOS</b><span>Hold 2 s; with no signal it saves, calls 112 and texts your location.</span></div>
-    <div class="feat"><b>Safer hours<i>v1</i></b><span>The hours that are neither deserted nor crowded today.</span></div>
-    <div class="feat"><b>Accessible Bagalkote</b><span>Step-free places and a plan that avoids stairs.</span></div>
-    <div class="feat"><b>Local livelihoods<i>v1</i></b><span>GI crafts by distance, Pravasi Mitras, and a portal for small businesses.</span></div>
+    <div class="feat"><b>Stay and eat local</b><span>19 stays and 34 eateries ranked with the reason; local owners first.</span></div>
+    <div class="feat"><b>Smart parking</b><span>Free spaces predicted for the time you will actually arrive.</span></div>
+    <div class="feat"><b>Safety and SOS</b><span>Hold two seconds; with no signal it saves, calls 112, texts your place.</span></div>
+    <div class="feat"><b>Accessible Bagalkote</b><span>Step-free places, shade, and a plan that avoids stairs.</span></div>
+    <div class="feat"><b>Local livelihoods<i>v1</i></b><span>GI crafts by distance, Pravasi Mitras, a portal for small businesses.</span></div>
     <div class="feat"><b>Report a problem<i>v1</i></b><span>Photograph a crack or litter; it reaches the district by site and topic.</span></div>
   </div>
 
+  <div class="steps">
+    <div><em>1</em><div><b>Scan the code</b><span>It opens in the browser. No app store, no sign-in, no ads.</span></div></div>
+    <div><em>2</em><div><b>Ask, plan or point the camera</b><span>In Kannada, Hindi or English — typed or spoken.</span></div></div>
+    <div><em>3</em><div><b>Walk into the caves</b><span>Recognition, stories, plans and SOS keep working with no signal.</span></div></div>
+  </div>
+
   <div class="band">
-    <div><b>85.8%</b><span>sculptures, unseen photographers</span></div>
-    <div><b>13.1%</b><span>footfall error (31.1% baseline)</span></div>
-    <div><b>±3.5</b><span>parking slots, 2 hours ahead</span></div>
-    <div><b>95.8%</b><span>questions understood</span></div>
-    <div><b>93.3%</b><span>review sentiment</span></div>
+    <div><b>25</b><span>sculptures known offline</span></div>
+    <div><b>17</b><span>places with stories and sources</span></div>
+    <div><b>3</b><span>languages, everywhere</span></div>
+    <div><b>6</b><span>languages a board translates into</span></div>
+    <div><b>0</b><span>rupees, ads or accounts</span></div>
   </div>
 </section>
 
-<!-- ─────────── RIGHT: the district, and the evidence ─────────── -->
+<!-- ─────────── RIGHT: the rest of the app, and the district ─────────── -->
 <section class="panel right">
   <div class="foldmark">fold</div><div class="foldmark b">fold</div>
 
   <div class="rtop">
     <div class="l"><div class="t"><img src="../brand/logo/chalukya-ai-logo-2048.png" alt=""></div>
-      <div><b>Chalukya AI<span class="kn" style="display:inline">ಚಾಲುಕ್ಯ AI</span></b><span>District command centre · Bagalkote District Tourism</span></div></div>
+      <div><b>The rest of the app, and the district's side</b><span>Sheet 1 of 2 · sheet 2 explains how every part is built</span></div></div>
     <div class="u">chalukya-ai.vercel.app</div>
   </div>
 
-  <h2 style="margin-top:6mm">For the district <span>one screen to run the day from</span></h2>
-  <div class="shot"><img src="../screens/v3/command_print.png" alt="Command centre: expected visitors, people on site, parking, alerts and the live map"></div>
-  <p class="cap">Live command centre during the morning of 25 September: expected visitors, people on site now, free parking, open alerts and feels-like heat.</p>
+  <h2>More of the app <span>boards, stories, stays, parking, reports</span></h2>
+  <div class="shots">
+    <div class="shot"><div class="f"><img src="../screens/v3/board_tx.png" alt=""></div><b>Board in Hindi</b><span>read, then translated</span></div>
+    <div class="shot"><div class="f"><img src="../screens/v3/place_crowd.png" alt=""></div><b>Quietest hour</b><span>crowd by hour, parking</span></div>
+    <div class="shot"><div class="f"><img src="../screens/v3/stay_open.png" alt=""></div><b>Why this stay</b><span>the reason on every card</span></div>
+    <div class="shot"><div class="f"><img src="../screens/v3/parking.png" alt=""></div><b>Parking ahead</b><span>free when you arrive</span></div>
+    <div class="shot"><div class="f"><img src="../screens/v3/report_stone.png" alt=""></div><b>Report a crack</b><span>marked on the phone</span></div>
+  </div>
 
-  <h2>What it does for the department</h2>
+  <h2>What the district sees <span>the same platform, from the control room</span></h2>
+  <div class="wide"><img src="../screens/v3/command_print.png" alt="Command centre with expected visitors, people on site, parking, alerts and the live map"></div>
+  <p class="cap">Live command centre: visitors expected, people on site now, free parking, open alerts, feels-like heat and the live map.</p>
   <ul class="two">
-    <li><b>Crowd against capacity</b> at six sites, hour by hour, with today's peak.</li>
-    <li><b>SOS and heat alerts</b> from visitors' phones, with one-tap respond.</li>
-    <li><b>Seven-day plan:</b> water, waste, bins and trips, toilets, Pravasi Mitras.</li>
-    <li><b>Carrying capacity</b> per site, with the assumptions on screen. <i>v1</i></li>
-    <li><b>CCTV people counting,</b> frames blurred; only the count is kept.</li>
-    <li><b>What visitors say:</b> sentiment and complaint topics per monument.</li>
+    <li><b>Crowd against capacity</b> at six sites, with today's peak hour.</li>
+    <li><b>SOS and heat alerts</b> from phones, with one-tap respond.</li>
+    <li><b>A week planned:</b> water, waste, bins, toilets, guides.</li>
+    <li><b>What visitors say,</b> by monument and by complaint.</li>
   </ul>
-
-  <h2>Tested on data the models never saw</h2>
-  <table>
-    <tr><th style="width:34%">Model</th><th style="width:28%">Tested on</th><th style="width:22%">Result</th><th style="width:16%">Baseline</th></tr>
-    <tr><td>Sculpture recognition</td><td>344 photos, unseen photographers</td><td class="r">85.8% top-1 · 98.0% site</td><td class="b">—</td></tr>
-    <tr><td>…with the “not sure” rule</td><td>same</td><td class="r">95.6% when it answers</td><td class="b">—</td></tr>
-    <tr><td>Footfall forecast</td><td>held-out Jan–Aug 2026</td><td class="r">13.1% error (WAPE)</td><td class="b">31.1% last year</td></tr>
-    <tr><td>Parking prediction</td><td>winter peak season</td><td class="r">±3.5 slots at 2 h</td><td class="b">±7.9 no change</td></tr>
-    <tr><td>Question understanding</td><td>unseen phrasings</td><td class="r">95.8% · phone 91.2%</td><td class="b">51.7% char model</td></tr>
-    <tr><td>Review sentiment</td><td>30 fresh reviews</td><td class="r">93.3% · topic F1 0.98</td><td class="b">73.3% char model</td></tr>
-    <tr><td>Heritage board reader</td><td>4 real ASI boards</td><td class="r">4 / 4 right monument</td><td class="b">—</td></tr>
-    <tr><td>Lighthouse, live site</td><td>mid-range phone, slow 4G</td><td class="r">100 · 100 · 100, perf 83–87</td><td class="b">—</td></tr>
-  </table>
 
   <h2>All twenty problem statements <span>11 complete · 9 at version 1, marked in the app</span></h2>
   <div class="cov">
@@ -201,13 +204,12 @@
     <div class="p"><i>v1</i><b>20</b> Carrying capacity</div>
   </div>
 
-  <p class="note"><b>Honest data.</b> Real: 1,960 CC-licensed monument photos from 202 photographers, ASI annual footfall, OpenStreetMap places and roads, the district tourism book and website, live weather. Simulated and labelled in the app: the hourly crowd shape (calibrated to ASI totals), parking sensor streams, business prices and ratings. Home photos are real photographs relit with AI. <b>Version 1</b> means working today at a simpler depth — the app says so on the screen, and every pipeline retrains unchanged on real ticket counts and sensors.</p>
+  <p class="note"><b>Honest by design.</b> Real: monument photographs from Wikimedia Commons, ASI's annual visitor numbers, OpenStreetMap places and roads, the district's tourism pages, live weather. Simulated and <b>labelled inside the app</b>: the hour-by-hour crowd shape (calibrated so the yearly totals match ASI), parking sensor streams, business prices. <b>Version 1</b> means working today at a simpler depth — the app says so on the screen. Sheet 2 gives the method, the datasets and the test scores behind every line above.</p>
 
   <div class="foot">
     <p>Built by <b>Chinmay R M &amp; Sandesh Joshi</b> · BVVS Basaveshwar Engineering College, Bagalkote<br>
-      React PWA on Vercel · FastAPI · LightGBM · PyTorch → ONNX on the phone · Tesseract.js · NLLB-200 (int8) · ESP32 firmware<br>
-      github.com/framemindaistudio/chalukya-ai</p>
-    <p style="text-align:right" class="url">chalukya-ai.vercel.app</p>
+      github.com/framemindaistudio/chalukya-ai · works offline after the first visit · no accounts, no ads, no tracking</p>
+    <p class="u">scan it,<br>try it now</p>
   </div>
 </section>
 </body>

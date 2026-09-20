@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Chalukya AI · how it is built (A3)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400..800&family=Tiro+Kannada&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  /* Sheet 2 of 2, A3 landscape folded down the middle: every feature with the plain answer, the technical
+     answer and where the proof sits in the repository. Left half: the visitor's app. Right half: the
+     district, the data sources, and the questions judges ask. */
+  :root { --night:#0F1A17; --night2:#16241F; --mist:#EEF3F0; --paper:#FBFCFA; --ink:#14211D; --ink2:#4A5A54; --ink3:#5D6C66;
+          --lake:#1F5E57; --lake-soft:#D5E6E1; --lamp:#D9A441; --lamp-l:#F3C56B; --lamp-d:#8A6412; --sand:#C0562F; --line:#D6E0DB; }
+  @page { size: 420mm 297mm; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 420mm; height: 297mm; }
+  body { font-family: 'DM Sans', Arial, sans-serif; color: var(--ink); background: var(--mist);
+         -webkit-print-color-adjust: exact; print-color-adjust: exact; overflow: hidden; display: grid; grid-template-columns: 210mm 210mm; }
+  .panel { position: relative; width: 210mm; height: 297mm; overflow: hidden; display: flex; flex-direction: column; }
+  .panel.right { border-left: .35mm dashed #a9bdb5; }
+  .foldmark { position: absolute; top: 3mm; left: 2.5mm; font-size: 6pt; letter-spacing: .3em; text-transform: uppercase; color: #9fb3ab; }
+  .foldmark.b { top: auto; bottom: 3mm; }
+
+  .head { background: radial-gradient(120% 200% at 0% 0%, #1d3a33 0%, var(--night) 60%); color: var(--paper); padding: 5mm 10mm;
+          display: flex; align-items: center; justify-content: space-between; gap: 6mm; }
+  .head .l { display: flex; align-items: center; gap: 3.5mm; }
+  .head .t { width: 9mm; height: 9mm; border-radius: 2.6mm; background: var(--paper); display: grid; place-items: center; }
+  .head .t img { width: 6.4mm; height: 6.4mm; object-fit: contain; }
+  .head b { font-size: 10.5pt; font-weight: 800; }
+  .head .kn { font-family: 'Tiro Kannada', serif; font-weight: 400; color: var(--lamp-l); font-size: 9pt; margin-left: 1.6mm; }
+  .head span { font-size: 7pt; color: #BFD8D5; display: block; margin-top: .6mm; }
+  .head .u { font-size: 7.6pt; font-weight: 700; color: var(--lamp-l); text-align: right; line-height: 1.5; }
+
+  h2 { font-size: 7.4pt; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--lake); margin: 4.5mm 10mm 2mm; display: flex; align-items: baseline; gap: 2.5mm; }
+  h2 span { font-size: 6.6pt; letter-spacing: 0; text-transform: none; color: var(--ink3); font-weight: 500; }
+  table { width: calc(100% - 20mm); margin: 0 10mm; border-collapse: collapse; }
+  th { text-align: left; font-size: 6.2pt; letter-spacing: .08em; text-transform: uppercase; color: var(--ink3); font-weight: 700; padding-bottom: 1mm; }
+  td { padding: 1.3mm 2mm 1.3mm 0; border-top: .25mm solid var(--line); vertical-align: top; font-size: 6.7pt; line-height: 1.3; color: var(--ink2); }
+  td:last-child { padding-right: 0; }
+  td.f { font-size: 7.3pt; font-weight: 700; color: var(--ink); line-height: 1.2; }
+  td.f i { font-style: normal; display: inline-block; font-size: 5.4pt; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+           color: var(--lamp-d); background: var(--lamp-l); border-radius: 1mm; padding: .2mm 1mm; margin-left: 1mm; vertical-align: .5mm; }
+  td.p { font-family: 'JetBrains Mono', monospace; font-size: 6pt; color: var(--lake); line-height: 1.35; }
+  td.p b { color: var(--ink); font-weight: 700; }
+  tr.alt td { background: rgba(255,255,255,.55); }
+
+  .src { margin: 0 10mm; display: grid; grid-template-columns: 1fr 1fr; gap: 1.4mm 5mm; }
+  .src li { list-style: none; font-size: 6.6pt; line-height: 1.35; color: var(--ink2); padding-left: 3mm; position: relative; }
+  .src li:before { content: ""; position: absolute; left: 0; top: 1.4mm; width: 1.3mm; height: 1.3mm; border-radius: 50%; background: var(--lamp); }
+  .src li b { color: var(--ink); }
+  .src li code { font-family: 'JetBrains Mono', monospace; font-size: 5.9pt; color: var(--lake); }
+
+  .qa { margin: 0 10mm; display: grid; grid-template-columns: 1fr 1fr; gap: 2mm 5mm; }
+  .qa div { background: var(--paper); border: .25mm solid var(--line); border-radius: 2.4mm; padding: 2mm 2.6mm; }
+  .qa b { display: block; font-size: 7pt; color: var(--ink); line-height: 1.25; }
+  .qa span { display: block; font-size: 6.5pt; color: var(--ink2); line-height: 1.35; margin-top: .8mm; }
+  .qa em { font-style: normal; color: var(--lake); font-weight: 700; }
+
+  .where { margin: 0 10mm; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3mm; }
+  .where div { border-radius: 2.6mm; padding: 2.4mm 3mm; }
+  .where .a { background: var(--lake); color: var(--paper); }
+  .where .b { background: var(--night); color: var(--paper); }
+  .where .c { background: var(--paper); border: .25mm solid var(--line); }
+  .where b { display: block; font-size: 7.2pt; line-height: 1.2; }
+  .where i { font-style: normal; display: block; font-size: 6.2pt; opacity: .8; margin-top: .4mm; }
+  .where p { font-size: 6.4pt; line-height: 1.45; margin-top: 1.6mm; }
+  .where .c p { color: var(--ink2); }
+  .foot { margin: auto 10mm 7mm; padding-top: 2.6mm; border-top: .3mm solid var(--line); display: grid; grid-template-columns: 1fr auto; gap: 6mm;
+          font-size: 6.6pt; color: var(--ink2); line-height: 1.4; }
+  .foot b { color: var(--ink); }
+  .foot .u { font-size: 8pt; font-weight: 700; color: var(--lake); text-align: right; }
+</style>
+</head>
+<body>
+
+<!-- ─────────── LEFT: the visitor's app, feature by feature ─────────── -->
+<section class="panel">
+  <div class="head">
+    <div class="l"><div class="t"><img src="../brand/logo/chalukya-ai-logo-2048.png" alt=""></div>
+      <div><b>Chalukya AI<span class="kn">ಚಾಲುಕ್ಯ AI</span></b><span>How every part is built · sheet 2 of 2 · the visitor's app</span></div></div>
+    <div class="u">github.com/framemindaistudio/<br>chalukya-ai</div>
+  </div>
+
+  <h2>On the phone <span>plain answer · how it is done · where the proof is</span></h2>
+  <table>
+    <tr><th style="width:21%">Feature</th><th style="width:26%">In plain words</th><th style="width:33%">How it is done</th><th style="width:20%">Proof</th></tr>
+    <tr><td class="f">Scan a sculpture</td>
+      <td>Photograph a carving; the phone names it and tells its story with no internet.</td>
+      <td>EfficientNet-B0 (ImageNet-pretrained, 4.0 M parameters) fine-tuned to 25 classes: 14 epochs, AdamW + OneCycle, random-resized crop and colour jitter for cave light against harsh sun. Exported to ONNX (opset 17) and run in the browser by onnxruntime-web (WASM).</td>
+      <td class="p">1,396 / 220 / 344 photos, split so no photographer is in both halves → <b>85.8% top-1, 98.0% site</b><br>ml/vision/train.py</td></tr>
+    <tr class="alt"><td class="f">“Not sure” instead of a guess</td>
+      <td>If the photo is not one of the 25, it says so rather than inventing a name.</td>
+      <td>Open-set rule on the softmax: answer only when the top probability is at least 0.75, otherwise show candidates or answer at site level.</td>
+      <td class="p">answers <b>79.4%</b> at <b>95.6%</b> accuracy; rejects <b>81.8%</b> of 33 Hampi / Belur / Halebidu photos<br>ml/vision/ood_calibrate.py</td></tr>
+    <tr><td class="f">Live lens (AR)</td>
+      <td>Hold the camera up and the name appears over the live view.</td>
+      <td>The same ONNX model on a timer loop over camera frames, exponential smoothing of the scores, a lock after three agreeing frames and hysteresis so the label does not flicker.</td>
+      <td class="p">≈<b>70 ms a frame</b> in Chrome on a laptop (printed on screen)<br>web/src/components/LiveLens.tsx</td></tr>
+    <tr class="alt"><td class="f">Read a board</td>
+      <td>Photograph an ASI board in any of three scripts and get the monument's story.</td>
+      <td>Tesseract.js (LSTM) with Kannada, Hindi and English traineddata in a web worker; the heading lines are matched against the knowledge base with heading weight ×3, stop-words removed and a site-level rule for overview boards.</td>
+      <td class="p"><b>4 / 4</b> real ASI boards matched to the right monument<br>web/src/lib/ocr.ts</td></tr>
+    <tr><td class="f">Translation</td>
+      <td>A whole board, or anything you type, in six languages.</td>
+      <td>Meta NLLB-200-distilled-600M on the district server: int8 dynamic quantisation, greedy decoding (one beam), a glossary that protects monument names, OCR-noise cleaning, streamed back sentence by sentence as NDJSON.</td>
+      <td class="p"><b>3.9×</b> faster after int8; first line ≈ 6 s on a laptop CPU<br>server/main.py · /api/translate</td></tr>
+    <tr class="alt"><td class="f">Ask the guide</td>
+      <td>Ask in Kannada, Hindi or English — typed, spoken or romanised.</td>
+      <td>17-intent classifier: character n-gram TF-IDF (2–4, char_wb) + logistic regression on the phone; multilingual-e5-small embeddings + logistic regression on the server; a curated trilingual lexicon on top. The answer is composed from tools (forecast, planner, parking, recommender) and a verified knowledge base. <b>No LLM and no paid API.</b></td>
+      <td class="p"><b>95.8%</b> server, <b>91.2%</b> phone on unseen phrasings (400 train, 70 fresh test)<br>ml/assistant/compare_intents.py</td></tr>
+    <tr><td class="f">Voice in and out</td>
+      <td>Speak the question; the answer is read aloud.</td>
+      <td>Web Speech API for listening. For speaking, the phone's own voice where it has one, and Meta MMS-TTS (VITS: mms-tts-kan, mms-tts-hin) on the server for phones with no Kannada or Hindi voice.</td>
+      <td class="p">web/src/lib/speech.ts<br>server/main.py · /api/tts</td></tr>
+    <tr class="alt"><td class="f">Trip planner</td>
+      <td>Say your hours, budget and interests; get a timed day.</td>
+      <td>The sentence is parsed by rules and the lexicon; stops are chosen by interest and importance; then <b>every visiting order is tried</b> (exhaustive permutations) and scored on driving time, the forecast crowd at the time you would arrive, midday heat on stairs, opening hours and budget. A lunch stop is inserted where it fits.</td>
+      <td class="p">the compute time is printed under the plan<br>web/src/lib/itinerary.ts · tripParse.ts</td></tr>
+    <tr><td class="f">Crowd forecast</td>
+      <td>How busy each site will be, hour by hour and day by day.</td>
+      <td>LightGBM (700 trees, learning rate 0.03, 31 leaves) on calendar features only: weekday, month, seasonal sine and cosine, Dasara, Diwali, Ugadi, Shivaratri, Sankranti, school holidays, long weekends and World Heritage Week. The 80% band comes from conformalised quantile regression.</td>
+      <td class="p"><b>WAPE 13.1%</b> vs 31.1% same-day-last-year, on 243 unseen days of 2026; band holds <b>79.2%</b><br>ml/forecast/train_footfall.py</td></tr>
+    <tr class="alt"><td class="f">Parking</td>
+      <td>How many spaces will be free when you actually arrive.</td>
+      <td>LightGBM (500 trees) per horizon — 30, 60 and 120 minutes — on occupancy history plus calendar features. A small 120-tree, 15-leaf copy is exported as JSON so the phone runs the same kind of model with no network.</td>
+      <td class="p"><b>±3.5 slots</b> at 2 h vs ±7.9 for “no change”; <b>81%</b> of “lot will be full” alerts right<br>ml/forecast/train_parking.py</td></tr>
+    <tr><td class="f">SOS, and SOS with no signal</td>
+      <td>Hold two seconds; it reaches the control room, or waits until the signal returns.</td>
+      <td>WebSocket to the district server. With no connection the alert goes into an outbox on the phone and is resent automatically on reconnect; the card falls back to a tel: call to 112 and an sms: with a maps link, neither of which needs data. Caution zones are haversine circles.</td>
+      <td class="p">tested end to end with the network switched off<br>web/src/lib/live.ts · pages/Safety.tsx</td></tr>
+    <tr class="alt"><td class="f">Stone check<i>v1</i></td>
+      <td>Photograph a crack; the phone outlines crack-like marks for inspection.</td>
+      <td>Classical image processing, no model: each pixel is compared with its local average (dark-ridge filter), threshold at mean + 2.2 σ, then connected components are kept only when they are at least 40 px and three times longer than wide.</td>
+      <td class="p"><b>33 ms</b> for a 720 px photo, on the phone<br>web/src/lib/stone.ts</td></tr>
+    <tr><td class="f">Stay, food and craft picks</td>
+      <td>Ranked for you, with the reason shown on every card.</td>
+      <td>Explainable weighted score: budget fit, distance to the places in your plan, amenities or cuisine, a Bayesian-smoothed rating, a small boost for locally owned places, then an MMR re-rank for variety.</td>
+      <td class="p">19 stays, 34 eateries, names and places from OpenStreetMap<br>web/src/lib/recommend.ts</td></tr>
+  </table>
+</section>
+
+<!-- ─────────── RIGHT: the district, the data, the cross-questions ─────────── -->
+<section class="panel right">
+  <div class="foldmark">fold</div><div class="foldmark b">fold</div>
+
+  <div class="head">
+    <div class="l"><div class="t"><img src="../brand/logo/chalukya-ai-logo-2048.png" alt=""></div>
+      <div><b>The district, the data, the questions</b><span>Everything below is in the repository; every number is in web/src/data/metrics.json</span></div></div>
+    <div class="u">chalukya-ai.vercel.app</div>
+  </div>
+
+  <h2>In the command centre</h2>
+  <table>
+    <tr><th style="width:21%">Feature</th><th style="width:26%">In plain words</th><th style="width:33%">How it is done</th><th style="width:20%">Proof</th></tr>
+    <tr><td class="f">Live operations</td><td>Crowds, parking, heat and alerts on one screen.</td>
+      <td>The same forecast and parking models, plus live alerts pushed over a WebSocket; “respond” writes straight back to the visitor's phone.</td>
+      <td class="p">server/main.py<br>web/src/pages/Command.tsx</td></tr>
+    <tr class="alt"><td class="f">Carrying capacity<i>v1</i></td><td>How many people a site can take in a day.</td>
+      <td>Comfort capacity × (open hours ÷ average stay). Space per visitor and average stay are inputs on screen, so the department can use its own figures.</td>
+      <td class="p">assumptions shown and editable<br>pages/Command.tsx</td></tr>
+    <tr><td class="f">Resource planning</td><td>Water, waste, toilets, guides, bins and trips for seven days.</td>
+      <td>Forecast × published-style rates: 4 L water and 0.12 kg waste per visitor, one toilet seat per 60 people at peak, one Pravasi Mitra per 150, a 120 L bin per 20 kg, twelve bins a trip. Every rate is editable.</td>
+      <td class="p">pages/Command.tsx<br>(constants at the top)</td></tr>
+    <tr class="alt"><td class="f">CCTV people counting</td><td>Counts people without anyone watching faces.</td>
+      <td>torchvision Faster R-CNN MobileNetV3-Large FPN (COCO weights), person class only, score ≥ 0.5, on the server. The frame is blurred in the browser and only the count and anonymous boxes are kept.</td>
+      <td class="p">server/main.py<br>components/CctvPanel.tsx</td></tr>
+    <tr><td class="f">Sensor anomalies</td><td>Spots a stuck or lying sensor.</td>
+      <td>Robust z-score: median and median-absolute-deviation over the recent window for each device, so one bad reading does not move the baseline.</td>
+      <td class="p">server/main.py · IoT ingest<br>iot/ (ESP32 firmware)</td></tr>
+    <tr class="alt"><td class="f">What visitors say</td><td>Sentiment and complaint topics for every monument.</td>
+      <td>Character n-grams and a polarity lexicon on the phone; multilingual-e5-small + logistic regression on the server; complaint topics from a curated aspect lexicon (water, toilets, parking, shade, guides).</td>
+      <td class="p"><b>93.3%</b> sentiment on 30 fresh reviews, topic <b>F1 0.98</b><br>ml/assistant/</td></tr>
+  </table>
+
+  <h2>Where the data comes from <span>all of it public, all of it credited</span></h2>
+  <ul class="src">
+    <li><b>Monument photographs</b> — 1,960 images by 202 photographers, Wikimedia Commons (CC BY / BY-SA / CC0). Per-photo credit in <code>ml/vision/data/metadata.csv</code></li>
+    <li><b>Visitor numbers</b> — ASI visitor footfall at centrally protected ticketed monuments, FY 2024–25: Badami 4,44,542 · Pattadakal 3,24,615 · Durga temple, Aihole 2,13,901</li>
+    <li><b>Places, roads, hospitals</b> — OpenStreetMap contributors (ODbL) via Overpass API; drive times from OSRM (<code>router.project-osrm.org</code>)</li>
+    <li><b>Weather</b> — Open-Meteo forecast API, no key: temperature, apparent temperature and rain by latitude and longitude (<code>open-meteo.com</code>)</li>
+    <li><b>Heritage facts</b> — DTDC Bagalkote, <i>Sounds and Emotions</i> (2022), paraphrased and cited, plus <code>bagalkot.nic.in/en/tourism</code></li>
+    <li><b>Open models</b> — <code>facebook/nllb-200-distilled-600M</code>, <code>facebook/mms-tts-kan · -hin</code>, <code>intfloat/multilingual-e5-small</code>, torchvision EfficientNet-B0 and Faster R-CNN, Tesseract <code>kan · hin · eng</code></li>
+  </ul>
+
+  <h2>The questions you are about to ask</h2>
+  <div class="qa">
+    <div><b>How do you get the weather?</b><span>Open-Meteo's public forecast API by latitude and longitude, no key. We use the <em>apparent</em> temperature — what it feels like on hot stone — and warn above 38 °C.</span></div>
+    <div><b>How is traffic estimated?</b><span><em>It is not.</em> Drive times come from OSRM routing on the OSM road network at typical speeds, cached per pair of sites. A live traffic feed is a version-2 item; I would rather say so than pretend.</span></div>
+    <div><b>How is the route chosen?</b><span>For the stops that fit your hours, <em>every order is tried</em> and scored on driving time, the crowd forecast at your arrival hour, midday heat on stairs, opening hours and budget.</span></div>
+    <div><b>How were the models trained?</b><span>On this laptop. Photos split by photographer; forecasts on four years of daily data; intents on 400 written examples. Scripts and reports are in <em>ml/*/</em> and <em>ml/*/out/</em>.</span></div>
+    <div><b>Is the data real?</b><span>Photos, ticket totals, roads, places and weather: real. The hour-by-hour crowd shape, parking streams and business prices: <em>simulated and labelled in the app</em>, calibrated so yearly totals match ASI exactly.</span></div>
+    <div><b>Did you use ChatGPT or an API?</b><span>No LLM, no paid API. Five models trained for Bagalkote and five open models used as they are. The assistant answers only from tools and a verified knowledge base.</span></div>
+    <div><b>What still works with no signal?</b><span>Recognition, live lens, board reading, planning, forecasts, parking, the knowledge base and SOS queueing. Translation, Grad-CAM and people counting need the district server.</span></div>
+    <div><b>What about privacy?</b><span>CCTV frames are blurred and only counts are stored. Questions are counted anonymously. The emergency contact never leaves the phone. No accounts, no tracking, no ads.</span></div>
+  </div>
+
+  <h2>What runs where <span>the honest answer to “does it work offline?”</span></h2>
+  <div class="where">
+    <div class="a"><b>On the phone<i>works with no signal, after the first visit</i></b>
+      <p>Sculpture model (ONNX) · live lens · board OCR (Tesseract) · trip planner · crowd forecast · parking model (120 trees as JSON) · knowledge base · stone check · SOS outbox · everything cached by the service worker</p></div>
+    <div class="b"><b>On the district server<i>one laptop today, one small machine for the district</i></b>
+      <p>Live alerts over WebSocket · NLLB-200 translation (int8) · MMS-TTS speech · Grad-CAM “why” · CCTV people counting · sensor anomaly checks · multilingual-e5 for questions and reviews</p></div>
+    <div class="c"><b>Public services<i>free, no keys, no accounts</i></b>
+      <p>Open-Meteo weather (live) · OpenStreetMap tiles for the maps · OSRM drive times (fetched once, cached in the app) · Wikimedia Commons photographs (fetched when the dataset was built)</p></div>
+  </div>
+
+  <div class="foot">
+    <p><b>Chinmay R M &amp; Sandesh Joshi</b> · BVVS Basaveshwar Engineering College, Bagalkote · AI to Redesign Tourism, Bagalkote 2026<br>
+      React 19 + Vite + TypeScript PWA on Vercel · FastAPI + WebSocket · LightGBM · PyTorch → ONNX Runtime Web · Tesseract.js · NLLB-200 (int8) · ESP32 firmware<br>
+      Every metric on this sheet is reproducible: <b>python ml/vision/train.py</b>, <b>ml/forecast/train_footfall.py</b>, <b>ml/assistant/compare_intents.py</b></p>
+    <p class="u">github.com/<br>framemindaistudio/<br>chalukya-ai</p>
+  </div>
+</section>
+</body>
+</html>
